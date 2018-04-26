@@ -16,7 +16,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-          <form role="form">
+          <form #userForm="ngForm" (ngSubmit)="saveUser(userForm)">
             <h2>Please Sign Up</h2>
             <hr class="colorgraph">
             <div class="row">
@@ -28,58 +28,100 @@
                 <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Error!</strong> Error While Register User
               </div>
-              <div class="alert alert-warning alert-dismissible" *ngIf="signUpApiStatus === 'validationError'">
+              <div class="alert alert-warning alert-dismissible" *ngIf="signUpApiStatus === 'validationError' && (userForm && userForm.form && userForm.form.controls && userForm.form.invalid)">
                 <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Required Fields!</strong> Required Fields as (*)
+                <div class="errorbox" *ngIf="(userForm && userForm.form && userForm.form.controls && userForm.form.invalid && userForm.submitted) ">
+                  <b>Validation error(s) occured:</b>
+                  <br>
+                  <!-- <li *ngIf="ErrorMesageFlag">{{validateMsg}}</li> -->
+                  <li *ngIf="userForm.form.controls.username?.hasError('required')">Please enter user name</li>
+                  <li *ngIf="userForm.form.controls.username?.hasError('pattern')">Please enter valid user name (should be alphabets only)</li>
+                  <li *ngIf="userForm.form.controls.username?.hasError('minlength')">user name minimum length should be 5</li>
+                  <li *ngIf="userForm.form.controls.username?.hasError('maxlength')">user name maximum length should be 10</li>
+                  <li *ngIf="userForm.form.controls.fName?.hasError('required')">Please enter first name</li>
+                  <li *ngIf="userForm.form.controls.fName?.hasError('pattern')">Please enter valid first name (should be alphabets only)</li>
+                  <li *ngIf="userForm.form.controls.fName?.hasError('minlength')">first name minimum length should be 3</li>
+                  <li *ngIf="userForm.form.controls.fName?.hasError('maxlength')">first name maximum length should be 50</li>
+                  <li *ngIf="userForm.form.controls.lName?.hasError('required')">Please enter last name</li>
+                  <li *ngIf="userForm.form.controls.lName?.hasError('pattern')">Please enter valid last name (should be alphabets only)</li>
+                  <li *ngIf="userForm.form.controls.lName?.hasError('minlength')">first name minimum length should be 3</li>
+                  <li *ngIf="userForm.form.controls.lName?.hasError('maxlength')">first name maximum length should be 50</li>
+                  <li *ngIf="userForm.form.controls.dob?.hasError('required')">Please choose date of birth</li>
+                  <li *ngIf="userForm.form.controls.contactNumber?.hasError('required')">Please Fill Contact Number</li>
+                  <li *ngIf="userForm.form.controls.contactNumber?.hasError('pattern')">Invalid Contact Number, Contact Number should be like (123)123-1234</li>
+                  <li *ngIf="userForm.form.controls.email?.hasError('required')">please enter email address</li>
+                  <li *ngIf="userForm.form.controls.email?.hasError('pattern')">please enter valid email address</li>
+                  <li *ngIf="userForm.form.controls.countryId?.hasError('required')">Please Choose Country</li>
+                  <li *ngIf="userForm.form.controls.stateId?.hasError('required')">Please Choose State</li>
+                  <li *ngIf="userForm.form.controls.city?.hasError('required')">Please Choose City</li>
+                  <li *ngIf="userForm.form.controls.roleId?.hasError('required')">Please Choose Your Role</li>
+                  <li *ngIf="userForm.form.controls.zip?.hasError('required')">Please Enter Zip Code</li>
+                  <li *ngIf="userForm.form.controls.zip?.hasError('pattern')">Please Enter Valid Zip Code , like 56566</li>
+                </div>
               </div>
             </div>
             <div class="row">
-              <form action="/action_page.php" style="padding-top: 30px;">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input type='text' class="form-control" placeholder="First Name" [(ngModel)]="fName" name="firstName" />
-                  </div>
-                  <div class="form-group">
-                    <input type='text' class="form-control" placeholder="DOB" [(ngModel)]="dob" name="dob" />
+              <div style="padding-top: 30px;">
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="form-group">
+                      <input type='text' class="form-control" placeholder="User Name" [(ngModel)]="username" name="username" pattern="[a-zA-Z][a-zA-Z ]+"
+                        minlength="5" maxlength="10" required/>
+                    </div>
+
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input type='text' class="form-control" placeholder="Last name" [(ngModel)]="lName" name="lastName" />
+                    <input type='text' class="form-control" placeholder="First Name" [(ngModel)]="fName" name="fName" pattern="[a-zA-Z][a-zA-Z ]+"
+                      minlength="3" maxlength="50" required/>
                   </div>
                   <div class="form-group">
-                    <input type='text' class="form-control" placeholder="Contact No." [(ngModel)]="contactNumber" name="contactNumber" />
+                    <input type='text' class="form-control" placeholder="DOB" [(ngModel)]="dob" name="dob" id="datepicker" (click)="showDatePicker();"
+                      required/>
                   </div>
-
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="Last name" [(ngModel)]="lName" name="lName" pattern="[a-zA-Z][a-zA-Z ]+"
+                      minlength="3" maxlength="50" required/>
+                  </div>
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="Contact No." [(ngModel)]="contactNumber" name="contactNumber" pattern="^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
+                      required/>
+                  </div>
                 </div>
 
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <select class="form-control" id="country" (change)="getStateData(countryId)" [(ngModel)]="countryId" name="country">
+                    <select class="form-control" id="country" (change)="getStateData(countryId)" [(ngModel)]="countryId" name="countryId" required>
                       <option disabled=true value="">Choose Country</option>
                       <option *ngFor="let item of countryData" value="{{item?.country_id}}">{{item?.country_name}}</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <select class="form-control" id="state" [(ngModel)]="stateId" name="state">
+                    <select class="form-control" id="state" [(ngModel)]="stateId" name="stateId" required>
                       <option disabled=true value="">Choose State</option>
                       <option *ngFor="let item of stateData" value="{{item?.state_id}}">{{item?.state_name}}</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type='text' class="form-control" placeholder="City Name" [(ngModel)]="city" name="city" />
+                    <input type='text' class="form-control" placeholder="City Name" [(ngModel)]="city" name="city" required/>
                   </div>
                 </div>
 
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <select class="form-control" id="userRole" [(ngModel)]="roleId" name="role">
+                    <select class="form-control" id="userRole" [(ngModel)]="roleId" name="roleId" required>
                       <option disabled=true value="">Choose Role Type</option>
                       <option *ngFor="let item of roleData" value="{{item?.role_id}}">{{item?.role_name}}</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type='text' class="form-control" placeholder="ZIP" [(ngModel)]="zip" name="zip" />
+                    <input type='text' class="form-control" placeholder="ZIP" [(ngModel)]="zip" name="zip" pattern="^[0-9]{5}(-[0-9]{4})?$" required/>
+                  </div>
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="Email" [(ngModel)]="email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
                   </div>
                 </div>
 
@@ -98,13 +140,13 @@
 
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
 
             <hr>
             <div class="row">
               <div class="col-xs-12 col-md-6 col-lg-6 col-lg-offset-6 tab-content">
-                <input type="submit" value="Register" class="btn btn-default btn-block btn-lg" tabindex="7" (click)="saveUser()">
+                <input type="submit" value="Register" class="btn btn-default btn-block btn-lg" tabindex="7">
               </div>
             </div>
           </form>
@@ -118,28 +160,54 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <form role="form">
+        <form role="form" #signuploginForm="ngForm" (ngSubmit)="login('default', signuploginForm)">
           <h4 class="text-left">If you Already have a Account Please Login!!!</h4>
           <hr>
           <div class="row">
-            <form style="padding-top: 30px;">
+              <div class="alert alert-success alert-dismissible" *ngIf="loginApiStatus === 'success'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> User Login Successfully.
+              </div>
+              <div class="alert alert-danger alert-dismissible" *ngIf="loginApiStatus === 'error'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> Error While Login User
+              </div>
+              <div class="alert alert-warning alert-dismissible" *ngIf="loginApiStatus === 'validationError'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <div class="errorbox" *ngIf="(signuploginForm && signuploginForm.form && signuploginForm.form.controls && signuploginForm.form.invalid && signuploginForm.submitted) "><b>Validation error(s) occured:</b>
+                  <br>
+                  <!-- <li *ngIf="ErrorMesageFlag">{{validateMsg}}</li> -->
+                  <li *ngIf="signuploginForm.form.controls.username?.hasError('required')">Please enter user name</li>
+                  <li *ngIf="signuploginForm.form.controls.username?.hasError('pattern')">Please enter valid user name (should be alphabets only)</li>
+                  <li *ngIf="signuploginForm.form.controls.username?.hasError('minlength')">user name minimum length should be 5</li>
+                  <li *ngIf="signuploginForm.form.controls.username?.hasError('maxlength')">user name maximum length should be 10</li>
+                  <li *ngIf="signuploginForm.form.controls.userpassword?.hasError('required')">Please enter user password</li>
+                  <li *ngIf="signuploginForm.form.controls.userpassword?.hasError('minlength')">user password minimum length should be 5</li>                  
+                </div>
+              </div>
+            </div>
+          <div class="row">
+            <div style="padding-top: 30px;">
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type='text' class="form-control form-control_login" placeholder="Username" />
+                    <input type='text' class="form-control form-control_login" placeholder="Username" name="username" [(ngModel)]="username" pattern="[a-zA-Z][a-zA-Z ]+" required maxlength="10" minlength="5"
+                    />
                 </div>
               </div>
 
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type='password' class="form-control form-control_login" placeholder="Password" />
+                    <input type='password' class="form-control form-control_login" placeholder="Password" name="userpassword" [(ngModel)]="userpassword"  required minlength="5"
+                    />
                 </div>
               </div>
 
-            </form>
+            </div>
           </div>
           <div class="row">
             <div class="col-xs-12 col-md-6 col-lg-6 col-lg-offset-6">
-              <a href="javascript:void(0)" class="btn btn-danger" (click)="login('default')">Sign In</a>
+              <!-- <a href="javascript:void(0)" class="btn btn-danger" (click)="login('default')">Sign In</a> -->
+              <input type="submit" value="Sign In" class="btn btn-default btn-block btn-lg">
             </div>
           </div>
         </form>

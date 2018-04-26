@@ -38,12 +38,12 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
   loadContentStatus = false;
   currentDeletingItemIndex;
   showconfirmationPopup = false;
-  constructor(@Inject(APP_CONFIG) private config: IAppConfig, private _commonRequestResponseService: CommonRequestResponseService) {
+  constructor( @Inject(APP_CONFIG) private config: IAppConfig, private _commonRequestResponseService: CommonRequestResponseService) {
     // this.options = { concurrency: 0, allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif'] };
     this.files = []; // local uploading files array
     this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
     this.humanizeBytes = humanizeBytes;
-   }
+  }
 
   ngOnInit() {
     this.uploadUrl = this.config.apiEndpoint;
@@ -61,7 +61,7 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
         console.log('api response--', res);
         if (res && res.length > 0) {
           this.artistPhotosData = res;
-          
+
           this.selectedPhotoCatalogPostId = res[0].post_id;
           this.setPhotoCatalogueFormData(res[0].post_id);
           this.getPhotosPerTitleData(res[0].post_id);
@@ -77,7 +77,7 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
     this.loadContentStatus = false;
     this.selectedCatalogueIndex = postId;
     this.selectedPhotoCatalogPostId = postId;
-    const inputJson = {postId};
+    const inputJson = { postId };
     this._commonRequestResponseService.post('artist-catalog-photos.php?action=get_catalog_photos_per_title', inputJson)
       .subscribe((res) => {
         console.log('api response--', res);
@@ -96,13 +96,13 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
 
   setPhotoCatalogueFormData(index) {
     if (this.artistPhotosData) {
-      const resultData = this.artistPhotosData.map((data)=> { if(data.post_id === index.toString()) { return data }});
-      const filteredData = resultData.filter((e)=> e !== undefined);
+      const resultData = this.artistPhotosData.map((data) => { if (data.post_id === index.toString()) { return data; } });
+      const filteredData = resultData.filter((e) => e !== undefined);
       this.postTitle = filteredData[0]['post_title'];
       this.postLocation = filteredData[0]['post_place'];
       this.postDescription = filteredData[0]['post_description'];
     }
-    
+
   }
 
   onUploadOutput(output: UploadOutput): void {
@@ -122,13 +122,13 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
         data: { foo: 'bar' }
       };
       this.uploadInput.emit(event);
-    } else if (output.type === 'addedToQueue'  && typeof output.file !== 'undefined') { // add file to array when added
+    } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') { // add file to array when added
       this.files.push(output.file);
     } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
       // update current data in files array for uploading file
       const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
       this.files[index] = output.file;
-      this.fileInProgress =  'progress';
+      this.fileInProgress = 'progress';
       console.log('this.files--', this.files);
     } else if (output.type === 'removed') {
       // remove file from array when removed
@@ -140,7 +140,7 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
     } else if (output.type === 'drop') {
       this.dragOver = false;
     } else if (output.type === 'done') {
-      this.fileInProgress =  'done';
+      this.fileInProgress = 'done';
       console.log('file uploaded');
     }
   }
@@ -169,47 +169,55 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
     this.uploadInput.emit({ type: 'cancelAll' });
   }
 
-  savePhotoCatalogue() {
+  savePhotoCatalogue(artistPhotoForm) {
     // value.map((data, index) => data.userId !== id ? data.userName : data.userId).filter(function (e) { return e !== id });
     let url = 'artist-catalog-photos.php?action=addPhotos';
-    const validInputJson = this.prepareSavePhotoCatalogueInputJson();
-    if (this.selectedPhotoCatalogPostId > 0) {
-      validInputJson['post_id'] = this.selectedPhotoCatalogPostId;
-      url = 'artist-catalog-photos.php?action=update_catalog_photos';
-    }
-    console.log('validInputJson--', validInputJson);
-    this._commonRequestResponseService.post(url, validInputJson)
-    .subscribe((res) => {
-      if (res) {
-        console.log('photosData--', res);
-        if (this.selectedPhotoCatalogPostId > 0) {
-          this.photoCatalogueApiStatus = 'update';
-        } else {
-          this.photoCatalogueApiStatus = 'save';
-        }
-        this.getPhotosTitleData();
+    const validInputJson = this.prepareSavePhotoCatalogueInputJson(artistPhotoForm);
+    if (artistPhotoForm.valid) {
+      if (this.selectedPhotoCatalogPostId > 0) {
+        validInputJson['post_id'] = this.selectedPhotoCatalogPostId;
+        url = 'artist-catalog-photos.php?action=update_catalog_photos';
       }
-    }, (err) => {
-      this.photoCatalogueApiStatus = 'error';
-      console.log('got Error', err);
-    });
+      console.log('validInputJson--', validInputJson);
+      this._commonRequestResponseService.post(url, validInputJson)
+        .subscribe((res) => {
+          if (res) {
+            console.log('photosData--', res);
+            if (this.selectedPhotoCatalogPostId > 0) {
+              this.photoCatalogueApiStatus = 'update';
+            } else {
+              this.photoCatalogueApiStatus = 'save';
+            }
+            this.getPhotosTitleData();
+          }
+        }, (err) => {
+          this.photoCatalogueApiStatus = 'error';
+          console.log('got Error', err);
+        });
+    }
   }
 
-  prepareSavePhotoCatalogueInputJson() {
-    const inputJson = {
-      user_id : 1,
-      user_role_id : 1,
-      post_title : this.postTitle,
-      post_place : this.postLocation,
-      post_description : this.postDescription,
-      post_type : 'image',
-      post_attachment : JSON.stringify(this.preparePhotoCatalogueJson())
-    };
-    return inputJson;
+  prepareSavePhotoCatalogueInputJson(artistPhotoForm) {
+    if (artistPhotoForm.valid) {
+      this.photoCatalogueApiStatus = '';
+      const inputJson = {
+        user_id: 1,
+        user_role_id: 1,
+        post_title: this.postTitle,
+        post_place: this.postLocation,
+        post_description: this.postDescription,
+        post_type: 'image',
+        post_attachment: JSON.stringify(this.preparePhotoCatalogueJson())
+      };
+      return inputJson;
+    } else {
+      this.photoCatalogueApiStatus = 'validationError';
+    }
+
   }
 
   preparePhotoCatalogueJson() {
-    const resultString = this.files.map((data) =>  data['responseStatus'] === 200 ? data.response : '').filter((e) => e !== '' );
+    const resultString = this.files.map((data) => data['responseStatus'] === 200 ? data.response : '').filter((e) => e !== '');
     let mergeArray = resultString;
     if (this.artistPhotosPerTitleData.length > 0 && this.selectedPhotoCatalogPostId > 0) {
       mergeArray = resultString.concat(this.artistPhotosPerTitleData);
@@ -224,31 +232,27 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
   deleteAttachmentPerPost() {
     this.artistPhotosPerTitleData.splice(this.currentDeletingItemIndex, 1);
     const inputJson = {
-      user_id : 1,
-      user_role_id : 1,
-      post_id : this.selectedPhotoCatalogPostId,
-      post_attachment : JSON.stringify(this.artistPhotosPerTitleData)
+      user_id: 1,
+      user_role_id: 1,
+      post_id: this.selectedPhotoCatalogPostId,
+      post_attachment: JSON.stringify(this.artistPhotosPerTitleData)
     };
     this._commonRequestResponseService.post('artist-catalog-photos.php?action=delete_catalog_photo_attachment', inputJson)
-    .subscribe((res) => {
-      if (res) {
-        console.log('photosData--', res);
-        this.photoCatalogueApiStatus = 'delete';
-        this.getPhotosTitleData();
-      }
-    }, (err) => {
-      this.photoCatalogueApiStatus = 'error';
-      console.log('got Error', err);
-    });
+      .subscribe((res) => {
+        if (res) {
+          console.log('photosData--', res);
+          this.photoCatalogueApiStatus = 'delete';
+          this.getPhotosTitleData();
+        }
+      }, (err) => {
+        this.photoCatalogueApiStatus = 'error';
+        console.log('got Error', err);
+      });
     console.log('this.artistPhotosPerTitleData--', this.artistPhotosPerTitleData);
   }
 
-  resetForm() {
-    this.postTitle = '';
-    this.postLocation = '';
-    this.postDescription = '';
-    this.selectedPhotoCatalogPostId = 0;
-    this.removeAllFiles();
+  resetForm(artistPhotoForm) {
+    artistPhotoForm.reset();
   }
 
 }

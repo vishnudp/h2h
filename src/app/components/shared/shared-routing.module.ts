@@ -92,10 +92,10 @@ const appRoutes: Routes =
     'path': 'contact-us',
     'component': ContactUsComponent
 }, {
-    'path' : 'artist/myProfile',
+    'path' : 'artist/dashboard',
     'component': AfterLoginPageContentComponent
 }, {
-    'path' : 'hotel/myProfile',
+    'path' : 'hotel/dashboard',
     'component': AfterLoginPageContentComponent
 }];
 

@@ -1,7 +1,8 @@
+<form #hotelPhotoForm="ngForm" (ngSubmit)="savePhotoCatalogue(hotelPhotoForm)">
 <div class="row">
   <div class="col-lg-2 pull-right">
-    <button type="submit" class="btn btn-default rightButton" (click)="resetForm()">Add New</button>
-    <button type="submit" class="btn btn-default rightButton" (click)="savePhotoCatalogue()">Save</button>
+    <button type="button" class="btn btn-default rightButton" (click)="resetForm(hotelPhotoForm)">Add New</button>
+    <button type="submit" class="btn btn-default rightButton">Save</button>
   </div>
 </div>
 <br>
@@ -26,17 +27,32 @@
       <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <strong>Error!</strong> Error While Saving Photos Catalogue
     </div>
-    <div class="alert alert-warning alert-dismissible" *ngIf="photoCatalogueApiStatus === 'validationError'">
+    <div class="alert alert-warning alert-dismissible" *ngIf="photoCatalogueApiStatus === 'validationError' && (hotelPhotoForm && hotelPhotoForm.form && hotelPhotoForm.form.controls && hotelPhotoForm.form.invalid)">
       <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Required Fields!</strong> Required Fields as (*)
+      <div class="errorbox" *ngIf="(hotelPhotoForm && hotelPhotoForm.form && hotelPhotoForm.form.controls && hotelPhotoForm.form.invalid && hotelPhotoForm.submitted) ">
+          <b>Validation error(s) occured:</b>
+          <br>
+          <!-- <li *ngIf="ErrorMesageFlag">{{validateMsg}}</li> -->
+          <li *ngIf="hotelPhotoForm.form.controls.postTitle?.hasError('required')">Please enter post title</li>
+          <li *ngIf="hotelPhotoForm.form.controls.postTitle?.hasError('pattern')">Please enter valid post title (should be alphabets only)</li>
+          <li *ngIf="hotelPhotoForm.form.controls.postTitle?.hasError('minlength')">post title minimum length should be 5</li>
+          <li *ngIf="hotelPhotoForm.form.controls.postTitle?.hasError('maxlength')">post title maximum length should be 10</li>
+          <li *ngIf="hotelPhotoForm.form.controls.postLocation?.hasError('required')">Please enter post location</li>
+          <li *ngIf="hotelPhotoForm.form.controls.postLocation?.hasError('pattern')">Please enter valid post location (should be alphabets only)</li>
+          <li *ngIf="hotelPhotoForm.form.controls.postLocation?.hasError('minlength')">post title minimum length should be 2</li>
+          <li *ngIf="hotelPhotoForm.form.controls.postLocation?.hasError('maxlength')">post title maximum length should be 50</li>
+          
+        </div>
     </div>
   </div>
   <div class="form-group">
-    <input type='text' class="form-control" placeholder="Title" name="postTitle" [(ngModel)]="postTitle" />
+    <input type='text' class="form-control" placeholder="Title" name="postTitle" [(ngModel)]="postTitle" pattern="[a-zA-Z][a-zA-Z ]+"
+    minlength="5" maxlength="10" required/>
 
   </div>
   <div class="form-group">
-    <input type='text' class="form-control" placeholder="Place" name="postLocation" [(ngModel)]="postLocation" />
+    <input type='text' class="form-control" placeholder="Place" name="postLocation" [(ngModel)]="postLocation" pattern="[a-zA-Z][a-zA-Z ]+"
+    minlength="2" maxlength="50" required/>
 
   </div>
   <div class="form-group">
@@ -208,3 +224,4 @@
     </li>
   </ul> -->
 </fieldset>
+</form>

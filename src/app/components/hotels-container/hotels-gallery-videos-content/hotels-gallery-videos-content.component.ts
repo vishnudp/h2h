@@ -116,7 +116,7 @@ export class HotelsGalleryVideosContentComponent implements OnInit {
       // this.uploadInput.emit(event);
       const event: UploadInput = {
         type: 'uploadAll',
-        url: this.uploadUrl +'hotels-catalog-videos.php?action=upload_artist_catalog_videos',
+        url: this.uploadUrl + 'hotels-catalog-videos.php?action=upload_artist_catalog_videos',
         method: 'POST',
         data: { foo: 'bar' }
       };
@@ -147,7 +147,7 @@ export class HotelsGalleryVideosContentComponent implements OnInit {
   startUpload(): void {
     const event: UploadInput = {
       type: 'uploadAll',
-      url: this.uploadUrl +'hotels-catalog-videos.php?action=upload_artist_catalog_videos',
+      url: this.uploadUrl + 'hotels-catalog-videos.php?action=upload_artist_catalog_videos',
       method: 'POST',
       data: { foo: 'bar' }
     };
@@ -168,43 +168,50 @@ export class HotelsGalleryVideosContentComponent implements OnInit {
     this.uploadInput.emit({ type: 'cancelAll' });
   }
 
-  saveVideosCatalogue() {
+  saveVideosCatalogue(hotelVideoForm) {
     // value.map((data, index) => data.userId !== id ? data.userName : data.userId).filter(function (e) { return e !== id });
     let url = 'hotels-catalog-videos.php?action=addVideos';
-    const validInputJson = this.prepareSaveVideoCatalogueInputJson();
-    if (this.selectedVideosCatalogPostId > 0) {
-      validInputJson['post_id'] = this.selectedVideosCatalogPostId;
-      url = 'hotels-catalog-videos.php?action=update_catalog_videos';
-    }
-    console.log('validInputJson--', validInputJson);
-    this._commonRequestResponseService.post(url, validInputJson)
-      .subscribe((res) => {
-        if (res) {
-          console.log('videosData--', res);
-          if (this.selectedVideosCatalogPostId > 0) {
-            this.videoCatalogueApiStatus = 'update';
-          } else {
-            this.videoCatalogueApiStatus = 'save';
+    const validInputJson = this.prepareSaveVideoCatalogueInputJson(hotelVideoForm);
+    if (hotelVideoForm.valid) {
+      if (this.selectedVideosCatalogPostId > 0) {
+        validInputJson['post_id'] = this.selectedVideosCatalogPostId;
+        url = 'hotels-catalog-videos.php?action=update_catalog_videos';
+      }
+      console.log('validInputJson--', validInputJson);
+      this._commonRequestResponseService.post(url, validInputJson)
+        .subscribe((res) => {
+          if (res) {
+            console.log('videosData--', res);
+            if (this.selectedVideosCatalogPostId > 0) {
+              this.videoCatalogueApiStatus = 'update';
+            } else {
+              this.videoCatalogueApiStatus = 'save';
+            }
+            this.getVideosTitleData();
           }
-          this.getVideosTitleData();
-        }
-      }, (err) => {
-        this.videoCatalogueApiStatus = 'error';
-        console.log('got Error', err);
-      });
+        }, (err) => {
+          this.videoCatalogueApiStatus = 'error';
+          console.log('got Error', err);
+        });
+    }
   }
 
-  prepareSaveVideoCatalogueInputJson() {
-    const inputJson = {
-      user_id: 2,
-      user_role_id: 2,
-      post_title: this.postTitle,
-      post_place: this.postLocation,
-      post_description: this.postDescription,
-      post_type: 'video',
-      post_attachment: JSON.stringify(this.prepareVideoCatalogueJson())
-    };
-    return inputJson;
+  prepareSaveVideoCatalogueInputJson(hotelVideoForm) {
+    if (hotelVideoForm.valid) {
+      this.videoCatalogueApiStatus = '';
+      const inputJson = {
+        user_id: 2,
+        user_role_id: 2,
+        post_title: this.postTitle,
+        post_place: this.postLocation,
+        post_description: this.postDescription,
+        post_type: 'video',
+        post_attachment: JSON.stringify(this.prepareVideoCatalogueJson())
+      };
+      return inputJson;
+    } else {
+      this.videoCatalogueApiStatus = 'validationError';
+    }
   }
 
   prepareVideoCatalogueJson() {
@@ -243,12 +250,13 @@ export class HotelsGalleryVideosContentComponent implements OnInit {
     console.log('this.artistPhotosPerTitleData--', this.artistVideosPerTitleData);
   }
 
-  resetForm() {
-    this.postTitle = '';
-    this.postLocation = '';
-    this.postDescription = '';
-    this.selectedVideosCatalogPostId = 0;
-    this.removeAllFiles();
+  resetForm(hotelVideoForm) {
+    hotelVideoForm.reset();
+    // this.postTitle = '';
+    // this.postLocation = '';
+    // this.postDescription = '';
+    // this.selectedVideosCatalogPostId = 0;
+    // this.removeAllFiles();
   }
 
 }

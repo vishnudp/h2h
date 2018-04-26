@@ -17,7 +17,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-          <form role="form">
+          <form role="form" #loginForm="ngForm" (ngSubmit)="login('default', loginForm)">
             <h2>Please Sign In</h2>
             <hr class="colorgraph">
             <div class="row">
@@ -31,32 +31,41 @@
               </div>
               <div class="alert alert-warning alert-dismissible" *ngIf="loginApiStatus === 'validationError'">
                 <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Required Fields!</strong> Required Fields as (*)
+                <div class="errorbox" *ngIf="(loginForm && loginForm.form && loginForm.form.controls && loginForm.form.invalid && loginForm.submitted) "><b>Validation error(s) occured:</b>
+                  <br>
+                  <!-- <li *ngIf="ErrorMesageFlag">{{validateMsg}}</li> -->
+                  <li *ngIf="loginForm.form.controls.username?.hasError('required')">Please enter user name</li>
+                  <li *ngIf="loginForm.form.controls.username?.hasError('pattern')">Please enter valid user name (should be alphabets only)</li>
+                  <li *ngIf="loginForm.form.controls.username?.hasError('minlength')">user name minimum length should be 5</li>
+                  <li *ngIf="loginForm.form.controls.username?.hasError('maxlength')">user name maximum length should be 10</li>
+                  <li *ngIf="loginForm.form.controls.userpassword?.hasError('required')">Please enter user password</li>
+                  <li *ngIf="loginForm.form.controls.userpassword?.hasError('minlength')">user password minimum length should be 5</li>                  
+                </div>
               </div>
             </div>
             <div class="row">
-              <form action="/action_page.php" style="padding-top: 30px;">
+              <div style="padding-top: 30px;">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input type='text' class="form-control form-control_login" placeholder="Username" name="username" [(ngModel)]="username"
+                    <input type='text' class="form-control form-control_login" placeholder="Username" name="username" [(ngModel)]="username" pattern="[a-zA-Z][a-zA-Z ]+" required maxlength="10" minlength="5"
                     />
                   </div>
                 </div>
 
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input type='password' class="form-control form-control_login" placeholder="Password" name="userpassword" [(ngModel)]="userpassword"
+                    <input type='password' class="form-control form-control_login" placeholder="Password" name="userpassword" [(ngModel)]="userpassword"  required minlength="5"
                     />
                   </div>
                 </div>
 
-              </form>
+              </div>
             </div>
 
             <hr>
             <div class="row">
               <div class="col-xs-12 col-md-6 col-lg-6 col-lg-offset-6 tab-content">
-                <input type="submit" value="Sign In" class="btn btn-default btn-block btn-lg" tabindex="7" (click)="login('default')">
+                <input type="submit" value="Sign In" class="btn btn-default btn-block btn-lg" tabindex="7">
               </div>
             </div>
           </form>

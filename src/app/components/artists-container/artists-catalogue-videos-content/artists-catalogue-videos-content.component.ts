@@ -93,11 +93,11 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
 
   setVideosCatalogueFormData(index) {
     console.log('this.artistVideosData--', this.artistVideosData);
-    console.log('index--', index)
+    console.log('index--', index);
     if (this.artistVideosData) {
-      const resultData = this.artistVideosData.map((data)=> { if(data.post_id === index.toString()) { return data }});
+      const resultData = this.artistVideosData.map((data) => { if ( data.post_id === index.toString()) { return data; }});
       const filteredData = resultData.filter((e)=> e !== undefined);
-      for(let i=0; i< this.artistVideosData.length; i++) {
+      for (let i = 0; i < this.artistVideosData.length; i++) {
         if (this.artistVideosData[i].post_id === index.toString()) {
             this.postTitle = this.artistVideosData[i]['post_title'];
             this.postLocation = this.artistVideosData[i]['post_place'];
@@ -105,7 +105,6 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
             break;
         }
       }
-      
     }
   }
 
@@ -121,7 +120,7 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
       // this.uploadInput.emit(event);
       const event: UploadInput = {
         type: 'uploadAll',
-        url: this.uploadUrl +'artist-catalog-videos.php?action=upload_artist_catalog_videos',
+        url: this.uploadUrl + 'artist-catalog-videos.php?action=upload_artist_catalog_videos',
         method: 'POST',
         data: { foo: 'bar' }
       };
@@ -152,7 +151,7 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
   startUpload(): void {
     const event: UploadInput = {
       type: 'uploadAll',
-      url: this.uploadUrl +'artist-catalog-photos.php?action=upload_artist_catalog_images',
+      url: this.uploadUrl + 'artist-catalog-photos.php?action=upload_artist_catalog_images',
       method: 'POST',
       data: { foo: 'bar' }
     };
@@ -173,43 +172,52 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
     this.uploadInput.emit({ type: 'cancelAll' });
   }
 
-  saveVideosCatalogue() {
+  saveVideosCatalogue(artistVideoForm) {
+    console.log('artistVideoForm--', artistVideoForm);
     // value.map((data, index) => data.userId !== id ? data.userName : data.userId).filter(function (e) { return e !== id });
     let url = 'artist-catalog-videos.php?action=addVideos';
-    const validInputJson = this.prepareSaveVideoCatalogueInputJson();
-    if (this.selectedVideosCatalogPostId > 0) {
-      validInputJson['post_id'] = this.selectedVideosCatalogPostId;
-      url = 'artist-catalog-videos.php?action=update_catalog_videos';
-    }
-    console.log('validInputJson--', validInputJson);
-    this._commonRequestResponseService.post(url, validInputJson)
-    .subscribe((res) => {
-      if (res) {
-        console.log('videosData--', res);
-        if (this.selectedVideosCatalogPostId > 0) {
-          this.videoCatalogueApiStatus = 'update';
-        } else {
-          this.videoCatalogueApiStatus = 'save';
-        }
-        this.getVideosTitleData();
+    const validInputJson = this.prepareSaveVideoCatalogueInputJson(artistVideoForm);
+    if (artistVideoForm.valid) {
+      if (this.selectedVideosCatalogPostId > 0) {
+        validInputJson['post_id'] = this.selectedVideosCatalogPostId;
+        url = 'artist-catalog-videos.php?action=update_catalog_videos';
       }
-    }, (err) => {
-      this.videoCatalogueApiStatus = 'error';
-      console.log('got Error', err);
-    });
+      console.log('validInputJson--', validInputJson);
+      this._commonRequestResponseService.post(url, validInputJson)
+      .subscribe((res) => {
+        if (res) {
+          console.log('videosData--', res);
+          if (this.selectedVideosCatalogPostId > 0) {
+            this.videoCatalogueApiStatus = 'update';
+          } else {
+            this.videoCatalogueApiStatus = 'save';
+          }
+          this.getVideosTitleData();
+        }
+      }, (err) => {
+        this.videoCatalogueApiStatus = 'error';
+        console.log('got Error', err);
+      });
+    }
   }
 
-  prepareSaveVideoCatalogueInputJson() {
-    const inputJson = {
-      user_id : 1,
-      user_role_id : 1,
-      post_title : this.postTitle,
-      post_place : this.postLocation,
-      post_description : this.postDescription,
-      post_type : 'video',
-      post_attachment : JSON.stringify(this.prepareVideoCatalogueJson())
-    };
-    return inputJson;
+  prepareSaveVideoCatalogueInputJson(artistVideoForm) {
+    console.log('artistVideoForm.valid--', artistVideoForm.valid);
+    if (artistVideoForm.valid) {
+      this.videoCatalogueApiStatus = '';
+      const inputJson = {
+        user_id : 1,
+        user_role_id : 1,
+        post_title : this.postTitle,
+        post_place : this.postLocation,
+        post_description : this.postDescription,
+        post_type : 'video',
+        post_attachment : JSON.stringify(this.prepareVideoCatalogueJson())
+      };
+      return inputJson;
+    } else {
+      this.videoCatalogueApiStatus = 'validationError';
+    }
   }
 
   prepareVideoCatalogueJson() {
@@ -246,12 +254,8 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
     console.log('this.artistPhotosPerTitleData--', this.artistVideosPerTitleData);
   }
 
-  resetForm() {
-    this.postTitle = '';
-    this.postLocation = '';
-    this.postDescription = '';
-    this.selectedVideosCatalogPostId = 0;
-    this.removeAllFiles();
+  resetForm(artistVideoForm) {
+    artistVideoForm.reset();
   }
 
 }

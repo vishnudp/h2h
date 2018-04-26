@@ -112,11 +112,11 @@ export class LoginWithSocialMediaComponent implements OnInit {
     if (this.roleId === '5') {
       this.username = 'artist';
       this.userpassword = 'artist';
-      this._router.navigate(['../artist/myProfile'], { relativeTo: this._routes });
+      this._router.navigate(['../artist/dashboard'], { relativeTo: this._routes });
     } else if (this.roleId === '4') {
       this.username = 'hotel';
       this.userpassword = 'hotel';
-      this._router.navigate(['../hotel/myProfile'], { relativeTo: this._routes });
+      this._router.navigate(['../hotel/dashboard'], { relativeTo: this._routes });
     }
   }
 

@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { APP_CONFIG } from '../../../app.config';
 import { IAppConfig } from '../../../app.config.shared';
 import { AuthService } from 'angular2-social-login';
@@ -7,6 +8,7 @@ import { FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBV
 import {
   CommonAuthenticationService, CommonDataSharedService
 } from '../../../services/common-services';
+declare var $: any;
 import {
   CommonRequestResponseService,
   GeneralApiFunctionsService
@@ -40,6 +42,7 @@ export class SignupComponent implements OnInit {
   username = '';
   userpassword = '';
   loginApiStatus = '';
+  email = '';
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
     public _auth: AuthService,
@@ -92,48 +95,70 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  prepareRegistrationFormData() {
-    const inputJson = {
-      fName : this.fName,
-      lName : this.lName,
-      dob   : this.dob,
-      contactNumber : this.contactNumber,
-      countryId : this.countryId,
-      stateId : this.stateId,
-      city : this.city,
-      zip : this.zip,
-      gender : this.gender,
-      roleId : this.roleId
-    };
-    return inputJson;
-  }
-
-  saveUser() {
-    const validInputJson = this.prepareRegistrationFormData();
-    console.log('validInputJson--', validInputJson);
-    this._commonRequestResponseService.post('user.php?action=save_user_data', validInputJson)
-    .subscribe((res) => {
-      if (res) {
-        console.log('userData--', res);
-        this.signUpApiStatus = 'success';
-      }
-    }, (err) => {
-        this.signUpApiStatus = 'error';
-    });
-  }
-
-  login(provider) {
-    switch (provider) {
-      case 'facebook':
-        this.loginWithFacebook();
-        break;
-      case 'google':
-        this.loginWithGoogle();
-        break;
-      case 'default':
-        this.defaultLogin();
-        break;
+  prepareRegistrationFormData(userForm) {
+    let inputJson = {};
+    console.log('userForm.valid--', userForm.valid);
+    if (userForm.valid) {
+      this.signUpApiStatus = '';
+      inputJson = {
+        username : this.username,
+        fName : this.fName,
+        lName : this.lName,
+        dob   : this.dob,
+        contactNumber : this.contactNumber,
+        countryId : this.countryId,
+        stateId : this.stateId,
+        city : this.city,
+        zip : this.zip,
+        gender : this.gender,
+        email : this.email,
+        roleId : this.roleId
+      };
+      return inputJson;
+    } else {
+      this.signUpApiStatus = 'validationError';
     }
+  }
+
+  saveUser(userForm) {
+    console.log('in user form');
+    const validInputJson = this.prepareRegistrationFormData(userForm);
+    if (userForm.valid) {
+      this._commonRequestResponseService.post('user.php?action=save_user_data', validInputJson)
+      .subscribe((res) => {
+        if (res) {
+          console.log('userData--', res);
+          this.signUpApiStatus = 'success';
+          userForm.reset();
+        }
+      }, (err) => {
+          this.signUpApiStatus = 'error';
+      });
+    }
+  }
+
+  prepareLoginFormData(provider, signuploginForm) {
+    console.log('loginForm.valid--', signuploginForm.valid);
+    if (signuploginForm.valid) {
+      this.loginApiStatus = '';
+      switch (provider) {
+        // case 'facebook':
+        //   this.loginWithFacebook();
+        //   break;
+        // case 'google':
+        //   this.loginWithGoogle();
+        //   break;
+        case 'default':
+          this.defaultLogin();
+          break;
+      }
+    } else {
+      this.loginApiStatus = 'validationError';
+    }
+  }
+
+  login(provider, signuploginForm) {
+    const validInputJson = this.prepareLoginFormData(provider, signuploginForm);
   }
 
   defaultLogin() {
@@ -142,13 +167,11 @@ export class SignupComponent implements OnInit {
     if (this.username === 'hotel' && this.userpassword === 'hotel') {
       this.setLoginData();
       this.loadContainer();
-      // this._router.navigate(['../myProfile'], { relativeTo: this._routes });
       console.log('login Successfull');
       this.loginApiStatus = 'success';
     } else if (this.username === 'artist' && this.userpassword === 'artist') {
       this.setLoginData();
       this.loadContainer();
-      // this._router.navigate(['../myProfile'], { relativeTo: this._routes });
       console.log('login Successfull');
       this.loginApiStatus = 'success';
     } else {
@@ -200,14 +223,33 @@ export class SignupComponent implements OnInit {
   loadContainer() {
     this._commonDataSharedService.loginStatus.next(true);
     if (this.username === 'artist') {
-      this._router.navigate(['../artist/myProfile'], { relativeTo: this._routes });
+      this._router.navigate(['../artist/dashboard'], { relativeTo: this._routes });
     } else if (this.username === 'hotel') {
-      this._router.navigate(['../hotel/myProfile'], { relativeTo: this._routes });
+      this._router.navigate(['../hotel/dashboard'], { relativeTo: this._routes });
     }
   }
 
   setLoginData() {
     const loginData = {username : this.username , password : this.userpassword};
     this._commonAuthenticationService.setLoginData(loginData);
+  }
+
+  showDatePicker() {
+    const that = this;
+    const start = new Date();
+    start.setFullYear(start.getFullYear() - 100);
+    const end = new Date();
+    end.setFullYear(end.getFullYear());
+    $('#datepicker').show();
+      $('#datepicker').datepicker({
+        format: 'dd-mm-yyyy',
+        changeMonth: true,
+        changeYear: true,
+        minDate: start,
+        maxDate: end,
+        yearRange: start.getFullYear() + ':' + end.getFullYear()
+      }).on('change', function() {
+        that.dob = $('#datepicker').val();
+      });
   }
 }

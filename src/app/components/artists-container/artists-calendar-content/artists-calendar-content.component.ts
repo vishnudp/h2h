@@ -196,30 +196,32 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
     console.log('in calender');
   }
 
-  saveCalendar() {
+  saveCalendar(artistCalendarForm) {
     let url = 'artist-event.php?action=addEvent';
-    const validInputJson = this.prepareInputJson();
-    if (this.selectedEventId > 0) {
-      validInputJson['event_id'] = this.selectedEventId;
-      url = 'artist-event.php?action=update_event';
-    }
-    console.log('validInputJson--', validInputJson);
-    this._commonRequestResponseService.post(url, validInputJson)
-    .subscribe((res) => {
-      if (res) {
-        console.log('photosData--', res);
-        if (this.selectedEventId > 0) {
-          this.eventApiStatus = 'update';
-        } else {
-          this.eventApiStatus = 'save';
-        }
-        this.hideCalendarPopup();
-        this.getEventData();
+    const validInputJson = this.prepareInputJson(artistCalendarForm);
+    if (artistCalendarForm.valid) {
+      if (this.selectedEventId > 0) {
+        validInputJson['event_id'] = this.selectedEventId;
+        url = 'artist-event.php?action=update_event';
       }
-    }, (err) => {
-      this.eventApiStatus = 'error';
-      console.log('got Error', err);
-    });
+      console.log('validInputJson--', validInputJson);
+      this._commonRequestResponseService.post(url, validInputJson)
+      .subscribe((res) => {
+        if (res) {
+          console.log('photosData--', res);
+          if (this.selectedEventId > 0) {
+            this.eventApiStatus = 'update';
+          } else {
+            this.eventApiStatus = 'save';
+          }
+          this.hideCalendarPopup();
+          this.getEventData();
+        }
+      }, (err) => {
+        this.eventApiStatus = 'error';
+        console.log('got Error', err);
+      });
+    }
   }
 
   deleteEvent() {
@@ -237,15 +239,20 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
       });
   }
 
-  prepareInputJson() {
-    const inputJson = {
-      user_id : 1,
-      user_role_id : 1,
-      event_title : this.eventTitle,
-      event_description : this.eventDescription,
-      event_date : this.eventDate
-    };
-    return inputJson;
+  prepareInputJson(artistCalendarForm) {
+    if (artistCalendarForm.valid) {
+      this.eventApiStatus = '';
+      const inputJson = {
+        user_id : 1,
+        user_role_id : 1,
+        event_title : this.eventTitle,
+        event_description : this.eventDescription,
+        event_date : this.eventDate
+      };
+      return inputJson;
+    } else {
+      this.eventApiStatus = 'validationError';
+    }
   }
 
   hideCalendarPopup() {

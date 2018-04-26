@@ -1,8 +1,9 @@
+<form #artistSkillForm="ngForm" (ngSubmit)="saveSkill(artistSkillForm)">
 <div class=" col-xs-12 col-lg-12  ">
   <div class="row">
     <div class="col-lg-2 pull-right">
-      <button type="submit" class="btn btn-default rightButton" (click)="resetForm()">Add New</button>
-      <button type="submit" class="btn btn-default rightButton" (click)="saveSkill()">Save</button>
+      <button type="button" class="btn btn-default rightButton" (click)="resetForm(artistSkillForm)">Add New</button>
+      <button type="submit" class="btn btn-default rightButton">Save</button>
     </div>
   </div>
   <br>
@@ -26,16 +27,25 @@
         <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error!</strong> Error While Saving Skill
       </div>
-      <div class="alert alert-warning alert-dismissible" *ngIf="skillApiStatus === 'validationError'">
+      <div class="alert alert-warning alert-dismissible" *ngIf="skillApiStatus === 'validationError' && (artistSkillForm && artistSkillForm.form && artistSkillForm.form.controls && artistSkillForm.form.invalid)">
         <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Required Fields!</strong> Required Fields as (*)
+        <div class="errorbox" *ngIf="(artistSkillForm && artistSkillForm.form && artistSkillForm.form.controls && artistSkillForm.form.invalid && artistSkillForm.submitted) ">
+            <b>Validation error(s) occured:</b>
+            <br>
+            <!-- <li *ngIf="ErrorMesageFlag">{{validateMsg}}</li> -->
+            <li *ngIf="artistSkillForm.form.controls.skillTitle?.hasError('required')">Please enter skill title</li>
+            <li *ngIf="artistSkillForm.form.controls.skillTitle?.hasError('pattern')">Please enter valid skill title (should be alphabets only)</li>
+            <li *ngIf="artistSkillForm.form.controls.skillTitle?.hasError('minlength')">skill title minimum length should be 5</li>
+            <li *ngIf="artistSkillForm.form.controls.skillTitle?.hasError('maxlength')">skill title maximum length should be 10</li>           
+          </div>
       </div>
     </div>
     <div class="form-group">
-      <input type='text' class="form-control" placeholder="Title " [(ngModel)]="skillTitle" name="skillTitle" />
+      <input type='text' class="form-control" placeholder="Title " [(ngModel)]="skillTitle" name="skillTitle" pattern="[a-zA-Z][a-zA-Z ]+"
+      minlength="5" maxlength="10" required/>
     </div>
     <div class="form-group">
-      <textarea name="" id="" class="form-control" cols="30" rows="10" [(ngModel)]="skillDescription" name="skillDescription">Description</textarea>
+      <textarea name="" id="" class="form-control" placeholder="Skill Description" cols="30" rows="10" [(ngModel)]="skillDescription" name="skillDescription">Description</textarea>
     </div>
 
     <div class="skill">
@@ -93,7 +103,7 @@
             <div class="modal-footer">
               <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                  <button type="button" class="btn btn-default"  (click)="deleteSkill()" data-dismiss="modal">Delete</button>
+                  <button type="button" class="btn btn-default"  (click)="deleteSkill(artistSkillForm)" data-dismiss="modal">Delete</button>
                 </div>
                 <div class="col-lg-4">
                   <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
@@ -108,3 +118,4 @@
   </fieldset>
 
 </div>
+</form>

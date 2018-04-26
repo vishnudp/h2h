@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
               public _commonDataSharedService: CommonDataSharedService,
               private _router: Router,
               private _routes: ActivatedRoute) {
-   
   }
 
   ngOnInit() {
@@ -36,33 +35,37 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(provider) {
-    switch (provider) {
-      // case 'facebook':
-      //   this.loginWithFacebook();
-      //   break;
-      // case 'google':
-      //   this.loginWithGoogle();
-      //   break;
-      case 'default':
-        this.defaultLogin();
-        break;
+  prepareLoginFormData(provider, loginForm) {
+    if (loginForm.valid) {
+      this.loginApiStatus = '';
+      switch (provider) {
+        // case 'facebook':
+        //   this.loginWithFacebook();
+        //   break;
+        // case 'google':
+        //   this.loginWithGoogle();
+        //   break;
+        case 'default':
+          this.defaultLogin();
+          break;
+      }
+    } else {
+      this.loginApiStatus = 'validationError';
     }
   }
 
+  login(provider, loginForm) {
+    const validInputJson = this.prepareLoginFormData(provider, loginForm);
+  }
+
   defaultLogin() {
-    console.log('this.username--', this.username);
-    console.log('this.userpassword--', this.userpassword);
     if (this.username === 'hotel' && this.userpassword === 'hotel') {
       this.setLoginData();
       this.loadContainer();
-      // this._router.navigate(['../myProfile'], { relativeTo: this._routes });
-      console.log('login Successfull');
       this.loginApiStatus = 'success';
     } else if (this.username === 'artist' && this.userpassword === 'artist') {
       this.setLoginData();
       this.loadContainer();
-      // this._router.navigate(['../myProfile'], { relativeTo: this._routes });
       console.log('login Successfull');
       this.loginApiStatus = 'success';
     } else {
@@ -114,9 +117,9 @@ export class LoginComponent implements OnInit {
   loadContainer() {
     this._commonDataSharedService.loginStatus.next(true);
     if (this.username === 'artist') {
-      this._router.navigate(['../artist/myProfile'], { relativeTo: this._routes });
+      this._router.navigate(['../artist/dashboard'], { relativeTo: this._routes });
     } else if (this.username === 'hotel') {
-      this._router.navigate(['../hotel/myProfile'], { relativeTo: this._routes });
+      this._router.navigate(['../hotel/dashboard'], { relativeTo: this._routes });
     }
   }
 

@@ -1,3 +1,7 @@
+.errorbox {
+    text-align: left;
+    color: #ff0000;
+}
 .fc-event {
     background-color: brown !important;
     height: 25px !important;

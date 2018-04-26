@@ -91,11 +91,16 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
 
   setPhotoCatalogueFormData(index) {
     if (this.artistPhotosData) {
-      const resultData = this.artistPhotosData.map((data)=> { if(data.post_id === index.toString()) { return data }});
-      const filteredData = resultData.filter((e)=> e !== undefined);
-      this.postTitle = filteredData['post_title'];
-      this.postLocation = filteredData['post_place'];
-      this.postDescription = filteredData['post_description'];
+      const resultData = this.artistPhotosData.map((data) => { if ( data.post_id === index.toString()) { return data; }});
+      const filteredData = resultData.filter((e) => e !== undefined);
+      for (let i = 0; i < this.artistPhotosData.length; i++) {
+        if (this.artistPhotosData[i].post_id === index.toString()) {
+            this.postTitle = this.artistPhotosData[i]['post_title'];
+            this.postLocation = this.artistPhotosData[i]['post_place'];
+            this.postDescription = this.artistPhotosData[i]['post_description'];
+            break;
+        }
+      }
     }
   }
 
@@ -111,7 +116,7 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
       // this.uploadInput.emit(event);
       const event: UploadInput = {
         type: 'uploadAll',
-        url: this.uploadUrl+'hotels-catalog-photos.php?action=upload_artist_catalog_images',
+        url: this.uploadUrl + 'hotels-catalog-photos.php?action=upload_artist_catalog_images',
         method: 'POST',
         data: { foo: 'bar' }
       };
@@ -142,7 +147,7 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
   startUpload(): void {
     const event: UploadInput = {
       type: 'uploadAll',
-      url: this.uploadUrl+'hotels-catalog-photos.php?action=upload_artist_catalog_images',
+      url: this.uploadUrl + 'hotels-catalog-photos.php?action=upload_artist_catalog_images',
       method: 'POST',
       data: { foo: 'bar' }
     };
@@ -163,43 +168,51 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
     this.uploadInput.emit({ type: 'cancelAll' });
   }
 
-  savePhotoCatalogue() {
+  savePhotoCatalogue(hotelPhotoForm) {
+    console.log('hotelPhotoForm--', hotelPhotoForm.valid);
     // value.map((data, index) => data.userId !== id ? data.userName : data.userId).filter(function (e) { return e !== id });
     let url = 'hotels-catalog-photos.php?action=addPhotos';
-    const validInputJson = this.prepareSavePhotoCatalogueInputJson();
-    if (this.selectedPhotoCatalogPostId > 0) {
-      validInputJson['post_id'] = this.selectedPhotoCatalogPostId;
-      url = 'hotels-catalog-photos.php?action=update_catalog_photos';
-    }
-    console.log('validInputJson--', validInputJson);
-    this._commonRequestResponseService.post(url, validInputJson)
-    .subscribe((res) => {
-      if (res) {
-        console.log('photosData--', res);
-        if (this.selectedPhotoCatalogPostId > 0) {
-          this.photoCatalogueApiStatus = 'update';
-        } else {
-          this.photoCatalogueApiStatus = 'save';
-        }
-        this.getPhotosTitleData();
+    const validInputJson = this.prepareSavePhotoCatalogueInputJson(hotelPhotoForm);
+    if (hotelPhotoForm.valid) {
+      if (this.selectedPhotoCatalogPostId > 0) {
+        validInputJson['post_id'] = this.selectedPhotoCatalogPostId;
+        url = 'hotels-catalog-photos.php?action=update_catalog_photos';
       }
-    }, (err) => {
-      this.photoCatalogueApiStatus = 'error';
-      console.log('got Error', err);
-    });
+      console.log('validInputJson--', validInputJson);
+      this._commonRequestResponseService.post(url, validInputJson)
+      .subscribe((res) => {
+        if (res) {
+          console.log('photosData--', res);
+          if (this.selectedPhotoCatalogPostId > 0) {
+            this.photoCatalogueApiStatus = 'update';
+          } else {
+            this.photoCatalogueApiStatus = 'save';
+          }
+          this.getPhotosTitleData();
+        }
+      }, (err) => {
+        this.photoCatalogueApiStatus = 'error';
+        console.log('got Error', err);
+      });
+    }
   }
 
-  prepareSavePhotoCatalogueInputJson() {
-    const inputJson = {
-      user_id : 2,
-      user_role_id : 2,
-      post_title : this.postTitle,
-      post_place : this.postLocation,
-      post_description : this.postDescription,
-      post_type : 'image',
-      post_attachment : JSON.stringify(this.preparePhotoCatalogueJson())
-    };
-    return inputJson;
+  prepareSavePhotoCatalogueInputJson(hotelPhotoForm) {
+    if (hotelPhotoForm.valid) {
+      this.photoCatalogueApiStatus = '';
+      const inputJson = {
+        user_id : 2,
+        user_role_id : 2,
+        post_title : this.postTitle,
+        post_place : this.postLocation,
+        post_description : this.postDescription,
+        post_type : 'image',
+        post_attachment : JSON.stringify(this.preparePhotoCatalogueJson())
+      };
+      return inputJson;
+    } else {
+      this.photoCatalogueApiStatus = 'validationError';
+    }
   }
 
   preparePhotoCatalogueJson() {
@@ -238,12 +251,8 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
     console.log('this.artistPhotosPerTitleData--', this.artistPhotosPerTitleData);
   }
 
-  resetForm() {
-    this.postTitle = '';
-    this.postLocation = '';
-    this.postDescription = '';
-    this.selectedPhotoCatalogPostId = 0;
-    this.removeAllFiles();
+  resetForm(hotelPhotoForm) {
+    hotelPhotoForm.reset();
   }
 
 }

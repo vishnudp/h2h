@@ -60,7 +60,7 @@ import { ArtistsMyProfileContentComponent } from './../components/artists-contai
 const appRoutes: Routes =
 [{
 
-    'path': 'artists/myprofile',
+    'path': 'artists/dashboard',
     'component': ArtistsMyProfileContentComponent
 }]
 

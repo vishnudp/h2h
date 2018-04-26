@@ -1,94 +1,112 @@
-<div class="row" *ngIf="showForm">
-  <div class="col-lg-12 pull-right">
-    <button type="submit" class="btn btn-default rightButton" (click)="resetForm()">Add New</button>
-    <button type="submit" class="btn btn-default rightButton" (click)="savePhotoCatalogue()">Save</button>
-  </div>
-  
-</div>
-<br>
-<fieldset class="fieldset_inner">
-  <legend>
-    <span>Photo</span>
-  </legend>
+<form #artistPhotoForm="ngForm" (ngSubmit)="savePhotoCatalogue(artistPhotoForm)">
   <div class="row" *ngIf="showForm">
-    <div class="alert alert-success alert-dismissible" *ngIf="photoCatalogueApiStatus === 'save'">
-      <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Success!</strong> Photos Catalogue Added Successfully.
-    </div>
-    <div class="alert alert-success alert-dismissible" *ngIf="photoCatalogueApiStatus === 'update'">
-      <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Success!</strong> Photos Catalogue Updated Successfully.
-    </div>
-    <div class="alert alert-success alert-dismissible" *ngIf="photoCatalogueApiStatus === 'delete'">
-      <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Success!</strong> Photo Deleted Successfully from Selected Catalogue.
-    </div>
-    <div class="alert alert-danger alert-dismissible" *ngIf="photoCatalogueApiStatus === 'error'">
-      <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Error!</strong> Error While Saving Photos Catalogue
-    </div>
-    <div class="alert alert-warning alert-dismissible" *ngIf="photoCatalogueApiStatus === 'validationError'">
-      <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Required Fields!</strong> Required Fields as (*)
+    <div class="col-lg-12 pull-right">
+      <button type="button" class="btn btn-default rightButton" (click)="resetForm(artistPhotoForm)">Add New</button>
+      <button type="submit" class="btn btn-default rightButton">Save</button>
     </div>
   </div>
-  <div *ngIf="showForm">
-  <div class="form-group">
-    <input type='text' class="form-control" placeholder="Title" name="postTitle" [(ngModel)]="postTitle" />
+  <br>
+  <fieldset class="fieldset_inner">
+    <legend>
+      <span>Photo</span>
+    </legend>
 
-  </div>
-  <div class="form-group">
-    <input type='text' class="form-control" placeholder="Place" name="postLocation" [(ngModel)]="postLocation" />
-
-  </div>
-  <div class="form-group">
-    <textarea name="" id="" class="form-control" cols="30" rows="10" name="postDescription" [(ngModel)]="postDescription">Description</textarea>
-  </div>
-  <div class="form-group row">
-    <div class="col-lg-2">
-
-      <div class="image-upload">
-        <label for="file-input-artist-photos">
-          <span class="blackhover-gray"><i class="fa fa-camera" aria-hidden="true"></i> Choose Catalogue Photos</span>
-        </label>      
-        <input id="file-input-artist-photos" type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple>
-    </div>
-      <div class="file-response">
-        <span *ngIf="fileInProgress === 'done'">Uploading File Done Successfully.
-          <img src="./assets/images/done.png" height="50px" width="50px" />
-        </span>
-        <span *ngIf="fileInProgress === 'progress'">File Uploading In Progress...
-          <img src="./assets/images/progress.gif" height="40px" width="50px" />
-        </span>
+    <div class="row" *ngIf="showForm">
+      <div class="alert alert-success alert-dismissible" *ngIf="photoCatalogueApiStatus === 'save'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Photos Catalogue Added Successfully.
+      </div>
+      <div class="alert alert-success alert-dismissible" *ngIf="photoCatalogueApiStatus === 'update'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Photos Catalogue Updated Successfully.
+      </div>
+      <div class="alert alert-success alert-dismissible" *ngIf="photoCatalogueApiStatus === 'delete'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Photo Deleted Successfully from Selected Catalogue.
+      </div>
+      <div class="alert alert-danger alert-dismissible" *ngIf="photoCatalogueApiStatus === 'error'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> Error While Saving Photos Catalogue
+      </div>
+      <div class="alert alert-warning alert-dismissible" *ngIf="photoCatalogueApiStatus === 'validationError' && (artistPhotoForm && artistPhotoForm.form && artistPhotoForm.form.controls && artistPhotoForm.form.invalid)">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <div class="errorbox" *ngIf="(artistPhotoForm && artistPhotoForm.form && artistPhotoForm.form.controls && artistPhotoForm.form.invalid && artistPhotoForm.submitted) ">
+          <b>Validation error(s) occured:</b>
+          <br>
+          <!-- <li *ngIf="ErrorMesageFlag">{{validateMsg}}</li> -->
+          <li *ngIf="artistPhotoForm.form.controls.postTitle?.hasError('required')">Please enter post title</li>
+          <li *ngIf="artistPhotoForm.form.controls.postTitle?.hasError('pattern')">Please enter valid post title (should be alphabets only)</li>
+          <li *ngIf="artistPhotoForm.form.controls.postTitle?.hasError('minlength')">post title minimum length should be 5</li>
+          <li *ngIf="artistPhotoForm.form.controls.postTitle?.hasError('maxlength')">post title maximum length should be 10</li>
+          <li *ngIf="artistPhotoForm.form.controls.postLocation?.hasError('required')">Please enter post location</li>
+          <li *ngIf="artistPhotoForm.form.controls.postLocation?.hasError('pattern')">Please enter valid post location (should be alphabets only)</li>
+          <li *ngIf="artistPhotoForm.form.controls.postLocation?.hasError('minlength')">post title minimum length should be 2</li>
+          <li *ngIf="artistPhotoForm.form.controls.postLocation?.hasError('maxlength')">post title maximum length should be 50</li>
+          
+        </div>
       </div>
     </div>
-  </div>
-  </div>
-  <div class="row">
-    <!-- Grid column -->
-    <div class="col-md-12 d-flex justify-content-center mb-5">
-      <div class="gallery-btn-group" *ngFor="let item of artistPhotosData; let i = index;">
-        <button type="button" class="btn btn-outline-black waves-effect filter" [ngClass]="selectedCatalogueIndex === item?.post_id ? 'activeCatalogue' : ''"
-          (click)="getPhotosPerTitleData(item?.post_id); setPhotoCatalogueFormData(item?.post_id)">{{item?.post_title}}</button>
+    <div *ngIf="showForm">
+      <div class="form-group">
+        <input type='text' class="form-control" placeholder="Title" name="postTitle" [(ngModel)]="postTitle" pattern="[a-zA-Z][a-zA-Z ]+"
+        minlength="5" maxlength="10" required/>
+
+      </div>
+      <div class="form-group">
+        <input type='text' class="form-control" placeholder="Place" name="postLocation" [(ngModel)]="postLocation" pattern="[a-zA-Z][a-zA-Z ]+"
+        minlength="2" maxlength="50" required/>
+
+      </div>
+      <div class="form-group">
+        <textarea name="" id="" class="form-control" cols="30" rows="10" name="postDescription" [(ngModel)]="postDescription">Description</textarea>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-2">
+
+          <div class="image-upload">
+            <label for="file-input-artist-photos">
+              <span class="blackhover-gray">
+                <i class="fa fa-camera" aria-hidden="true"></i> Choose Catalogue Photos</span>
+            </label>
+            <input id="file-input-artist-photos" type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
+              [uploadInput]="uploadInput" multiple>
+          </div>
+          <div class="file-response">
+            <span *ngIf="fileInProgress === 'done'">Uploading File Done Successfully.
+              <img src="./assets/images/done.png" height="50px" width="50px" />
+            </span>
+            <span *ngIf="fileInProgress === 'progress'">File Uploading In Progress...
+              <img src="./assets/images/progress.gif" height="40px" width="50px" />
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Grid column -->
-  </div>
-
-  <div class="gallery">
-    <div *ngIf="!loadContentStatus">
-      <img src="./assets/images/load.gif" />
-    </div>
-    <div *ngIf="loadContentStatus">
-      <div class="mb-3 pics" *ngFor="let attachmentItem of artistPhotosPerTitleData; let i = index;">
-        <a *ngIf="showForm" class="delete-icon" href="javascript:void(0)" (click)="showDeletionConfirmationPopup(i); showconfirmationPopup=!showconfirmationPopup">X</a>
-        <img class="img-fluid" *ngIf="attachmentItem?.generatedName" src="{{uploadUrl}}/uploads/{{attachmentItem?.generatedName}}"
-          alt="ads" title="ads" class="img-responsive" (error)="img.src = updateUrl()" #img>
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-md-12 d-flex justify-content-center mb-5">
+        <div class="gallery-btn-group" *ngFor="let item of artistPhotosData; let i = index;">
+          <button type="button" class="btn btn-outline-black waves-effect filter" [ngClass]="selectedCatalogueIndex === item?.post_id ? 'activeCatalogue' : ''"
+            (click)="getPhotosPerTitleData(item?.post_id); setPhotoCatalogueFormData(item?.post_id)">{{item?.post_title}}</button>
+        </div>
       </div>
+      <!-- Grid column -->
     </div>
 
-  </div>
-  <div *ngIf="showconfirmationPopup" id="artistphotosdeleteModel" role="dialog" #artistphotosdeleteModel>
+    <div class="gallery">
+      <div *ngIf="!loadContentStatus">
+        <img src="./assets/images/load.gif" />
+      </div>
+      <div *ngIf="loadContentStatus">
+        <div class="mb-3 pics" *ngFor="let attachmentItem of artistPhotosPerTitleData; let i = index;">
+          <a *ngIf="showForm" class="delete-icon" href="javascript:void(0)" (click)="showDeletionConfirmationPopup(i); showconfirmationPopup=!showconfirmationPopup">X</a>
+          <img class="img-fluid" *ngIf="attachmentItem?.generatedName" src="{{uploadUrl}}/uploads/{{attachmentItem?.generatedName}}"
+            alt="ads" title="ads" class="img-responsive" (error)="img.src = updateUrl()" #img>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="showconfirmationPopup" id="artistphotosdeleteModel" role="dialog" #artistphotosdeleteModel>
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -102,19 +120,20 @@
           <div class="modal-footer">
             <div class="row">
               <div class="col-lg-4 col-lg-offset-2">
-                <button type="button" class="btn btn-default" (click)="deleteAttachmentPerPost(); showconfirmationPopup=!showconfirmationPopup;" data-dismiss="modal">Delete</button>
+                <button type="button" class="btn btn-default" (click)="deleteAttachmentPerPost(); showconfirmationPopup=!showconfirmationPopup;"
+                  data-dismiss="modal">Delete</button>
               </div>
               <div class="col-lg-4">
                 <button type="button" class="btn btn-gray" (click)="showconfirmationPopup=!showconfirmationPopup">Cancel</button>
               </div>
             </div>
-  
+
           </div>
         </div>
-  
+
       </div>
     </div>
-  <!-- <div class="col-lg-3">
+    <!-- <div class="col-lg-3">
         <video class="video">
           <source src="./assets/images/sample.mp4" type="video/mp4">
           <source src="./assets/images/sample.mp4" type="video/ogg">
@@ -141,7 +160,7 @@
         <div class="playpause"></div>
       </div> -->
 
-  <!-- <div class="video" > 
+    <!-- <div class="video" > 
       <div class="col-lg-3">
         <video class="video">
           <source src="./assets/images/sample.mp4" type="video/mp4">
@@ -178,7 +197,7 @@
       </div>
     </div> -->
 
-  <!-- <ul class="pagination">
+    <!-- <ul class="pagination">
     <li>
       <a href="#">1</a>
     </li>
@@ -210,4 +229,5 @@
       <a href="#">10</a>
     </li>
   </ul> -->
-</fieldset>
+  </fieldset>
+</form>

@@ -40,35 +40,37 @@ export class ArtistsSkillsContentComponent implements OnInit {
       });
   }
 
-  saveSkill() {
-    console.log(this.prepareSaveSkill());
-    const validInputJson = this.prepareSaveSkill();
+  saveSkill(artistSkillForm) {
+    console.log(this.prepareSaveSkill(artistSkillForm));
+    const validInputJson = this.prepareSaveSkill(artistSkillForm);
     let url;
     console.log('validInputJson--', validInputJson);
-    if (this.selectedSkillId > 0) {
-      url = 'artist-skill.php?action=update_skill';
-      validInputJson['skill_id'] = this.selectedSkillId;
-    } else {
-      url = 'artist-skill.php?action=addSkill';
-    }
-    this._commonRequestResponseService.post(url, validInputJson)
-    .subscribe((res) => {
-      if (res) {
-        console.log('photosData--', res);
-        if (this.selectedSkillId > 0) {
-          this.skillApiStatus = 'update';
-        } else {
-          this.skillApiStatus = 'save';
-        }
-        this.getSkills();
-        this.resetForm();
+    if (artistSkillForm.valid) {
+      if (this.selectedSkillId > 0) {
+        url = 'artist-skill.php?action=update_skill';
+        validInputJson['skill_id'] = this.selectedSkillId;
+      } else {
+        url = 'artist-skill.php?action=addSkill';
       }
-        // this.countryData = res;
-        // console.log('this.countryData--', this.countryData);
-    }, (err) => {
-      this.skillApiStatus = 'error';
-      console.log('got Error', err);
-    });
+      this._commonRequestResponseService.post(url, validInputJson)
+      .subscribe((res) => {
+        if (res) {
+          console.log('photosData--', res);
+          if (this.selectedSkillId > 0) {
+            this.skillApiStatus = 'update';
+          } else {
+            this.skillApiStatus = 'save';
+          }
+          this.getSkills();
+          this.resetForm(artistSkillForm);
+        }
+          // this.countryData = res;
+          // console.log('this.countryData--', this.countryData);
+      }, (err) => {
+        this.skillApiStatus = 'error';
+        console.log('got Error', err);
+      });
+    }
   }
 
   editSkill(index) {
@@ -80,7 +82,7 @@ export class ArtistsSkillsContentComponent implements OnInit {
   showDeletionConfirmationPopup(id) {
     this.currentDeletingSkillId = id;
   }
-  deleteSkill() {
+  deleteSkill(artistSkillForm) {
     const inputJson = { skill_id : this.currentDeletingSkillId};
     this._commonRequestResponseService.post('artist-skill.php?action=delete_skill', inputJson)
       .subscribe((res) => {
@@ -88,27 +90,30 @@ export class ArtistsSkillsContentComponent implements OnInit {
         if (res) {
           this.skillApiStatus = 'delete';
           this.getSkills();
-          this.resetForm();
+          this.resetForm(artistSkillForm);
         }
       }, (err) => {
         console.log('got Error', err);
       });
   }
 
-  prepareSaveSkill() {
-    const inputJson = {
-      user_id : 1,
-      user_role_id : 1,
-      skill_title : this.skillTitle,
-      skill_description : this.skillDescription
-    };
-    return inputJson;
+  prepareSaveSkill(artistSkillForm) {
+    if (artistSkillForm.valid) {
+      this.skillApiStatus = '';
+      const inputJson = {
+        user_id : 1,
+        user_role_id : 1,
+        skill_title : this.skillTitle,
+        skill_description : this.skillDescription
+      };
+      return inputJson;
+    } else {
+      this.skillApiStatus = 'validationError';
+    }
   }
 
-  resetForm() {
-    this.selectedSkillId = 0;
-    this.skillTitle = '';
-    this.skillDescription = '';
+  resetForm(artistSkillForm) {
+    artistSkillForm.reset();
   }
 
 }
