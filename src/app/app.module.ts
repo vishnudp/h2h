@@ -27,6 +27,7 @@ import { FacebookModule } from 'ngx-facebook';
 import { Angular2SocialLoginModule } from "angular2-social-login";
 
 
+
 let providers = {
   "google": {
     "clientId": "109739933766-nh2c92re0ss4r38hptp40tiptof50g1c.apps.googleusercontent.com"

@@ -37,6 +37,7 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
 
   loadContentStatus = false;
   currentDeletingItemIndex;
+  showconfirmationPopup = false;
   constructor(@Inject(APP_CONFIG) private config: IAppConfig, private _commonRequestResponseService: CommonRequestResponseService) {
     // this.options = { concurrency: 0, allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif'] };
     this.files = []; // local uploading files array

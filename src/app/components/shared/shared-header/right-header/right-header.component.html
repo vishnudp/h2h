@@ -28,7 +28,11 @@
       </a>
     </li>
     <li class="account-login" *ngIf="loginStatus">
-        <a href="javascript:void(0)" [routerLink]="['/myProfile']">
+        <a *ngIf="username==='artist'" href="javascript:void(0)" [routerLink]="['/artist/myProfile']">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <span>My Profile</span>
+        </a>
+        <a *ngIf="username==='hotel'" href="javascript:void(0)" [routerLink]="['/hotel/myProfile']">
           <i class="fa fa-user" aria-hidden="true"></i>
           <span>My Profile</span>
         </a>

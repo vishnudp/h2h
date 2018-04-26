@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'angular2-social-login';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBVideoComponent } from 'ngx-facebook';
 import {
   CommonAuthenticationService, CommonDataSharedService
 } from '../../../services/common-services';
@@ -16,16 +14,12 @@ export class LoginComponent implements OnInit {
   username = 'artist';
   userpassword = 'artist';
   loginApiStatus = '';
-  constructor(public _auth: AuthService,
-              public fb: FacebookService,
+  constructor(
               public _commonAuthenticationService: CommonAuthenticationService,
               public _commonDataSharedService: CommonDataSharedService,
               private _router: Router,
               private _routes: ActivatedRoute) {
-    this.fb.init({
-      appId: '257126294373864',
-      version: 'v2.9'
-    });
+   
   }
 
   ngOnInit() {
@@ -44,12 +38,12 @@ export class LoginComponent implements OnInit {
 
   login(provider) {
     switch (provider) {
-      case 'facebook':
-        this.loginWithFacebook();
-        break;
-      case 'google':
-        this.loginWithGoogle();
-        break;
+      // case 'facebook':
+      //   this.loginWithFacebook();
+      //   break;
+      // case 'google':
+      //   this.loginWithGoogle();
+      //   break;
       case 'default':
         this.defaultLogin();
         break;
@@ -65,8 +59,7 @@ export class LoginComponent implements OnInit {
       // this._router.navigate(['../myProfile'], { relativeTo: this._routes });
       console.log('login Successfull');
       this.loginApiStatus = 'success';
-    }
-    else if (this.username === 'artist' && this.userpassword === 'artist') {
+    } else if (this.username === 'artist' && this.userpassword === 'artist') {
       this.setLoginData();
       this.loadContainer();
       // this._router.navigate(['../myProfile'], { relativeTo: this._routes });
@@ -77,41 +70,41 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginWithFacebook() {
-    this.fb.login()
-      .then((res: LoginResponse) => {
-        console.log('facebook res--', res);
-        this.setLoginData();
-        this.getFacebookProfileData(res.authResponse.userID);
+  // loginWithFacebook() {
+  //   this.fb.login()
+  //     .then((res: LoginResponse) => {
+  //       console.log('facebook res--', res);
+  //       this.setLoginData();
+  //       this.getFacebookProfileData(res.authResponse.userID);
 
-      })
-      .catch(this.handleError);
-  }
+  //     })
+  //     .catch(this.handleError);
+  // }
 
-  getFacebookProfileData(userID) {
-    this.fb.api('/' + userID + '/?fields=id,name,picture.type(large),email,first_name,last_name')
-      .then((res: any) => {
-        console.log('Got the users profile', res);
-        this.loginApiStatus = 'success';
-        this.loadContainer();
-      })
-      .catch(this.handleError);
-  }
+  // getFacebookProfileData(userID) {
+  //   this.fb.api('/' + userID + '/?fields=id,name,picture.type(large),email,first_name,last_name')
+  //     .then((res: any) => {
+  //       console.log('Got the users profile', res);
+  //       this.loginApiStatus = 'success';
+  //       this.loadContainer();
+  //     })
+  //     .catch(this.handleError);
+  // }
 
-  loginWithGoogle() {
-    const provider = 'google';
-    this.sub = this._auth.login(provider).subscribe(
-      (data) => {
-        this.user = data;
-        this.loginApiStatus = 'success';
-        this.setLoginData();
-        this.loadContainer();
-        console.log('google res', this.user);
-      }, (error) => {
-        console.log('error--', error);
-      }
-    );
-  }
+  // loginWithGoogle() {
+  //   const provider = 'google';
+  //   this.sub = this._auth.login(provider).subscribe(
+  //     (data) => {
+  //       this.user = data;
+  //       this.loginApiStatus = 'success';
+  //       this.setLoginData();
+  //       this.loadContainer();
+  //       console.log('google res', this.user);
+  //     }, (error) => {
+  //       console.log('error--', error);
+  //     }
+  //   );
+  // }
 
   private handleError(error) {
     this.loginApiStatus = 'error';
@@ -120,7 +113,11 @@ export class LoginComponent implements OnInit {
 
   loadContainer() {
     this._commonDataSharedService.loginStatus.next(true);
-    this._router.navigate(['../myProfile'], { relativeTo: this._routes });
+    if (this.username === 'artist') {
+      this._router.navigate(['../artist/myProfile'], { relativeTo: this._routes });
+    } else if (this.username === 'hotel') {
+      this._router.navigate(['../hotel/myProfile'], { relativeTo: this._routes });
+    }
   }
 
   setLoginData() {

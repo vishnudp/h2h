@@ -10,6 +10,7 @@ import {
 })
 export class RightHeaderComponent implements OnInit {
   loginStatus = false;
+  username = '';
   constructor(public _commonAuthenticationService: CommonAuthenticationService,
     public _commonDataSharedService: CommonDataSharedService,
     private _router: Router,
@@ -43,6 +44,7 @@ export class RightHeaderComponent implements OnInit {
     const loginData = this._commonAuthenticationService.getLoginData();
     console.log('loginData--', loginData);
     if (loginData) {
+      this.username = loginData.username;
       this.loginStatus = true;
     } else {
       this.loginStatus = false;

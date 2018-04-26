@@ -61,43 +61,46 @@ const appRoutes: Routes =
 
 [{
 
-    "path": "signup",
-    "component": SignupComponent
-},{
+    'path': 'signup',
+    'component': SignupComponent
+}, {
 
-    "path": "faq",
-    "component": FaqComponent
-},{
+    'path': 'faq',
+    'component': FaqComponent
+}, {
 
-    "path": "help",
-    "component": HelpComponent
-},{
+    'path': 'help',
+    'component': HelpComponent
+}, {
 
-    "path": "blog",
-    "component": BlogComponent
-},{
+    'path': 'blog',
+    'component': BlogComponent
+}, {
 
-    "path": "login",
-    "component": LoginComponent
-},{
+    'path': 'login',
+    'component': LoginComponent
+}, {
 
-    "path": "about-us",
-    "component": AboutUsComponent
-},{
+    'path': 'about-us',
+    'component': AboutUsComponent
+}, {
 
-    "path": "popular-events",
-    "component": PopularEventsComponent
-},{
+    'path': 'popular-events',
+    'component': PopularEventsComponent
+}, {
 
-    "path": "contact-us",
-    "component": ContactUsComponent
-},{
-    "path" : "myProfile",
-    "component": AfterLoginPageContentComponent
-}]
+    'path': 'contact-us',
+    'component': ContactUsComponent
+}, {
+    'path' : 'artist/myProfile',
+    'component': AfterLoginPageContentComponent
+}, {
+    'path' : 'hotel/myProfile',
+    'component': AfterLoginPageContentComponent
+}];
 
 @NgModule({
-    imports:[RouterModule.forRoot(appRoutes , { useHash: true })],
+    imports: [RouterModule.forRoot(appRoutes , { useHash: true })],
     exports: [RouterModule]
 })
 export class SharedRoutingModule {

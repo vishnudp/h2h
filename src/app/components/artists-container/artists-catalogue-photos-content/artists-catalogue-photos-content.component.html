@@ -81,19 +81,19 @@
     </div>
     <div *ngIf="loadContentStatus">
       <div class="mb-3 pics" *ngFor="let attachmentItem of artistPhotosPerTitleData; let i = index;">
-        <!-- <a *ngIf="showForm" class="delete-icon" href="javascript:void(0)" data-toggle="modal" data-target="#artistphotosdeleteModel" (click)="showDeletionConfirmationPopup(i)">X</a> -->
+        <a *ngIf="showForm" class="delete-icon" href="javascript:void(0)" (click)="showDeletionConfirmationPopup(i); showconfirmationPopup=!showconfirmationPopup">X</a>
         <img class="img-fluid" *ngIf="attachmentItem?.generatedName" src="{{uploadUrl}}/uploads/{{attachmentItem?.generatedName}}"
           alt="ads" title="ads" class="img-responsive" (error)="img.src = updateUrl()" #img>
       </div>
     </div>
 
   </div>
-  <div class="modal fade" id="artistphotosdeleteModel" role="dialog" #artistphotosdeleteModel>
+  <div *ngIf="showconfirmationPopup" id="artistphotosdeleteModel" role="dialog" #artistphotosdeleteModel>
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" (click)="showconfirmationPopup=!showconfirmationPopup">&times;</button>
             <h4 class="modal-title">Delete Item</h4>
           </div>
           <div class="modal-body text-center">
@@ -102,10 +102,10 @@
           <div class="modal-footer">
             <div class="row">
               <div class="col-lg-4 col-lg-offset-2">
-                <button type="button" class="btn btn-default" (click)="deleteAttachmentPerPost();" data-dismiss="modal">Delete</button>
+                <button type="button" class="btn btn-default" (click)="deleteAttachmentPerPost(); showconfirmationPopup=!showconfirmationPopup;" data-dismiss="modal">Delete</button>
               </div>
               <div class="col-lg-4">
-                <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-gray" (click)="showconfirmationPopup=!showconfirmationPopup">Cancel</button>
               </div>
             </div>
   

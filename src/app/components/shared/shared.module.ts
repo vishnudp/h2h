@@ -39,6 +39,7 @@ import { CalendarComponent } from 'ap-angular2-fullcalendar/src/calendar/calenda
 import { ArtistsCatalogueVideosContentComponent } from './../../components/artists-container/artists-catalogue-videos-content/artists-catalogue-videos-content.component';
 import { ArtistsCataloguePhotosContentComponent } from './../../components/artists-container/artists-catalogue-photos-content/artists-catalogue-photos-content.component';
 import { ArtistsCalendarContentComponent } from './../../components/artists-container/artists-calendar-content/artists-calendar-content.component';
+import { LoginWithSocialMediaComponent } from './../../components/auth-container/login-with-social-media/login-with-social-media.component';
 // Directive
 import { FileChooseDirective } from './../../directive/file-chooser.directive';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
@@ -84,7 +85,8 @@ import { NgUploaderModule  } from 'ngx-uploader';
         CalendarComponent,
         ArtistsCatalogueVideosContentComponent,
         ArtistsCataloguePhotosContentComponent,
-        ArtistsCalendarContentComponent
+        ArtistsCalendarContentComponent,
+        LoginWithSocialMediaComponent
     ],
     imports: [
         FormsModule,
@@ -134,7 +136,8 @@ import { NgUploaderModule  } from 'ngx-uploader';
         AngularMultiSelectModule,
         ArtistsCatalogueVideosContentComponent,
         ArtistsCataloguePhotosContentComponent,
-        ArtistsCalendarContentComponent
+        ArtistsCalendarContentComponent,
+        LoginWithSocialMediaComponent
     ],
     providers: []
 })
