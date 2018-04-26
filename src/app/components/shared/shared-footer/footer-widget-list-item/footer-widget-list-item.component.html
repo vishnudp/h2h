@@ -1,0 +1,152 @@
+<div class="row">
+	<div class="col-xs-12 col-lg-3">
+		<h3> About us</h3>
+		<p>
+			<img src="./assets/images/logo.jpg" alt="" class="pull-left">
+		</p>
+		<div *ngIf="!loadContentStatus">
+			<img src="./assets/images/load.gif" />
+		</div>
+		<div *ngIf="loadContentStatus">
+				<span class="pull-left" [innerHtml]="currentPageData?.page_description | slice : 0:250"></span>
+		</div>
+		<img src="./assets/images/indexslider.jpg" alt="" width="100%">
+	</div>
+	<div class="col-xs-12 col-lg-3">
+		<h3> More Links</h3>
+		<ul>
+			<li>
+				<a href="javascript:void(0)" [routerLink]="['/']">
+					<i class="fa fa-angle-right"></i>Home</a>
+			</li>
+			<li>
+				<a href="javascript:void(0)" [routerLink]="['/about-us']">
+					<i class="fa fa-angle-right"></i>About Company</a>
+			</li>
+			<li>
+				<a href="javascript:void(0)" [routerLink]="['/faq']">
+					<i class="fa fa-angle-right"></i>FAQ</a>
+			</li>
+			<li>
+				<a href="javascript:void(0)" [routerLink]="['/help']">
+					<i class="fa fa-angle-right"></i>Help</a>
+			</li>
+			<li>
+				<a href="javascript:void(0)" [routerLink]="['/blog']">
+					<i class="fa fa-angle-right"></i>Blog</a>
+			</li>
+			<li>
+				<a href="javascript:void(0)" [routerLink]="['/contact-us']">
+					<i class="fa fa-angle-right"></i>Contact us</a>
+			</li>
+			<!-- <li><a href="javascript:void(0)"> <i class="fa fa-angle-right"></i> About as page link</a> </li>
+							<li><a href="javascript:void(0)"> <i class="fa fa-angle-right"></i> Page link to show here</a> </li>
+							<li><a href="javascript:void(0)"><i class="fa fa-angle-right"></i> About as page link</a> </li>
+							<li><a href="javascript:void(0)"> <i class="fa fa-angle-right"></i> Know about next project</a> </li>
+							<li><a href="javascript:void(0)"> <i class="fa fa-angle-right"></i> About as page link</a> </li>
+							<li><a href="javascript:void(0)"> <i class="fa fa-angle-right"></i> About as page link</a> </li>
+							<li><a href="javascript:void(0)"> <i class="fa fa-angle-right"></i> as page link</a> </li>
+							<li><a href="javascript:void(0)"><i class="fa fa-angle-right"></i> About as page link</a> </li>
+							<li><a href="javascript:void(0)"> <i class="fa fa-angle-right"></i> Page link to show here</a> </li>	 -->
+		</ul>
+	</div>
+	<div class="col-xs-12 col-lg-3 latestevent">
+		<h3>Latest Events</h3>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-1.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-2.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-3.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-4.jpg" alt="">
+		</a>
+
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-4.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-3.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-2.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-1.jpg" alt="">
+		</a>
+
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-1.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-2.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-3.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-4.jpg" alt="">
+		</a>
+
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-4.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-3.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-2.jpg" alt="">
+		</a>
+		<a href="javascript:void(0)">
+			<img src="./assets/images/img-1.jpg" alt="">
+		</a>
+
+
+	</div>
+	<div class="col-xs-12 col-lg-3 address">
+		<h3>Address</h3>
+		<p>
+			<strong>145</strong> office no.
+			<strong>522</strong> , Nest Addrss line
+			<br> jaipur , Rajasthan. Pin Code:
+			<strong>302154</strong>
+			<br>
+			<label>
+				<i class="fa fa-mobile-phone" aria-hidden="true"></i>
+			</label>
+			<strong>54721324464</strong>
+			<br>
+			<label>
+				<i class="fa fa-phone" aria-hidden="true"></i>
+			</label>
+			<strong>646-13133</strong>
+			<br>
+		</p>
+
+		<div id="map">
+			<img src="./assets/images/map.jpg" alt="">
+		</div>
+
+		<div class="form-group">
+			<div class="input-group col-xs-12 newsletter">
+				<input type="text" class="form-control input-lg">
+				<a href="javascript:void(0)">Newsletter</a>
+			</div>
+		</div>
+		<script>
+			function myMap() {
+				var mapOptions = {
+					center: new google.maps.LatLng(51.5, -0.12),
+					zoom: 10,
+					mapTypeId: google.maps.MapTypeId.HYBRID
+				}
+				var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			}
+		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvc1IsbjHOPQyRJWdT9tj1KcvxJNXkJEU&callback=initMap"
+		 type="text/javascript"></script>
+	</div>
+</div>

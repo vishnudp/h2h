@@ -1,0 +1,223 @@
+.fc-event {
+    background-color: brown !important;
+    height: 25px !important;
+    font-size: 13px !important;
+    border:1px solid lightcoral;
+}
+
+.fc-content .fc-title {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.fc-content .closeon {
+    float: right;
+    margin-right: 5px;
+    margin-top: 2px;
+    background: #ff0000;
+    border-radius: 50%;
+    padding: 5px;
+    height: 10px;
+    width: 10px;
+    text-align: center;
+    font-size: 9px;
+
+}
+
+.modal-body  p{
+    color: #000;
+}
+.modal-header .close {
+    color: #fff;
+}
+.thumbnail {
+    padding: 30px !important;
+}
+.file-response-slider img{
+    position: absolute;
+    z-index: 10;
+    right: -50px;
+    top: 17px;
+}
+.file-response-profile-pic img {
+    position: absolute;
+    right: -5px;
+    bottom: 7px;
+}
+.wid_100 .container {
+    width: 99%;
+}
+.profile-pic img{
+    padding: 5px 58px;
+}
+.rightButton{
+    display: inline-block;
+    vertical-align: top;
+    float:right;
+    width: 200px;
+}
+.blackhover-gray {
+    width: 212px !important;
+    font-weight: lighter;
+    font-size: 92%;
+    background: #000;
+    color: #FFF;
+    margin: 5px 30px;
+    text-align: center;
+
+}
+
+.file-response {
+    width: 280px;
+    clear: both;
+}
+.image-upload > input
+{
+    display: none;
+}
+
+
+.skillcontainer  {
+    background: firebrick;
+    padding: 10px;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.calendarModel {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.calendarModel .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.activeCatalogue {
+    background: linear-gradient(to right , #8d2429 , #daa971);
+    color: white;
+    text-shadow: none;
+    border-right: solid white 1px; 
+}
+.delete-icon {
+    height: 20px;
+  width: 20px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 12px;
+  color: #fff !important;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 1;
+}
+.btn-outline-black {
+    border: 2px solid #000!important;
+    background-color: transparent!important;
+    color: #000!important;
+}
+
+.btn[class*=btn-outline-] {
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+}
+
+.btn {
+    padding: .84rem 2.14rem;
+    transition: all .2s ease-in-out;
+    margin: .375rem;
+    border-radius: .125rem;
+    text-transform: uppercase;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.waves-effect {
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 1;
+}
+
+.gallery-btn-group {
+    float: left;
+}
+.gallery {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-width: 33%;
+    -moz-column-width: 33%;
+    column-width: 33%; }
+.gallery .pics {
+    border: 1px solid #DDDDDD;
+    width: 96%;
+    height: 96%;
+    position: relative;
+    margin: 2%;
+    float:left;
+}
+.gallery .pics > img {
+   padding:10px;
+}
+
+.videoFrame {
+    position: relative;
+    width: 350px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  .videoFrame video {
+    width: 100%;
+    display: block;
+  }
+  .videoFrame:before {
+    content: '';
+    position: absolute;
+    border: 1px solid #DDD;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+  }
+.gallery .animation {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1); }
+
+@media (max-width: 450px) {
+    .gallery {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+        -webkit-column-width: 100%;
+        -moz-column-width: 100%;
+        column-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .btn.filter {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+    }
+}

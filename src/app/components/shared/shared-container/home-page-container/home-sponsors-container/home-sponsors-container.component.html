@@ -1,0 +1,38 @@
+<section class="">
+  <div class="container">
+    <fieldset>
+      <legend>
+        <span>Our</span> Clients</legend>
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="myCarousel" class="row carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <div *ngIf="!loadContentStatus">
+                  <img src="./assets/images/load.gif" />
+                </div>
+                <ul class="thumbnails" *ngIf="loadContentStatus">
+                  <li class="col-xs-12 col-sm-6 col-lg-4 display-table text-center" *ngFor="let item of sponsorData">
+                    <div class="thumbnail">
+                      <a href="{{item?.sponser_url}}" target="_blank">
+                        <img src="{{sponsorImagesPath}}{{item.sponser_image}}" alt="">
+                      </a>
+                    </div>
+                    <span>{{item?.sponser_title}}</span>
+                  </li>
+                </ul>
+              </div>
+              <!-- /Slide1 -->
+            </div>
+            <!-- /.control-box -->
+          </div>
+          <!-- /#myCarousel -->
+        </div>
+        <!-- /.col-sm-12 -->
+      </div>
+      <!-- /.row -->
+    </fieldset>
+    <!-- /.container -->
+  </div>
+</section>

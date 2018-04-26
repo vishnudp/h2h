@@ -1,0 +1,50 @@
+<div class="col-md-6 col-12">
+  <ul class="list-inline pull-right top-right socialicon">
+    <li>
+      <a href="javascript:void(0)" [routerLink]="['/faq']">FAQ</a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" [routerLink]="['/help']">Help</a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" [routerLink]="['/blog']">Blog</a>
+    </li>
+    <li *ngIf="loginStatus">
+      <span class="badge badge-top">7</span>
+      <a href="javascript:void(0)">
+        <i class="bell"></i>
+      </a>
+    </li>
+    <li class="account-login" *ngIf="!loginStatus">
+      <a href="javascript:void(0)" [routerLink]="['/login']">
+        <i class="singin" aria-hidden="true"></i>
+        <span>Sign In</span>
+      </a>
+    </li>
+    <li *ngIf="!loginStatus">
+      <a href="javascript:void(0)" [routerLink]="['/signup']">
+        <i class="signout" aria-hidden="true"></i>
+        <span> Sign Up</span>
+      </a>
+    </li>
+    <li class="account-login" *ngIf="loginStatus">
+        <a href="javascript:void(0)" [routerLink]="['/myProfile']">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <span>My Profile</span>
+        </a>
+    </li>
+    <li class="account-login" *ngIf="loginStatus">
+      <a href="javascript:void(0)" (click)="logout()">
+        <i class="singin" aria-hidden="true"></i>
+        <span>Logout</span>
+      </a>
+    </li>
+    <li *ngIf="loginStatus">
+
+      <a href="javascript:void(0)" class="wishlist">
+        <span class="badge">7</span>
+        <img src="./assets/images/wishlist.png" alt=""> Wish List
+      </a>
+    </li>
+  </ul>
+</div>

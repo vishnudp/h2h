@@ -1,0 +1,181 @@
+<section class="acts" style="padding:0;">
+  <div class="container">
+    <fieldset class="fieldset_inner">
+      <legend>
+        <span>About</span>
+      </legend>
+      <div class="darkgray">
+        <div *ngIf="!loadPersonalDataStatus">
+          <img src="./assets/images/load.gif" />
+        </div>
+        <div *ngIf="1loadPersonalDataStatus">
+          <strong>Hotel : </strong><span>{{userPersonalData?.user_proflie_title}}</span>
+          <br/>
+          <br/>
+          <br/>
+          <strong>About : </strong><span>{{userPersonalData?.user_about_info}}</span>
+        </div>
+
+      </div>
+    </fieldset>
+
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <fieldset class="fieldset_inner">
+      <legend>
+        <span>Contact </span>Detail</legend>
+      <div class="darkgray">
+        <div *ngIf="!loadContactDataStatus">
+          <img src="./assets/images/load.gif" />
+        </div>
+        <div *ngIf="loadContactDataStatus">
+          <strong>Address : </strong><span>{{userContactData?.user_address}}</span>
+          <br/>
+          <br/>
+          <br/>
+          <strong>City : </strong><span>{{userContactData?.user_city_name}}</span>
+          <br/>
+          <br/>
+          <br/>
+          <strong>State : </strong><span>{{userContactData?.user_zone_id}}</span>
+          <br/>
+          <br/>
+          <br/>
+          <strong>Country : </strong><span>{{userContactData?.user_country_id}}</span>
+          <br/>
+          <br/>
+          <br/>
+          <strong>Email : </strong><span>{{userContactData?.user_email}}</span>
+          <br/>
+          <br/>
+          <br/>
+          <strong>Phone Number : </strong><span>{{userContactData?.user_phone_number}}</span>
+          <br/>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<!-- <section>			
+    <div class="container">
+      <fieldset class="fieldset_inner" >
+        <legend> <span>previously  </span>Performed</legend>
+        <div class="darkgray">
+          <a href="#">Taj Palace Delhi </a> |
+          <a href="#">Electric Room   </a> |
+          <a href="#">Ritz Carlton Dubai etc..</a>
+        </div>
+      </fieldset>
+    </div>			
+  </section> 
+
+  <section>			
+    <div class="container">
+      <fieldset  class="fieldset_inner">
+        <legend> <span>Performance    </span>options</legend>
+        <div class="darkgray">
+          <a href="#">Solo  </a> |
+          <a href="#">Duo band   </a> |
+          <a href="#">Trio</a>|
+          <a href="#">Can jam with a Dj etc</a>
+        </div>
+      </fieldset>
+    </div>			
+  </section> 
+
+  <section class="video">			
+    <div class="container">
+      <fieldset>
+        <legend> <span>Catalogue</span>/portfolio </legend>
+        <div  >
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+        </div>
+        <div>
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+
+          <div class="col-lg-3">
+            <video class="video">
+              <source src="./assets/images/sample.mp4" type="video/mp4">
+              <source src="./assets/images/sample.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="playpause"></div>
+          </div>
+        </div>
+
+      </fieldset>
+    </div>			
+  </section> 	
+
+  <section>			
+    <div class="container">
+      <fieldset >
+        <legend> <span>Performance    </span>options</legend>
+        <img src="./assets/images/calendar.jpg" alt="" class="wid_100">
+      </fieldset>
+    </div>			
+  </section> -->

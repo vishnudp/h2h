@@ -1,0 +1,33 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="container">
+      <div *ngIf="!loadContentStatus">
+        <img src="./assets/images/load.gif" />
+      </div>
+      <div *ngIf="loadContentStatus">
+        <h2>
+          <i class="fa fa-sign-in" aria-hidden="true"></i>{{currentPageData?.page_title}}</h2>
+      </div>
+
+    </div>
+    <div class="item active">
+      <img src="./assets/images/innerpage.jpg" alt="Los Angeles" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12  col-md-8 col-md-offset-2 blog ">
+        <div *ngIf="!loadContentStatus">
+          <img src="./assets/images/load.gif" />
+        </div>
+        <div *ngIf="loadContentStatus">
+          <div [innerHtml]="currentPageData?.page_description"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

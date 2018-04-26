@@ -1,0 +1,102 @@
+<div class="container">
+  <!-- <div class="row">
+    <div class="col-lg-2 pull-right">
+      <button type="submit" class="btn btn-default">Update</button>
+    </div>
+  </div> -->
+  <br>
+  <div class="row">
+      <div class="alert alert-success alert-dismissible" *ngIf="eventApiStatus === 'save'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Event Added Successfully.
+      </div>
+      <div class="alert alert-success alert-dismissible" *ngIf="eventApiStatus === 'update'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Event Updated Successfully.
+      </div>
+      <div class="alert alert-success alert-dismissible" *ngIf="eventApiStatus === 'delete'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Event Deleted Successfully.
+      </div>
+      <div class="alert alert-danger alert-dismissible" *ngIf="eventApiStatus === 'error'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> Error While Saving Event.
+      </div>
+      <div class="alert alert-warning alert-dismissible" *ngIf="eventApiStatus === 'validationError'">
+        <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Required Fields!</strong> Required Fields as (*)
+      </div>
+    </div>
+  <div class="row">
+    
+    <div class="col-lg-12" *ngIf="showCalendar">
+      <!-- <img src="./assets/images/calendar.jpg" alt=""> -->
+      <angular2-fullcalendar class="myCalendar" [options]="calendarOptions"></angular2-fullcalendar>
+
+    </div>
+
+  </div>
+  <div class="calendarModel" id="calendarModel" role="dialog" #calendarModel>
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="hideCalendarPopup()" style="color:#fff">&times;</button>
+          <h4 class="modal-title">Add Event</h4>
+        </div>
+        <div class="modal-body">
+          <form id="formidc">
+            <div class="form-group">
+              <input type='text' class="form-control" placeholder="Title" name="eventTitle" [(ngModel)]="eventTitle" />
+
+            </div>
+            <div class="form-group">
+              <textarea name="" id="" class="form-control" cols="30" rows="10" name="eventDescription" [(ngModel)]="eventDescription">Description</textarea>
+            </div>
+
+            <label>Date</label>
+            <p>{{eventDate | date : 'MM/dd/yyyy'}}</p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-lg-4 col-lg-offset-2">
+              <button type="button" class="btn btn-default" (click)="saveCalendar()">Save</button>
+            </div>
+            <div class="col-lg-4">
+              <button type="button" class="btn btn-gray" (click)="hideCalendarPopup()">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="deleteCalendarModel" id="deleteCalendarModel" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" (click)="hideDeleteCalendarPopup()" style="color:#fff">&times;</button>
+            <h4 class="modal-title">Delete Event</h4>
+          </div>
+          <div class="modal-body">
+            Are You sure to delete this event !!
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-lg-4 col-lg-offset-2">
+                <button type="button" class="btn btn-default" (click)="deleteEvent()">Delete</button>
+              </div>
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-gray" (click)="hideDeleteCalendarPopup()">Cancel</button>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+  
+      </div>
+    </div>
+</div>

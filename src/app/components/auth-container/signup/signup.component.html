@@ -1,0 +1,182 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="container">
+      <h2>
+        <i class="fa fa-sign-in" aria-hidden="true"></i> Sign in l Sign up</h2>
+    </div>
+    <div class="item active">
+
+      <img src="./assets/images/innerpage.jpg" alt="Los Angeles" style="width:100%;">
+    </div>
+  </div>
+</div>
+<section id="signup">
+  <div class="whitebg">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+          <form role="form">
+            <h2>Please Sign Up</h2>
+            <hr class="colorgraph">
+            <div class="row">
+              <div class="alert alert-success alert-dismissible" *ngIf="signUpApiStatus === 'success'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> User Register Successfully.
+              </div>
+              <div class="alert alert-danger alert-dismissible" *ngIf="signUpApiStatus === 'error'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> Error While Register User
+              </div>
+              <div class="alert alert-warning alert-dismissible" *ngIf="signUpApiStatus === 'validationError'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Required Fields!</strong> Required Fields as (*)
+              </div>
+            </div>
+            <div class="row">
+              <form action="/action_page.php" style="padding-top: 30px;">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="First Name" [(ngModel)]="fName" name="firstName" />
+                  </div>
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="DOB" [(ngModel)]="dob" name="dob" />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="Last name" [(ngModel)]="lName" name="lastName" />
+                  </div>
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="Contact No." [(ngModel)]="contactNumber" name="contactNumber" />
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <select class="form-control" id="sel1" (change)="getStateData(countryId)" [(ngModel)]="countryId" name="country">
+                      <option disabled=true value="">Choose Country</option>
+                      <option *ngFor="let item of countryData" value="{{item?.country_id}}">{{item?.country_name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select class="form-control" id="sel2" [(ngModel)]="stateId" name="state">
+                      <option disabled=true value="">Choose State</option>
+                      <option *ngFor="let item of stateData" value="{{item?.state_id}}">{{item?.state_name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="City Name" [(ngModel)]="city" name="city" />
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <select class="form-control" id="sel1" [(ngModel)]="roleId" name="role">
+                      <option disabled=true value="">Choose Role Type</option>
+                      <option *ngFor="let item of roleData" value="{{item?.role_id}}">{{item?.role_name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type='text' class="form-control" placeholder="ZIP" [(ngModel)]="zip" name="zip" />
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="form-group gendar col-lg-6">
+                      <div class="col-lg-4">
+                        <label>Male</label>
+                        <input type="radio" name="gendar" [(ngModel)]="gender" value="male">
+                      </div>
+                      <div class="col-lg-4">
+                        <label>Female</label>
+                        <input type="radio" name="gendar" [(ngModel)]="gender" value="female">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <hr>
+            <div class="row">
+              <div class="col-xs-12 col-md-6 col-lg-6 col-lg-offset-6 tab-content">
+                <input type="submit" value="Register" class="btn btn-default btn-block btn-lg" tabindex="7" (click)="saveUser()">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="signin">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        <form role="form">
+          <h4 class="text-left">If you Already have a Account Please Login!!!</h4>
+          <hr>
+          <div class="row">
+            <form action="/action_page.php" style="padding-top: 30px;">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <input type='text' class="form-control form-control_login" placeholder="Username" />
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <input type='password' class="form-control form-control_login" placeholder="Password" />
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-6 col-lg-offset-6">
+              <a href="#" class="btn btn-danger ">Sign In</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="solical_btn">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-lg-6 col-lg-offset-3">
+
+        <fieldset class="pad_bot">
+          <legend>OR Please Login with social media accounts</legend>
+
+          <div class="col-xs-12 col-md-6 ">
+            <a href="#" class="btn btn-lg btn-block omb_btn-google">
+              <i class="fa fa-google-plus visible-xs"></i>
+              <span class="hidden-xs">
+                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                Sign in with Google+</span>
+            </a>
+          </div>
+          <div class="col-xs-12 col-md-6 tab-content">
+            <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+
+              <span class="hidden-xs">
+                <i class="fa fa-facebook" aria-hidden="true"></i>Sign in with Facebook</span>
+            </a>
+          </div>
+
+        </fieldset>
+
+      </div>
+    </div>
+  </div>
+
+</section>

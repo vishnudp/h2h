@@ -1,0 +1,6 @@
+<div *ngIf="!loginStatus">
+    <app-without-login-container></app-without-login-container>
+</div>
+<div *ngIf="loginStatus">
+    <app-after-login-container></app-after-login-container>
+</div>

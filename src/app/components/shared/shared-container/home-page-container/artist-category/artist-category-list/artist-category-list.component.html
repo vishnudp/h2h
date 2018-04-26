@@ -1,0 +1,37 @@
+<section class="acts ">
+	<div class="container">
+		<fieldset>
+			<legend>
+				<span>Over 500</span> Acts</legend>
+			<div class="row">
+				<div class="boxacts">
+					<div *ngIf="!loadContentStatus">
+						<img src="./assets/images/load.gif" />
+					</div>
+					<div *ngIf="loadContentStatus">
+						<div *ngFor="let item of artistCategoryData">
+							<a href="javascript:void(0)">
+								<img src="{{artistCategoryImagesPath}}{{item.artist_category_image}}" alt="">
+								<span>{{item.artist_category_name}}</span>
+							</a>
+						</div>
+					</div>
+
+
+
+					<!-- <a href="javascript:void(0)"><img src="./assets/images/500_6.jpg" alt=""><span>text goes here</span></a>
+							<a href="javascript:void(0)"><img src="./assets/images/500_3.jpg" alt=""><span>text goes here</span></a> -->
+					<!-- <div style="clear:both"></div>
+							<a href="javascript:void(0)"><img src="./assets/images/500_4.jpg" alt=""><span>text goes here</span></a>
+							<a href="javascript:void(0)"><img src="./assets/images/500_1.jpg" alt=""><span>text goes here</span></a>
+							<a href="javascript:void(0)"><img src="./assets/images/500_3.jpg" alt=""><span>text goes here</span></a>
+							<a href="javascript:void(0)"><img src="./assets/images/500_4.jpg" alt=""><span>text goes here</span></a>
+							<div style="clear:both"></div>
+							<a href="javascript:void(0)"><img src="./assets/images/500_7.jpg" alt=""><span>text goes here</span></a>
+							<a href="javascript:void(0)"><img src="./assets/images/500_8.jpg" alt=""><span>text goes here</span></a>
+							<a href="javascript:void(0)"><img src="./assets/images/500_1.jpg" alt=""><span>text goes here</span></a> -->
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</section>

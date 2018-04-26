@@ -1,0 +1,93 @@
+<section class="acts" style="padding:0;">
+  <div class="container">
+    <fieldset class="fieldset_inner">
+      <legend>
+        <span>Skills</span>
+      </legend>
+      <div *ngIf="!loadSkillStatus">
+        <img src="./assets/images/load.gif" />
+      </div>
+      <div *ngIf="loadSkillStatus">
+        <div class="darkgray">
+          <a href="javascript:void(0)" *ngFor="let item of skillsData">{{item?.skill_title}} | </a>
+          <!-- <a href="#">Synth Bass  </a> |
+                  <a href="#">Upright Bass</a> -->
+        </div>
+      </div>
+
+    </fieldset>
+
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <fieldset class="fieldset_inner">
+      <legend>
+        <span>Musical </span>Genres</legend>
+      <div class="darkgray">
+        <a href="#">Jazz </a> |
+        <a href="#">Blues </a> |
+        <a href="#">Latin etc...</a>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <fieldset class="fieldset_inner">
+      <legend>
+        <span>previously </span>Performed</legend>
+      <div *ngIf="!loadEventStatus">
+        <img src="./assets/images/load.gif" />
+      </div>
+      <div *ngIf="loadEventStatus">
+        <div class="darkgray">
+          <a href="javascript:void(0)" *ngFor="let item of eventData">{{item?.event_title}} | </a>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <fieldset class="fieldset_inner">
+      <legend>
+        <span>Performance </span>options</legend>
+      <div class="darkgray">
+        <a href="#">Solo </a> |
+        <a href="#">Duo band </a> |
+        <a href="#">Trio</a>|
+        <a href="#">Can jam with a Dj etc</a>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section class="video">
+  <div class="container">
+    <fieldset>
+      <legend>
+        <span>Catalogue</span>/portfolio </legend>
+      <app-artists-catalogue-photos-content [showForm]="showForm"></app-artists-catalogue-photos-content>
+      <app-artists-catalogue-videos-content [showForm]="showForm"></app-artists-catalogue-videos-content>
+    </fieldset>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <fieldset>
+      <legend>
+        <span>Performance </span>options</legend>
+      <!-- <img src="./assets/images/calendar.jpg" alt="" class="wid_100"> -->
+      <div class="wid_100">
+        <app-artists-calendar-content></app-artists-calendar-content>
+      </div>
+      
+    </fieldset>
+  </div>
+</section>

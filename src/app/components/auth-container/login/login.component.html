@@ -1,0 +1,101 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="container">
+      <h2>
+        <i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</h2>
+    </div>
+    <div class="item active">
+
+      <img src="./assets/images/innerpage.jpg" alt="Los Angeles" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<section id="signup">
+  <div class="whitebg">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+          <form role="form">
+            <h2>Please Sign In</h2>
+            <hr class="colorgraph">
+            <div class="row">
+              <div class="alert alert-success alert-dismissible" *ngIf="loginApiStatus === 'success'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> User Login Successfully.
+              </div>
+              <div class="alert alert-danger alert-dismissible" *ngIf="loginApiStatus === 'error'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> Error While Login User
+              </div>
+              <div class="alert alert-warning alert-dismissible" *ngIf="loginApiStatus === 'validationError'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Required Fields!</strong> Required Fields as (*)
+              </div>
+            </div>
+            <div class="row">
+              <form action="/action_page.php" style="padding-top: 30px;">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type='text' class="form-control form-control_login" placeholder="Username" name="username" [(ngModel)]="username"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type='password' class="form-control form-control_login" placeholder="Password" name="userpassword" [(ngModel)]="userpassword"
+                    />
+                  </div>
+                </div>
+
+              </form>
+            </div>
+
+            <hr>
+            <div class="row">
+              <div class="col-xs-12 col-md-6 col-lg-6 col-lg-offset-6 tab-content">
+                <input type="submit" value="Sign In" class="btn btn-default btn-block btn-lg" tabindex="7" (click)="login('default')">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="solical_btn">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-lg-6 col-lg-offset-3">
+
+        <fieldset class="pad_bot">
+          <legend>OR Please Login with social media accounts</legend>
+
+          <div class="col-xs-12 col-md-6 ">
+            <a href="javascript:void(0)" (click)="login('google')" class="btn btn-lg btn-block omb_btn-google">
+              <i class="fa fa-google-plus visible-xs"></i>
+              <span class="hidden-xs">
+                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                Sign in with Google+</span>
+            </a>
+          </div>
+          <div class="col-xs-12 col-md-6 tab-content">
+            <a href="javascript:void(0)" (click)="login('facebook')" class="btn btn-lg btn-block omb_btn-facebook">
+
+              <span class="hidden-xs">
+                <i class="fa fa-facebook" aria-hidden="true"></i>Sign in with Facebook</span>
+            </a>
+          </div>
+
+        </fieldset>
+
+      </div>
+    </div>
+  </div>
+
+</section>
