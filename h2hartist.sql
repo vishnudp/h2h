@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2018 at 08:23 AM
+-- Generation Time: Apr 27, 2018 at 10:44 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -19,6 +19,38 @@ SET time_zone = "+00:00";
 --
 -- Database: `h2hartist`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`%` FUNCTION `json_extract_c`(
+  details TEXT,
+  required_field VARCHAR (255)
+) RETURNS text CHARSET latin1
+BEGIN
+  RETURN TRIM(
+    BOTH '"' FROM SUBSTRING_INDEX(
+      SUBSTRING_INDEX(
+        SUBSTRING_INDEX(
+          details,
+          CONCAT(
+            '"',
+            SUBSTRING_INDEX(required_field,'$.', - 1),
+            '"'
+          ),
+          - 1
+        ),
+        '",',
+        1
+      ),
+      ':',
+      - 1
+    )
+  ) ;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -192,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `tg_catalogue` (
   `post_is_deleted` tinyint(4) NOT NULL,
   `post_created_time` datetime NOT NULL,
   `post_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `tg_catalogue`
@@ -207,9 +239,10 @@ INSERT INTO `tg_catalogue` (`post_id`, `user_id`, `user_role_id`, `post_title`, 
 (6, 1, 1, 'test', 'test', 'test vicdeo', 'video', '[]', 1, 0, '2018-04-23 14:50:34', '2018-04-23 13:08:10'),
 (7, 1, 1, 'test2', 'test2 ', 'test 2 video', 'video', '[]', 1, 0, '2018-04-23 15:06:05', '2018-04-24 06:21:05'),
 (8, 1, 1, 'test', 'test3', 'test vicdeo', 'video', '[{"status":true,"originalName":"Video_of_Explore_Careers_on_Mobile__iPhone_.MOV","generatedName":"7b5393b271f07ead419c1f1e8fa2d593.MOV"}]', 1, 0, '2018-04-23 15:07:52', '2018-04-24 06:00:04'),
-(9, 2, 2, 'test', 'test', 'test', 'image', '[{"status":true,"originalName":"hotelsscroll1.jpg","generatedName":"77c53febad01006005211186d2160307.jpg"}]', 1, 0, '2018-04-25 11:55:25', '2018-04-25 09:55:25'),
-(10, 2, 2, 'test', 'test', 'resr', 'video', '[{"status":true,"originalName":"Messages_-_Compose_-_Horizontal_Orientation.MOV","generatedName":"868e9f21a09baa7706cb41bfacff19dd.MOV"}]', 1, 0, '2018-04-25 12:09:07', '2018-04-25 11:37:26'),
-(11, 1, 1, '', '', '', 'image', '[]', 1, 0, '2018-04-25 13:54:41', '2018-04-25 11:54:41');
+(9, 2, 2, 'test video', 'test', 'test video', 'image', '[{"status":true,"originalName":"hotelsscroll1.jpg","generatedName":"77c53febad01006005211186d2160307.jpg"}]', 1, 0, '2018-04-25 11:55:25', '2018-04-26 10:59:22'),
+(10, 2, 2, 'testv', 'test', 'resr', 'video', '[{"status":true,"originalName":"Messages_-_Compose_-_Horizontal_Orientation.MOV","generatedName":"868e9f21a09baa7706cb41bfacff19dd.MOV"}]', 1, 0, '2018-04-25 12:09:07', '2018-04-26 11:04:55'),
+(11, 1, 1, 'testy', '', 'testy', 'image', '[]', 1, 0, '2018-04-25 13:54:41', '2018-04-26 09:33:42'),
+(12, 1, 1, 'test ty', 'test', 'test', 'video', '[]', 1, 0, '2018-04-26 12:31:42', '2018-04-26 10:31:42');
 
 -- --------------------------------------------------------
 
@@ -1543,7 +1576,7 @@ CREATE TABLE IF NOT EXISTS `tg_event` (
   `event_is_deleted` tinyint(4) NOT NULL,
   `event_created_time` datetime NOT NULL,
   `event_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tg_event`
@@ -1552,7 +1585,8 @@ CREATE TABLE IF NOT EXISTS `tg_event` (
 INSERT INTO `tg_event` (`event_id`, `user_id`, `user_role_id`, `event_title`, `event_description`, `event_date`, `event_is_active`, `event_is_deleted`, `event_created_time`, `event_updated_time`) VALUES
 (1, 1, 1, 'test event', 'test event', '04/04/2018', 1, 0, '2018-04-24 10:38:00', '2018-04-24 08:38:00'),
 (2, 1, 1, 'test event3', 'test event3', '2018-04-03T18:30:00.000Z', 1, 1, '2018-04-24 10:38:39', '2018-04-24 09:04:42'),
-(3, 1, 1, 'test event 11', 'test event 11', '04/11/2018', 1, 1, '2018-04-24 11:07:57', '2018-04-24 09:08:06');
+(3, 1, 1, 'test event 11', 'test event 11', '04/11/2018', 1, 1, '2018-04-24 11:07:57', '2018-04-24 09:08:06'),
+(4, 1, 1, 'test title', 'test title', '2018-04-10T18:30:00.000Z', 1, 0, '2018-04-26 12:46:02', '2018-04-26 10:47:15');
 
 -- --------------------------------------------------------
 
@@ -1756,6 +1790,30 @@ INSERT INTO `tg_gcm_users` (`id`, `gcm_regid`, `name`, `email`, `created_at`) VA
 (193, 'dQ9IjnUQm0Y:APA91bFevHGvahPd2Tp4KaviORxu8yZi7gbYsWUlyXvcZXKQxz0GkY_cTQZkCNiYo2jKtlEfL3UDp6fa_SQtAq96wO5Ua7T07tiLGsVH7JpYeKrtOtcLECeX0Vtk0mKtMwfYfuSkg9Qe', 'surendar', 'a@a.com', '2015-10-01 17:36:02'),
 (194, 'feXMjSVyGe4:APA91bG1VbgeQb5p7PxeT48DGESgDWaMXqDgp7DlBFWVHQNI5DQf2fidQ2p-8VQsY6pKgDhZjykUVDg8XKFqLeb6KZjnnT92nA-LX1vcAJyHMh5bdb_8apmPq8CMXNsB8rljX2bY6Vz9', 'surendar', 'a@a.com', '2015-10-01 18:48:56'),
 (195, 'dsPEhmPbvsQ:APA91bE1YTy3g5M1H4eGrsfWSJBrCCj2VrgmY4g59zclZeN_3hegSAMSmm6vh7snceCjVudDoAZ6h9mPV_w4MEpiVrJ4ZhQoBPN4qam9PR9qV_3eSQgXosECIWV8M5PD9NyXOz6hD8DV', 'surendar', 'a@a.com', '2015-10-02 09:59:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tg_guest_contact_info`
+--
+
+CREATE TABLE IF NOT EXISTS `tg_guest_contact_info` (
+`contact_id` int(11) unsigned NOT NULL,
+  `contact_name` varchar(255) NOT NULL,
+  `contact_email` varchar(255) NOT NULL,
+  `contact_mbl_number` varchar(255) NOT NULL,
+  `contact_city` varchar(255) NOT NULL,
+  `contact_comment` text NOT NULL,
+  `contact_is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `contact_created_at` datetime NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tg_guest_contact_info`
+--
+
+INSERT INTO `tg_guest_contact_info` (`contact_id`, `contact_name`, `contact_email`, `contact_mbl_number`, `contact_city`, `contact_comment`, `contact_is_deleted`, `contact_created_at`) VALUES
+(1, 'vishnu', 'vishnu@gmail.com', '1234567890', 'jaipur', 'test', 0, '2018-04-27 06:47:00');
 
 -- --------------------------------------------------------
 
@@ -2219,7 +2277,7 @@ CREATE TABLE IF NOT EXISTS `tg_skill` (
 
 INSERT INTO `tg_skill` (`skill_id`, `user_id`, `user_role_id`, `skill_title`, `skill_description`, `skill_is_active`, `skill_is_deleted`, `skill_created_time`, `skill_updated_time`) VALUES
 (1, 1, 1, 'test', 'test', 1, 0, '2018-04-09 09:28:22', '2018-04-24 12:12:25'),
-(2, 1, 1, 'test2', 'test', 1, 0, '2018-04-09 09:29:04', '2018-04-24 12:12:29'),
+(2, 1, 1, 'test2', 'test', 1, 1, '2018-04-09 09:29:04', '2018-04-26 10:38:00'),
 (3, 1, 1, 'test', 'test', 1, 1, '2018-04-24 07:30:40', '2018-04-24 05:30:43'),
 (4, 1, 1, 'test', 'test', 1, 1, '2018-04-24 07:32:04', '2018-04-24 05:32:05'),
 (5, 1, 1, 'test', 'test', 1, 1, '2018-04-24 07:34:03', '2018-04-24 06:28:17');
@@ -2348,7 +2406,7 @@ CREATE TABLE IF NOT EXISTS `tg_users` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL,
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `tg_users`
@@ -2370,7 +2428,14 @@ INSERT INTO `tg_users` (`user_id`, `role_id`, `hardware_id`, `first_name`, `last
 (13, 0, '', '', '', '', '', '', '', 0, '', '', '', '', '46ce610ee1e28e3767b021f10d9ddd2c90b48cc5224d', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-06 11:51:36'),
 (14, 4, '', 'test1', 'test', '', '', '', '', 99, '1501', 'jaipur', '12345678909', '302022', '454c84305a3f265aec4a128fa17c1585c7e695c60bff', '', '', '', '', '12/10/1990', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-06 11:51:36'),
 (15, 0, '', '', '', '', '', '', '', 0, '', '', '', '', '7db0e059219e7ada034e8db22048ca0bd5fef2dcf7d7', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-23 09:00:17'),
-(16, 5, '', 'test', 'test', '', '', '', '', 99, '1501', 'jaipour', '1234567890', '302030', '3d21be27cb86a2a10d331470632206827498a46fa967', '', '', '', '', '12/11/1698', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-23 09:00:17');
+(16, 5, '', 'test', 'test', '', '', '', '', 99, '1501', 'jaipour', '1234567890', '302030', '3d21be27cb86a2a10d331470632206827498a46fa967', '', '', '', '', '12/11/1698', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-23 09:00:17'),
+(17, 0, '', '', '', '', '', '', '', 0, '', '', '', '', '42a230c3839fb6d59c093308d76e01764b864655de51', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 06:27:53'),
+(18, 0, '', '', '', '', '', '', '', 0, '', '', '', '', 'f586b49cc4530ee8821eb1ee8edadbb636118bbdf683', '', '', '', '', '', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 06:27:53'),
+(19, 0, '', '', '', '', '', '', '', 0, '', '', '', '', 'd6468c4f88d63549465a9f99082bf8c57d4d8671c089', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 08:55:53'),
+(20, 0, '', '', '', '', '', '', '', 0, '', '', '', '', '03ad15fd3094c9de9da9f8fcb0372b84a0819d170a57', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:01:57'),
+(21, 4, '', 'lovlesh', 'gupta', 'lovle', 'lovlesh@gmail.com', '', '', 99, '1501', 'jaipur', '(123)123-1234', '30201', '9dce17da77df8817d68142c24a5be20bf4ac798b612f', '', '', '', '', '04/02/2018', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:01:57'),
+(22, 0, '', '', '', '', '', '', '', 0, '', '', '', '', '11686ac9ead64e6aec4cff57cf1d56edcb7da4cb91ea', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:03:51'),
+(23, 5, '', 'komal', 'gupta', 'komal', 'komal@gmail.com', '', '', 99, '1501', 'jaipur', '(123)123-1245', '30205', '552e8f4804da36b82d7c12514b3926b04cdee4932ae9', '', '', '', '', '04/03/2018', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:03:51');
 
 -- --------------------------------------------------------
 
@@ -2671,8 +2736,7 @@ CREATE TABLE IF NOT EXISTS `tg_user_other_info` (
 --
 
 INSERT INTO `tg_user_other_info` (`user_id`, `user_role_id`, `user_artist_category`, `user_artist_language`, `user_artist_physical_desc`, `user_artist_convince_travel`, `user_artist_convince_passport`, `created_time`, `updated_time`) VALUES
-(1, 1, '[{"artist_category_id":"1"}]', '[{"id":"1","itemName":"english"}]', '{"height":"34","weight":"54","complexion":"test","bodyType":"test"}', 'no', 'yes', '0000-00-00 00:00:00', '2018-04-24 12:01:43'),
-(2, 2, '', '', '', '', '', '0000-00-00 00:00:00', '2018-04-24 09:54:40');
+(1, 1, '[{"artist_category_id":"1"}]', '[{"id":"1","itemName":"english"}]', '{"height":"34","weight":"54","complexion":"test","bodyType":"test"}', 'no', 'yes', '0000-00-00 00:00:00', '2018-04-24 12:01:43');
 
 -- --------------------------------------------------------
 
@@ -6819,6 +6883,12 @@ ALTER TABLE `tg_gcm_users`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tg_guest_contact_info`
+--
+ALTER TABLE `tg_guest_contact_info`
+ ADD PRIMARY KEY (`contact_id`);
+
+--
 -- Indexes for table `tg_language`
 --
 ALTER TABLE `tg_language`
@@ -6949,7 +7019,7 @@ MODIFY `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `tg_catalogue`
 --
 ALTER TABLE `tg_catalogue`
-MODIFY `post_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `post_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tg_cities`
 --
@@ -6974,12 +7044,17 @@ MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
 -- AUTO_INCREMENT for table `tg_event`
 --
 ALTER TABLE `tg_event`
-MODIFY `event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tg_gcm_users`
 --
 ALTER TABLE `tg_gcm_users`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=196;
+--
+-- AUTO_INCREMENT for table `tg_guest_contact_info`
+--
+ALTER TABLE `tg_guest_contact_info`
+MODIFY `contact_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tg_language`
 --
@@ -7029,7 +7104,7 @@ MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `tg_users`
 --
 ALTER TABLE `tg_users`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `tg_user_info`
 --

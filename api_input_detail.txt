@@ -1,0 +1,22 @@
+http://localhost/h2hArtistApi/api/guest_contact_info.php?action=add_guest_contact_info
+
+input json : 
+
+{
+	
+	 "contact_name": "vishnu",
+	 "contact_email": "vishnu@gmail.com",
+	 "contact_mbl_number": "1234567890",
+	 "contact_city": "jaipur",
+	 "contact_comment": "test"
+	 
+}
+
+
+http://localhost/h2hArtistApi/api/artists-by-category.php?action=get_artists_by_category
+
+{
+	
+	 "artist_category": "1"
+	 
+}

@@ -41,6 +41,7 @@ switch($_GET['action'])  {
 
 function save_user_data() {    
     $data = json_decode(file_get_contents("php://input")); 
+    $username      = $data->username;
     $firstName     = $data->fName;
     $lastName      = $data->lName;
     $dob           = $data->dob;
@@ -51,9 +52,12 @@ function save_user_data() {
     $zip           = $data->zip;
     $gender        = $data->gender;
     $roleId        = $data->roleId;
+    $email         = $data->email;
     $verificationCode = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
     $qry = mysql_query('Insert into tg_users (
         role_id, 
+        username,
+        email,
         first_name, 
         last_name, 
         user_dob, 
@@ -65,6 +69,8 @@ function save_user_data() {
         location, 
         verification_code ) values (
             "'.$roleId.'",
+            "'.$username.'",
+            "'.$email.'",
             "'.$firstName.'",
             "'.$lastName.'",
             "'.$dob.'",
