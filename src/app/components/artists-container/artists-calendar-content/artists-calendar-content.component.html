@@ -57,11 +57,36 @@
             </div>
             <div class="form-group">
               <input type='text' class="form-control" placeholder="Title" name="eventTitle" [(ngModel)]="eventTitle" pattern="[a-zA-Z][a-zA-Z ]+"
-              minlength="5" maxlength="10" required/>
+                minlength="5" maxlength="10" required/>
 
             </div>
             <div class="form-group">
               <textarea name="" id="" class="form-control" cols="30" rows="10" name="eventDescription" [(ngModel)]="eventDescription">Description</textarea>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-lg-2">
+
+                <div class="image-upload">
+                  <label for="file-input-artist-event-photo">
+                    <span class="blackhover-gray">
+                      <i class="fa fa-camera" aria-hidden="true"></i> Choose Event Photo</span>
+                  </label>
+                  <input id="file-input-artist-event-photo" type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
+                    [uploadInput]="uploadInput">
+                </div>
+                <img class="img-fluid" *ngIf="currentEventCoverPhoto" src="{{uploadUrl}}/uploads/{{currentEventCoverPhoto}}" alt="ads" title="ads"
+                  class="img-responsive" (error)="img.src = updateUrl()" #img>
+                  
+                <div class="file-response">
+                  <span *ngIf="fileInProgress === 'done'">Uploading File Done Successfully.
+                    <img src="./assets/images/done.png" height="50px" width="50px" />
+                  </span>
+                  <span *ngIf="fileInProgress === 'progress'">File Uploading In Progress...
+                    <img src="./assets/images/progress.gif" height="40px" width="50px" />
+                  </span>
+                </div>
+              </div>
             </div>
 
             <label>Date</label>
