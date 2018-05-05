@@ -1,0 +1,26 @@
+<section class="acts ">
+	<div class="container">
+		<fieldset>
+			<legend>
+				<span>Over 800</span> Acts</legend>
+			<div class="row">
+				<div class="boxacts">
+					<div *ngIf="!loadContentStatus">
+						<img src="./assets/images/load.gif" />
+					</div>
+					<div *ngIf="loadContentStatus">
+						<!-- <h1>
+							Artist by category working....
+						</h1> -->
+						<div *ngFor="let item of artistByCategoryData">
+							<a href="javascript:void(0)" [routerLink]="['/artistprofile', item.artist_id || '55']">
+								<img src="{{artistCategoryImagesPath}}{{item.user_logo_info[0].originalName}}" alt="">
+								<span>{{item.user_profile_title}}</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</section>

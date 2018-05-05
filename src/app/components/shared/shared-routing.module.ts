@@ -10,6 +10,9 @@ import { AboutUsComponent } from './shared-container/static-page-container/stati
 import { PopularEventsComponent } from './shared-container/static-page-container/static-pages/popular-events/popular-events.component';
 import { ContactUsComponent } from './shared-container/static-page-container/static-pages/contact-us/contact-us.component';
 import { AfterLoginPageContentComponent } from './../../components/after-login-page-content/after-login-page-content.component';
+import { ArtistByCategoryComponent } from './shared-container/home-page-container/artist-category/artist-category-list/artist-by-category/artist-by-category.component';
+import { ArtistProfileComponent } from './shared-container/home-page-container/artist-category/artist-category-list/artist-by-category/artist-profile/artist-profile.component';
+
 // import { PublicComponent } from './public/public.component';
 // import {RecruiterComponent} from './recruiter/recruiter.component';
 // import {ContractorComponent} from './contractor/contractor.component';
@@ -97,6 +100,12 @@ const appRoutes: Routes =
 }, {
     'path' : 'hotel/dashboard',
     'component': AfterLoginPageContentComponent
+}, {
+    'path' : 'artistByCategory/:id',
+    'component': ArtistByCategoryComponent
+}, {
+    'path' : 'artistprofile/:id',
+    'component': ArtistProfileComponent
 }];
 
 @NgModule({

@@ -10,7 +10,7 @@
 					</div>
 					<div *ngIf="loadContentStatus">
 						<div *ngFor="let item of artistCategoryData">
-							<a href="javascript:void(0)">
+							<a href="javascript:void(0)" [routerLink]="['artistByCategory', item.artist_category_id]">
 								<img src="{{artistCategoryImagesPath}}{{item.artist_category_image}}" alt="">
 								<span>{{item.artist_category_name}}</span>
 							</a>

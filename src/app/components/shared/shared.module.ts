@@ -13,6 +13,8 @@ import { HomeSearchFormComponent } from './shared-container/home-page-container/
 import { HomeArtistContainerComponent } from './shared-container/home-page-container/home-artist-container/home-artist-container.component';
 import { ArtistCategoryComponent } from './shared-container/home-page-container/artist-category/artist-category.component';
 import { ArtistCategoryListComponent } from './shared-container/home-page-container/artist-category/artist-category-list/artist-category-list.component';
+import { ArtistByCategoryComponent } from './shared-container/home-page-container/artist-category/artist-category-list/artist-by-category/artist-by-category.component';
+import { ArtistProfileComponent } from './shared-container/home-page-container/artist-category/artist-category-list/artist-by-category/artist-profile/artist-profile.component';
 import { HomeSponsorsContainerComponent } from './shared-container/home-page-container/home-sponsors-container/home-sponsors-container.component';
 import { TestimonialContainerComponent } from './shared-container/home-page-container/testimonial-container/testimonial-container.component';
 import { TestimonialSliderComponent } from './shared-container/home-page-container/testimonial-slider/testimonial-slider.component';
@@ -59,6 +61,8 @@ import { NgUploaderModule  } from 'ngx-uploader';
         HomeArtistContainerComponent,
         ArtistCategoryComponent,
         ArtistCategoryListComponent,
+        ArtistByCategoryComponent,
+        ArtistProfileComponent,
         HomeSponsorsContainerComponent,
         TestimonialContainerComponent,
         TestimonialSliderComponent,
@@ -108,6 +112,8 @@ import { NgUploaderModule  } from 'ngx-uploader';
         HomeArtistContainerComponent,
         ArtistCategoryComponent,
         ArtistCategoryListComponent,
+        ArtistByCategoryComponent,
+        ArtistProfileComponent,
         HomeSponsorsContainerComponent,
         TestimonialContainerComponent,
         TestimonialSliderComponent,
