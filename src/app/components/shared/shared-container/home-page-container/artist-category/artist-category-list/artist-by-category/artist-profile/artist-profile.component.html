@@ -64,8 +64,8 @@
     <div class="container">
       <br>
       <h3 class="font-bauhaus">Jasmin Ferrera</h3>
-      <p>
-        Jasmin Ferrera has been recording online for over 5 years now amassing an impressive collection of vintage and modern bass guitars to cover all sounds. He also plays upright bass. He is known as a groove player who plays for the song and is proficient in a range of styles and techniques. Recent credits have included playing on demo projects all the way through to Hollywood films, TV and everything in between. His live credits include Katie Melba, Martha Reeves and the Candelas, Les Miserable (West End) and TV sessions with Rod Stewart and Olly Moors.
+      <p>{{aboutUser}}
+        <!-- Jasmin Ferrera has been recording online for over 5 years now amassing an impressive collection of vintage and modern bass guitars to cover all sounds. He also plays upright bass. He is known as a groove player who plays for the song and is proficient in a range of styles and techniques. Recent credits have included playing on demo projects all the way through to Hollywood films, TV and everything in between. His live credits include Katie Melba, Martha Reeves and the Candelas, Les Miserable (West End) and TV sessions with Rod Stewart and Olly Moors. -->
       </p>
     </div>
   </div>
@@ -74,10 +74,13 @@
   <div class="container">
     <fieldset class="fieldset_inner">
       <legend> <span>Skills</span></legend>
-      <div class="darkgray">
-        <a href="#">Electric Bass  </a> |
-        <a href="#">Synth Bass  </a> |
-        <a href="#">Upright Bass</a>
+      <div *ngIf="!loadSkillStatus">
+        <img src="./assets/images/load.gif" />
+      </div>
+      <div *ngIf="loadSkillStatus">
+        <div class="darkgray">
+          <a href="javascript:void(0)" *ngFor="let item of skillsData">{{item?.skill_title}} | </a>
+        </div>
       </div>
     </fieldset>
   </div>
@@ -98,10 +101,13 @@
   <div class="container">
     <fieldset class="fieldset_inner">
       <legend> <span>previously  </span>Performed</legend>
-      <div class="darkgray">
-        <a href="#">Taj Palace Delhi </a> |
-        <a href="#">Electric Room   </a> |
-        <a href="#">Ritz Carlton Dubai etc..</a>
+      <div *ngIf="!loadEventStatus">
+        <img src="./assets/images/load.gif" />
+      </div>
+      <div *ngIf="loadEventStatus">
+        <div class="darkgray">
+          <a href="javascript:void(0)" *ngFor="let item of eventData">{{item?.event_title}} | </a>
+        </div>
       </div>
     </fieldset>
   </div>
@@ -123,66 +129,8 @@
   <div class="container">
     <fieldset>
       <legend> <span>Catalogue</span>/portfolio </legend>
-      <div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-      </div>
-      <div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-        <div class="col-lg-3">
-          <video class="video">
-            <source src="images/sample.mp4" type="video/mp4">
-            <source src="images/sample.mp4" type="video/ogg"> Your browser does not support HTML5 video.
-          </video>
-          <div class="playpause"></div>
-        </div>
-      </div>
+      <app-artists-catalogue-photos-content [showForm]="showForm"></app-artists-catalogue-photos-content>
+      <app-artists-catalogue-videos-content [showForm]="showForm"></app-artists-catalogue-videos-content>
     </fieldset>
   </div>
 </section>
