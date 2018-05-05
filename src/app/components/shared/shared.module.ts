@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HeaderComponent } from './shared-header/header/header.component';
 import { TopHeaderComponent } from './shared-header/top-header/top-header.component';
@@ -94,6 +94,7 @@ import { NgUploaderModule  } from 'ngx-uploader';
     ],
     imports: [
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         CommonModule,
         NgUploaderModule,

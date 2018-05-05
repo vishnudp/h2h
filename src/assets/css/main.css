@@ -2423,3 +2423,14 @@ ul.thumbnails {
 .modal-dialog {    
     margin: 10% auto;
 }
+
+input.ng-invalid.ng-touched,
+input:focus.ng-invalid.ng-dirty,
+select.ng-invalid.ng-touched,
+select:focus.ng-invalid.ng-dirty {
+	border: 1px solid red;
+}
+.redItalic {
+	color: red;
+    font-style: italic;
+}

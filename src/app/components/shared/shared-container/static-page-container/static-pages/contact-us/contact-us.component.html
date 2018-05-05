@@ -13,29 +13,66 @@
 <section>
   <div class="container">
     <div class="row">
-
       <div class="col-xs-12 col-sm-6 col-md-6">
         <fieldset class="fieldset_inner">
           <legend> <span>Please Share</span> Your details</legend>
-          <div class="form-group">
-            <input type="type" class="form-control placeholder" placeholder="Your Name">
-          </div>
-          <div class="form-group">
-            <input type="type" class="form-control placeholder" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <input type="type" class="form-control placeholder" placeholder="Mobile No.">
-          </div>
+          <form [formGroup]="contacUsForm" (ngSubmit)="PostData(contacUsForm)">  
+            <div class="row">
+              <div class="alert alert-success alert-dismissible" *ngIf="contactUsApiStatus === 'success'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> Your inquiry was submittted and will be responded to as soon as possible. Thank you for contacting us!
+              </div>
+              <div class="alert alert-danger alert-dismissible" *ngIf="contactUsApiStatus === 'error'">
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> Error while contacting!
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" formControlName='contact_name' class="form-control placeholder" placeholder="Your Name">
+              <div *ngIf="contacUsForm.controls.contact_name.errors && (contacUsForm.controls.contact_name.touched || contacUsForm.controls.contact_name.dirty)">
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_name.errors.required">Name is required!</span>
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_name.errors.minlength">Name must be at least {{contacUsForm.controls.contact_name.errors.minlength.requiredLength}} characters!</span>
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_name.errors.maxlength">Name must be upto {{contacUsForm.controls.contact_name.errors.maxlength.requiredLength}} characters!</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="email" formControlName='contact_email' class="form-control placeholder" placeholder="Email">
+              <div *ngIf="contacUsForm.controls.contact_email.errors && (contacUsForm.controls.contact_email.touched || contacUsForm.controls.contact_email.dirty)">
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_email.errors.required">Email is required!</span>
+                <span class="redItalic" *ngIf="!contacUsForm.controls.contact_email.errors.required && contacUsForm.controls.contact_email.errors.email">Please provide valid email!</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="tel" formControlName='contact_mbl_number' class="form-control placeholder" placeholder="Mobile No.">
+              <div *ngIf="contacUsForm.controls.contact_mbl_number.errors && (contacUsForm.controls.contact_mbl_number.touched || contacUsForm.controls.contact_mbl_number.dirty)">
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_mbl_number.errors.required">Email is required!</span>
+                <span class="redItalic" *ngIf="!contacUsForm.controls.contact_mbl_number.errors.pattern && contacUsForm.controls.contact_mbl_number.errors.minlength">Mobile no must be at least {{contacUsForm.controls.contact_mbl_number.errors.minlength.requiredLength}} digits!</span>
+                <span class="redItalic" *ngIf="!contacUsForm.controls.contact_mbl_number.errors.pattern && contacUsForm.controls.contact_mbl_number.errors.maxlength">Mobile no must be upto {{contacUsForm.controls.contact_mbl_number.errors.maxlength.requiredLength}} digits!</span>
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_mbl_number.errors.pattern">Mobile no only contains digits!</span>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <input type="type" class="form-control placeholder" placeholder="City">
-          </div>
-          <div class="form-group">
-            <textarea name="" id="" cols="30" rows="2" class="form-control placeholder" placeholder="Comment..."></textarea>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 pull-right"><button type="submit" class="btn btn-default">Submit</button></div>
-          </div>
+            <div class="form-group">
+              <input type="type" formControlName='contact_city' class="form-control placeholder" placeholder="City">
+              <div *ngIf="contacUsForm.controls.contact_city.errors && (contacUsForm.controls.contact_city.touched || contacUsForm.controls.contact_city.dirty)">
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_city.errors.required">City is required!</span>
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_city.errors.minlength">City must be at least {{contacUsForm.controls.contact_city.errors.minlength.requiredLength}} characters!</span>
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_city.errors.maxlength">City must be upto {{contacUsForm.controls.contact_city.errors.maxlength.requiredLength}} characters!</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea name="" id="" formControlName='contact_comment' cols="30" rows="2" class="form-control placeholder" placeholder="Comment..."></textarea>
+              <div *ngIf="contacUsForm.controls.contact_comment.errors && (contacUsForm.controls.contact_comment.touched || contacUsForm.controls.contact_comment.dirty)">
+                <span class="redItalic" *ngIf="contacUsForm.controls.contact_comment.errors.maxlength">Comment must be upto {{contacUsForm.controls.contact_comment.errors.maxlength.requiredLength}} characters!</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 pull-right">
+                <button type="submit" [disabled]="loading || !contacUsForm.valid" class="btn btn-default">Submit</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </div>
+            </div>
+        </form>
         </fieldset>
 
       </div>
