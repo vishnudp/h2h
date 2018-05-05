@@ -1,10 +1,14 @@
-import { Component, ChangeDetectorRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { 
-  CommonAuthenticationService, CommonDataSharedService, CommonRequestResponseService
-} from '../../../services/common-services';
+import { Component, ChangeDetectorRef, EventEmitter, Inject, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {
+  CommonAuthenticationService, CommonDataSharedService, CommonRequestResponseService, SetGetDataService
+} from '../../../services';
+
+import { APP_CONFIG } from '../../../app.config';
+import { IAppConfig } from '../../../app.config.shared';
+import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 import * as $ from 'jquery';
 const returnCalendarViewBasedOnWindowSize = () => {
-  if ( window.innerWidth < 480 ) {
+  if (window.innerWidth < 480) {
     return 'agendaDay';
   } else {
     return 'month';
@@ -35,7 +39,24 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
   eventApiStatus = '';
   eventData = [];
   currentEvent = '';
-  @ViewChild('calendarModel') calendarModel;
+
+  options: UploaderOptions;
+  formData: FormData;
+  files: UploadFile[];
+  uploadInput: EventEmitter<UploadInput>;
+  humanizeBytes: Function;
+  dragOver: boolean;
+  fileInProgress = '';
+  uploadFile: any;
+  hasBaseDropZoneOver = false;
+  uploadUrl = '';
+
+  coverData = '';
+
+  calendarFormThis;
+  currentEventCoverPhoto;
+
+  currentEventPhotoData;
   calendarOptions = {
     height: 'auto',
     fixedWeekCount: false,
@@ -66,6 +87,7 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
       let currentDate;
       console.log('event--', event);
       console.log('date--', date);
+      console.log('this.currentEventCoverPhoto --', this.currentEventCoverPhoto );
       // currentDate = event._d;
       currentDate = event.format('MM/DD/YYYY');
       $('.tooltiptopicevent').hide();
@@ -77,13 +99,11 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
       this.eventTitle = '';
       this.eventDescription = '';
       this.selectedEventId = 0;
+      this.currentEventCoverPhoto  = '';
       this.showCalendarPopup();
     },
 
     eventMouseover: function (data, event, view) {
-
-      // this.tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#ccc; color: #353333; position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">' + 'Title ' + ' : ' + data.title + '</br>' + 'Start Date ' + ' : ' + new Date(data.start).toLocaleString().split(',')[0] + '</br>' + '</div>';
-
 
       $('body').append(this.tooltip);
       $('.tooltiptopicevent').show();
@@ -104,6 +124,7 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
       this.eventTitle = calEvent.title;
       this.eventDescription = calEvent.desciption;
       this.eventDate = calEvent.start;
+      this.currentEventCoverPhoto = calEvent.event_cover_photo;
       this.selectedEventId = calEvent.id;
       if (this.currentEvent !== 'delete') {
         this.showCalendarPopup();
@@ -138,14 +159,23 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
 
     events: []
   };
-  constructor( private cd: ChangeDetectorRef,
-      public _commonAuthenticationService: CommonAuthenticationService,
-      public _commonDataSharedService: CommonDataSharedService,
-      public _commonRequestResponseService: CommonRequestResponseService) { }
+  constructor( @Inject(APP_CONFIG) private config: IAppConfig,
+    private cd: ChangeDetectorRef,
+    public _commonAuthenticationService: CommonAuthenticationService,
+    public _commonDataSharedService: CommonDataSharedService,
+    public _commonRequestResponseService: CommonRequestResponseService,
+    public _setGetDataService: SetGetDataService
+  ) {
+    this.files = []; // local uploading files array
+    this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
+    this.humanizeBytes = humanizeBytes;
+    this.coverData = 'hi';
+  }
 
   ngOnInit() {
     console.log('in calender');
-    this.hideCalendarPopup();    
+    this.uploadUrl = this.config.apiEndpoint;
+    this.hideCalendarPopup();
     this.hideDeleteCalendarPopup();
     this._commonDataSharedService.loadCalendar.subscribe((data) => {
       console.log('data in calander', data);
@@ -156,6 +186,78 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
         this.cd.detectChanges();
       }, 200);
     });
+  }
+
+  onUploadOutput(output: UploadOutput): void {
+    if (output.type === 'allAddedToQueue') { // when all files added in queue
+      // uncomment this if you want to auto upload files when added
+      // const event: UploadInput = {
+      //   type: 'uploadAll',
+      //   url: '/upload',
+      //   method: 'POST',
+      //   data: { foo: 'bar' }
+      // };
+      // this.uploadInput.emit(event);
+      const event: UploadInput = {
+        type: 'uploadAll',
+        url: this.uploadUrl + 'artist-event.php?action=upload_artist_event_images',
+        method: 'POST',
+        data: { foo: 'bar' }
+      };
+      this.uploadInput.emit(event);
+    } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') { // add file to array when added
+      this.files.push(output.file);
+    } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
+      // update current data in files array for uploading file
+      const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
+      this.files[index] = output.file;
+      this.fileInProgress = 'progress';
+      console.log('this.files--', this.files);
+      this.coverData = 'hello';
+    } else if (output.type === 'removed') {
+      // remove file from array when removed
+      this.files = this.files.filter((file: UploadFile) => file !== output.file);
+    } else if (output.type === 'dragOver') {
+      this.dragOver = true;
+    } else if (output.type === 'dragOut') {
+      this.dragOver = false;
+    } else if (output.type === 'drop') {
+      this.dragOver = false;
+    } else if (output.type === 'done') {
+      this.fileInProgress = 'done';
+      const artistsEventFileData = { 'filesData': this.files };
+      this._setGetDataService.setData(artistsEventFileData);
+    }
+  }
+
+  updateUrl() {
+    console.log('in image error');
+    return `${this.uploadUrl}/uploads/no-image.png`;
+  }
+
+
+  startUpload(): void {
+    const event: UploadInput = {
+      type: 'uploadAll',
+      url: this.uploadUrl + 'artist-event.php?action=upload_artist_event_images',
+      method: 'POST',
+      data: { foo: 'bar' }
+    };
+
+    this.uploadInput.emit(event);
+  }
+
+  cancelUpload(id: string): void {
+    this.uploadInput.emit({ type: 'cancel', id: id });
+  }
+
+  removeFile(id: string): void {
+    this.uploadInput.emit({ type: 'remove', id: id });
+  }
+
+  removeAllFiles(): void {
+    this.uploadInput.emit({ type: 'removeAll' });
+    this.uploadInput.emit({ type: 'cancelAll' });
   }
 
   getEventData() {
@@ -177,12 +279,18 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
     const calenderEventArr = [];
     for (let i = 0; i < data.length; i++) {
       const obj = {};
+      console.log('data[i]--', data[i]);
       obj['title'] = data[i].event_title;
       obj['start'] = data[i].event_date;
       obj['desciption'] = data[i].event_description;
+      obj['event_cover_photo'] = (data[i].event_cover_photo && data[i].event_cover_photo[0]) ? this.currentEventCoverPhoto = data[i].event_cover_photo[0]['generatedName'] : this.currentEventCoverPhoto = `${this.uploadUrl}/uploads/no-image.png`;
       obj['id'] = data[i].event_id;
+      this.currentEventPhotoData = (data[i].event_cover_photo) ? data[i].event_cover_photo : [];
       calenderEventArr.push(obj);
+
+      
     }
+    console.log('calenderEventArr--', calenderEventArr);
     if (calenderEventArr) {
       this.calendarOptions.events = calenderEventArr;
       // newAddedItem.push(this.calenderEventArr.slice(-1).pop());
@@ -199,6 +307,7 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
   saveCalendar(artistCalendarForm) {
     let url = 'artist-event.php?action=addEvent';
     const validInputJson = this.prepareInputJson(artistCalendarForm);
+    console.log('validInputJson--', validInputJson);
     if (artistCalendarForm.valid) {
       if (this.selectedEventId > 0) {
         validInputJson['event_id'] = this.selectedEventId;
@@ -206,26 +315,26 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
       }
       console.log('validInputJson--', validInputJson);
       this._commonRequestResponseService.post(url, validInputJson)
-      .subscribe((res) => {
-        if (res) {
-          console.log('photosData--', res);
-          if (this.selectedEventId > 0) {
-            this.eventApiStatus = 'update';
-          } else {
-            this.eventApiStatus = 'save';
+        .subscribe((res) => {
+          if (res) {
+            console.log('photosData--', res);
+            if (this.selectedEventId > 0) {
+              this.eventApiStatus = 'update';
+            } else {
+              this.eventApiStatus = 'save';
+            }
+            this.hideCalendarPopup();
+            this.getEventData();
           }
-          this.hideCalendarPopup();
-          this.getEventData();
-        }
-      }, (err) => {
-        this.eventApiStatus = 'error';
-        console.log('got Error', err);
-      });
+        }, (err) => {
+          this.eventApiStatus = 'error';
+          console.log('got Error', err);
+        });
     }
   }
 
   deleteEvent() {
-    const inputJson = { event_id : this.selectedEventId};
+    const inputJson = { event_id: this.selectedEventId };
     this._commonRequestResponseService.post('artist-event.php?action=delete_event', inputJson)
       .subscribe((res) => {
         console.log('api response--', res);
@@ -243,16 +352,30 @@ export class ArtistsCalendarContentComponent implements OnInit, OnChanges {
     if (artistCalendarForm.valid) {
       this.eventApiStatus = '';
       const inputJson = {
-        user_id : 1,
-        user_role_id : 1,
-        event_title : this.eventTitle,
-        event_description : this.eventDescription,
-        event_date : this.eventDate
+        user_id: 1,
+        user_role_id: 1,
+        event_title: this.eventTitle,
+        event_description: this.eventDescription,
+        event_cover_photo: JSON.stringify(this.prepareEventPhotoJson()),
+        event_date: this.eventDate
       };
       return inputJson;
     } else {
       this.eventApiStatus = 'validationError';
     }
+  }
+
+  prepareEventPhotoJson() {
+    console.log('get data--', this._setGetDataService.getData());
+    const currentLoadedFileData = this._setGetDataService.getData()['filesData'];
+    let resultString;
+    if (currentLoadedFileData) {
+      resultString = currentLoadedFileData.map((data) => data['responseStatus'] === 200 ? data.response : '').filter((e) => e !== '');
+    } else {
+      resultString = this.currentEventPhotoData;
+    }
+    return resultString;
+
   }
 
   hideCalendarPopup() {

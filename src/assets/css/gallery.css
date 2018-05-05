@@ -1,3 +1,6 @@
+.closeon-preview {
+    display: none;
+}
 .errorbox {
     text-align: left;
     color: #ff0000;

@@ -64,7 +64,8 @@ let providers = {
     svc.CommonRequestResponseService,
     svc.CommonAuthenticationService,
     svc.CommonDataSharedService,
-    svc.GeneralApiFunctionsService
+    svc.GeneralApiFunctionsService,
+    svc.SetGetDataService
   ],
   bootstrap: [AppComponent]
 })

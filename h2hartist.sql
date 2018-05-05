@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2018 at 10:44 AM
+-- Generation Time: May 04, 2018 at 11:07 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -1569,24 +1569,34 @@ CREATE TABLE IF NOT EXISTS `tg_event` (
 `event_id` int(11) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
+  `event_requested_by_user_id` int(11) NOT NULL,
+  `event_requested_to_user_id` int(11) NOT NULL,
   `event_title` varchar(255) NOT NULL,
   `event_description` text NOT NULL,
   `event_date` varchar(255) NOT NULL,
+  `event_time` varchar(255) NOT NULL,
+  `event_cover_photo` text NOT NULL,
+  `event_is_accepted` tinyint(4) NOT NULL DEFAULT '0',
   `event_is_active` tinyint(4) NOT NULL,
   `event_is_deleted` tinyint(4) NOT NULL,
   `event_created_time` datetime NOT NULL,
   `event_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `tg_event`
 --
 
-INSERT INTO `tg_event` (`event_id`, `user_id`, `user_role_id`, `event_title`, `event_description`, `event_date`, `event_is_active`, `event_is_deleted`, `event_created_time`, `event_updated_time`) VALUES
-(1, 1, 1, 'test event', 'test event', '04/04/2018', 1, 0, '2018-04-24 10:38:00', '2018-04-24 08:38:00'),
-(2, 1, 1, 'test event3', 'test event3', '2018-04-03T18:30:00.000Z', 1, 1, '2018-04-24 10:38:39', '2018-04-24 09:04:42'),
-(3, 1, 1, 'test event 11', 'test event 11', '04/11/2018', 1, 1, '2018-04-24 11:07:57', '2018-04-24 09:08:06'),
-(4, 1, 1, 'test title', 'test title', '2018-04-10T18:30:00.000Z', 1, 0, '2018-04-26 12:46:02', '2018-04-26 10:47:15');
+INSERT INTO `tg_event` (`event_id`, `user_id`, `user_role_id`, `event_requested_by_user_id`, `event_requested_to_user_id`, `event_title`, `event_description`, `event_date`, `event_time`, `event_cover_photo`, `event_is_accepted`, `event_is_active`, `event_is_deleted`, `event_created_time`, `event_updated_time`) VALUES
+(1, 1, 1, 0, 0, 'test event', 'test event', '04/04/2018', '', '', 0, 1, 0, '2018-04-24 10:38:00', '2018-04-24 08:38:00'),
+(2, 1, 1, 0, 0, 'test event3', 'test event3', '2018-04-03T18:30:00.000Z', '', '', 0, 1, 1, '2018-04-24 10:38:39', '2018-04-24 09:04:42'),
+(3, 1, 1, 0, 0, 'test event 11', 'test event 11', '04/11/2018', '', '', 0, 1, 1, '2018-04-24 11:07:57', '2018-04-24 09:08:06'),
+(4, 1, 1, 0, 0, 'test title', 'test title', '2018-04-10T18:30:00.000Z', '', '', 0, 1, 0, '2018-04-26 12:46:02', '2018-04-26 10:47:15'),
+(5, 1, 1, 0, 0, 'testr', 'test5', '05/04/2018', '', '[]', 0, 1, 0, '2018-05-04 07:36:09', '2018-05-04 05:36:09'),
+(6, 1, 1, 0, 0, 'teytr', 'ghdgeh', '05/04/2018', '', '[]', 0, 1, 0, '2018-05-04 07:37:12', '2018-05-04 05:37:12'),
+(7, 1, 1, 0, 0, 'dfgjb', 'dbhjs', '05/04/2018', '', '', 0, 1, 0, '2018-05-04 07:40:23', '2018-05-04 05:40:23'),
+(8, 1, 1, 0, 0, 'gfjhgf', 'gfhjgf', '05/04/2018', '', '', 0, 1, 0, '2018-05-04 07:42:37', '2018-05-04 05:42:37'),
+(9, 1, 1, 0, 0, 'testhvv', 'testhvvghjghjh\n\nhjdgfjjkd', '2018-05-02T18:30:00.000Z', '', '[{"status":true,"originalName":"3.gif","generatedName":"3831b0db52ab7eabfc99b6771577d4f2.gif"}]', 0, 1, 0, '2018-05-04 09:26:27', '2018-05-04 07:45:04');
 
 -- --------------------------------------------------------
 
@@ -7044,7 +7054,7 @@ MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
 -- AUTO_INCREMENT for table `tg_event`
 --
 ALTER TABLE `tg_event`
-MODIFY `event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tg_gcm_users`
 --
