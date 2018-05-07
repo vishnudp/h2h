@@ -42,6 +42,7 @@ import { ArtistsCatalogueVideosContentComponent } from './../../components/artis
 import { ArtistsCataloguePhotosContentComponent } from './../../components/artists-container/artists-catalogue-photos-content/artists-catalogue-photos-content.component';
 import { ArtistsCalendarContentComponent } from './../../components/artists-container/artists-calendar-content/artists-calendar-content.component';
 import { LoginWithSocialMediaComponent } from './../../components/auth-container/login-with-social-media/login-with-social-media.component';
+import { BookingListComponent } from './shared-container/home-page-container/booking-list/booking-list.component';
 // Directive
 import { FileChooseDirective } from './../../directive/file-chooser.directive';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
@@ -90,7 +91,8 @@ import { NgUploaderModule  } from 'ngx-uploader';
         ArtistsCatalogueVideosContentComponent,
         ArtistsCataloguePhotosContentComponent,
         ArtistsCalendarContentComponent,
-        LoginWithSocialMediaComponent
+        LoginWithSocialMediaComponent,
+        BookingListComponent
     ],
     imports: [
         FormsModule,
@@ -144,7 +146,8 @@ import { NgUploaderModule  } from 'ngx-uploader';
         ArtistsCatalogueVideosContentComponent,
         ArtistsCataloguePhotosContentComponent,
         ArtistsCalendarContentComponent,
-        LoginWithSocialMediaComponent
+        LoginWithSocialMediaComponent,
+        BookingListComponent
     ],
     providers: []
 })
