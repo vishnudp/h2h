@@ -27,9 +27,9 @@ export class ContactUsComponent implements OnInit {
   ngOnInit() {
   }
 
-  PostData(contacUsForm:NgForm) {
+  PostData() {
   	this.loading = true;  
-    this._commonRequestResponseService.post('guest_contact_info.php?action=add_guest_contact_info', contacUsForm.value)
+    this._commonRequestResponseService.post('guest_contact_info.php?action=add_guest_contact_info', this.contacUsForm.value)
       .subscribe((res) => {
       	this.contacUsForm.reset();
         this.loading = false;
