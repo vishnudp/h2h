@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, Input, Output, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {fromEvent} from 'rxjs/observable/fromEvent';
+import * as jsPDF from 'jspdf'
 
 @Component({
 	selector : 'app-booking-list',
@@ -72,6 +73,61 @@ export class BookingListComponent implements OnInit, AfterViewInit {
 				return true;
     	}
     	return false;
+	}
+
+	saveAsPDF (argument) {
+		var table1 = 
+        this.dataSource /*tableToJson($('#table1').get(0))*/,
+        cellWidth = 35,
+        cellContents,
+        leftMargin = 2,
+        topMargin = 12,
+        topMarginTable = 55,
+        headerRowHeight = 13,
+        rowHeight = 9,
+
+         l = {
+         orientation: 'l',
+         unit: 'mm',
+         format: 'a3',
+         compress: true,
+         fontSize: 8,
+         lineHeight: 1,
+         autoSize: false,
+         printHeaders: true
+     };
+
+    var doc = new jsPDF(l, '', '', '');
+
+    doc.setProperties({
+        title: 'Test PDF Document',
+        subject: 'This is the subject',
+        author: 'author',
+        keywords: 'generated, javascript, web 2.0, ajax',
+        creator: 'author'
+    });
+
+    doc.cellInitialize();
+    
+    this.config.displayColumns.forEach((data,i)=>{
+	    doc.margins = 1;
+        doc.setFont("helvetica");
+        doc.setFontType("bold");
+        doc.setFontSize(9);
+        doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, (data.title || data.field), 0);
+    })
+    table1.forEach((row,i)=>{
+	    this.config.displayColumns.forEach((data,j)=>{
+	    	doc.margins = 1;
+	        doc.setFont("courier ");
+	        doc.setFontType("bolditalic ");
+	        doc.setFontSize(6.5);                    
+	        doc.cell(leftMargin, topMargin, cellWidth, rowHeight, row[data.field], i+1);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+	    })
+    })
+
+    doc.save('sample Report.pdf');
+
 	}
 
 	// saveData = (function () {
