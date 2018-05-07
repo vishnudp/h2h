@@ -175,9 +175,10 @@ function update_catalog_videos() {
     $user_role_id      = $data->user_role_id;
     $post_title           = $data->post_title;
     $post_description     = $data->post_description;
+    $post_place           = $data->post_place;
     $post_type            = $data->post_type;
     $post_attachment      = $data->post_attachment;
-    $qry = mysql_query("UPDATE tg_catalogue set post_title = '".$post_title."' , post_description = '".$post_description."' , post_type = '".$post_type."', post_attachment = '".$post_attachment."' WHERE post_id = ".$post_id);
+    $qry = mysql_query("UPDATE tg_catalogue set post_title = '".$post_title."' , post_description = '".$post_description."' , post_type = '".$post_type."', post_attachment = '".$post_attachment."', post_place = '".$post_place."' WHERE post_id = ".$post_id);
     if ($qry) {
       $arr = array('msg' => "Post Updated Successfully!!!", 'error' => '');
       $jsn = json_encode($arr);

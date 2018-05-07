@@ -188,6 +188,8 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
           } else {
             this.photoCatalogueApiStatus = 'save';
           }
+          this.artistPhotosPerTitleData = [];
+          this.files = [];
           this.getPhotosTitleData();
         }
       }, (err) => {
@@ -218,7 +220,7 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
   preparePhotoCatalogueJson() {
     const resultString = this.files.map((data) =>  data['responseStatus'] === 200 ? data.response : '').filter((e) => e !== '' );
     let mergeArray = resultString;
-    if (this.artistPhotosPerTitleData.length > 0 && this.selectedPhotoCatalogPostId > 0) {
+    if (this.artistPhotosPerTitleData && this.artistPhotosPerTitleData.length > 0 && this.selectedPhotoCatalogPostId > 0) {
       mergeArray = resultString.concat(this.artistPhotosPerTitleData);
     }
     console.log('resultString--', resultString);
@@ -252,6 +254,7 @@ export class HotelsGalleryPhotosContentComponent implements OnInit {
   }
 
   resetForm(hotelPhotoForm) {
+    this.selectedPhotoCatalogPostId = 0;
     hotelPhotoForm.reset();
   }
 

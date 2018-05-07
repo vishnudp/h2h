@@ -1,0 +1,18 @@
+[06-Dec-2014 11:20:21 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/controllers/admin/question.php on line 126
+[06-Dec-2014 12:24:01 UTC] PHP Parse error:  syntax error, unexpected ')', expecting :: (T_PAAMAYIM_NEKUDOTAYIM) in /home/rituraj123/public_html/gk-app/application/controllers/admin/configuration.php on line 138
+[06-Dec-2014 16:33:15 Europe/London] PHP Parse error:  syntax error, unexpected end of file, expecting ']' in /home/rituraj123/public_html/gk-app/application/views/admin/configuration/add.php on line 128
+[06-Dec-2014 16:39:42 UTC] PHP Warning:  Unterminated comment starting line 308 in /home/rituraj123/public_html/gk-app/application/controllers/admin/configuration.php on line 308
+[16-Dec-2014 10:41:15 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/configuration/add.php on line 166
+[16-Dec-2014 10:41:33 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/configuration/add.php on line 166
+[16-Dec-2014 10:57:12 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/controllers/admin/event.php on line 73
+[21-Dec-2014 06:34:16 Europe/London] PHP Fatal error:  Call to a member function show_all_subject() on a non-object in /home/rituraj123/public_html/gk-app/application/controllers/admin/event.php on line 29
+[21-Dec-2014 07:56:04 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/event/index.php on line 105
+[25-Dec-2014 15:48:46 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/event/index.php on line 123
+[25-Dec-2014 16:12:14 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/event/index.php on line 123
+[25-Dec-2014 16:17:37 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/event/index.php on line 123
+[26-Dec-2014 01:34:28 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/event/index.php on line 123
+[27-Dec-2014 09:19:23 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/event/index.php on line 123
+[27-Dec-2014 09:23:29 Europe/London] PHP Parse error:  syntax error, unexpected end of file in /home/rituraj123/public_html/gk-app/application/views/admin/event/index.php on line 123
+[27-Dec-2014 14:47:54 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home/rituraj123/public_html/gk-app/application/controllers/admin/event.php on line 116
+[06-Jan-2015 08:14:42 Europe/London] PHP Fatal error:  Unsupported operand types in /home/rituraj123/public_html/gk-app/system/libraries/Pagination.php on line 124
+[06-Jan-2015 08:14:49 Europe/London] PHP Fatal error:  Unsupported operand types in /home/rituraj123/public_html/gk-app/system/libraries/Pagination.php on line 124

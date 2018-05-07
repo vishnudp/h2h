@@ -1,0 +1,36 @@
+/*ie7---------------------------------------------------------------------------------------------- class*/
+
+.ie7 body{
+display:block;}
+
+	
+.ie7 .login{
+	padding:19px 59px;
+	margin-top:24px;}
+
+.ie7 .answer-key span{
+	margin-top:15px;}
+
+
+.ie7 .answer-key{ background-position:left center;  display:none !important;}
+
+.ie7 .content{
+	padding-top:1%;}
+
+.ie7 .question-hint{
+	margin-top:4px;
+	height:58px;}
+
+.ie7 .answer-key{
+	margin-bottom:12px;
+	height:71px;}
+
+.ie7 .answer-key p{
+	line-height:71px;}
+
+.ie7 .question{
+	height:321px;}
+
+
+
+

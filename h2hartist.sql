@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2018 at 12:20 PM
+-- Generation Time: May 07, 2018 at 01:57 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -126,14 +126,21 @@ CREATE TABLE IF NOT EXISTS `tg_artist_category` (
   `artist_category_is_deleted` tinyint(4) NOT NULL,
   `artist_category_is_active` tinyint(4) NOT NULL DEFAULT '1',
   `artist_category_created_by` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `tg_artist_category`
 --
 
 INSERT INTO `tg_artist_category` (`artist_category_id`, `artist_category_slug`, `artist_category_name`, `artist_category_description`, `artist_category_image`, `artist_category_image_url`, `created_time`, `updated_time`, `artist_category_is_deleted`, `artist_category_is_active`, `artist_category_created_by`) VALUES
-(1, '', 'Test Category', 'Test Category', 'min.jpg', '', '2017-12-31 08:00:59', '2017-12-31 08:01:54', 0, 1, 2);
+(1, '', 'Actor', 'Actor', 'actor.jpg', '', '2017-12-31 08:00:59', '2018-05-07 10:42:10', 0, 1, 2),
+(2, '', 'Biographer', 'Biographer', 'biographer.jpg', '', '2018-05-07 11:42:28', '2018-05-07 10:43:19', 0, 1, 2),
+(3, '', 'Culture', 'culture', 'culture.jpg', '', '2018-05-07 11:43:35', '2018-05-07 10:43:35', 0, 1, 2),
+(4, '', 'Museum', 'Museum', 'museum.jpg', '', '2018-05-07 11:43:50', '2018-05-07 10:43:50', 0, 1, 2),
+(5, '', 'Musicians', 'Musicians', 'musician.jpg', '', '2018-05-07 11:44:03', '2018-05-07 10:44:03', 0, 1, 2),
+(6, '', 'Painter', 'painter', 'painter.jpg', '', '2018-05-07 11:44:17', '2018-05-07 10:44:17', 0, 1, 2),
+(7, '', 'Sketcher', 'Sketcher', 'sketcher.jpg', '', '2018-05-07 11:44:33', '2018-05-07 10:44:33', 0, 1, 2),
+(8, '', 'Tailor', 'Tailor', 'tailor.jpg', '', '2018-05-07 11:44:47', '2018-05-07 10:44:47', 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -224,25 +231,26 @@ CREATE TABLE IF NOT EXISTS `tg_catalogue` (
   `post_is_deleted` tinyint(4) NOT NULL,
   `post_created_time` datetime NOT NULL,
   `post_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `tg_catalogue`
 --
 
 INSERT INTO `tg_catalogue` (`post_id`, `user_id`, `user_role_id`, `post_title`, `post_place`, `post_description`, `post_type`, `post_attachment`, `post_is_active`, `post_is_deleted`, `post_created_time`, `post_updated_time`) VALUES
-(1, 1, 1, 'test Catalogue', 'test', 'test Cataloguetest Cataloguetest Cataloguetest Catalogue', 'image', '[{"status":true,"originalName":"account-home.png","generatedName":"77baf46ebf4e4a18ec1cbd4462169654.png"},{"status":true,"originalName":"big-partner2.png","generatedName":"762f98ac716f6e7460c66eed8d990cab.png"},{"status":true,"originalName":"big-tour.png","generatedName":"45e450a985c81f3a3e79644fcf370f1d.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"ad-logo-homes.png","generatedName":"89646c4214c3dc686d9796ddad13f608.png"},{"status":true,"originalName":"ad-space.png","generatedName":"f007434300881f90df44e202ee45b171.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"about-banner.jpg","generatedName":"4d5356c81e56e48a46c7b3d15e6d78d4.jpg"},{"status":true,"originalName":"account-home.png","generatedName":"f9009b6cf01a62350fb9f60d44a1a5ee.png"},{"status":true,"originalName":"a1.jpg","generatedName":"35689bd0c00b98a85313922dc81b6717.jpg"},{"status":true,"originalName":"account-management.png","generatedName":"b0e5162c1cfbd04e4ebfde88a6e2e156.png"}]', 1, 0, '2018-04-23 13:15:34', '2018-04-25 11:54:28'),
-(2, 1, 1, 'test Catalogue', 'test Catalogue', 'test Cataloguetest Cataloguetest Cataloguetest Catalogue', 'image', '[{"status":true,"originalName":"ui-icons_777777_256x240.png","generatedName":"66ee78dde3f442d29882285870816ec9.png"},{"status":true,"originalName":"ui-icons_cc0000_256x240.png","generatedName":"8e1de196bc43e74332750199bc70dca3.png"},{"status":true,"originalName":"account-home.png","generatedName":"77baf46ebf4e4a18ec1cbd4462169654.png"},{"status":true,"originalName":"big-partner2.png","generatedName":"762f98ac716f6e7460c66eed8d990cab.png"},{"status":true,"originalName":"big-tour.png","generatedName":"45e450a985c81f3a3e79644fcf370f1d.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"ad-logo-homes.png","generatedName":"89646c4214c3dc686d9796ddad13f608.png"},{"status":true,"originalName":"ad-space.png","generatedName":"f007434300881f90df44e202ee45b171.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"about-banner.jpg","generatedName":"4d5356c81e56e48a46c7b3d15e6d78d4.jpg"},{"status":true,"originalName":"account-home.png","generatedName":"f9009b6cf01a62350fb9f60d44a1a5ee.png"},{"status":true,"originalName":"a1.jpg","generatedName":"35689bd0c00b98a85313922dc81b6717.jpg"},{"status":true,"originalName":"account-management.png","generatedName":"b0e5162c1cfbd04e4ebfde88a6e2e156.png"}]', 1, 0, '2018-04-23 14:02:46', '2018-04-24 06:16:38'),
-(3, 1, 1, 'test catalogue4', 'test catalogue4', 'test catalogue4test catalogue4test catalogue4test catalogue4', 'image', '[{"status":true,"originalName":"recruiter-what-is-contractRecruit.jpg","generatedName":"dae3d7971ab4048b605a32bb1229cae8.jpg"},{"status":true,"originalName":"regional-stats.jpg","generatedName":"d2af235999e6745dad2f7b0ffdbf7b1b.jpg"}]', 1, 0, '2018-04-23 14:04:24', '2018-04-23 12:04:24'),
-(4, 1, 1, 'test catalogue5', 'test catalogue5', 'test catalogue5test catalogue5test catalogue5test catalogue5test catalogue5', 'image', '[{"status":true,"originalName":"mvl-advisors.png","generatedName":"c0a71566d15e63c6e5687fdb86d29159.png"},{"status":true,"originalName":"news-artical-icon.png","generatedName":"6e8b129797e147e41b3da6241b8a54dd.png"}]', 1, 0, '2018-04-23 14:07:37', '2018-04-23 12:07:37'),
-(5, 1, 1, 'catalogue6', 'catalogue6', 'catalogue6', 'image', '[{"status":true,"originalName":"application1.png","generatedName":"1f7f8fd42cecd1e4ff57ecafdeb965f1.png"},{"status":true,"originalName":"big-partner1.png","generatedName":"9a9fc278e559173d630206a6941c5a3c.png"}]', 1, 0, '2018-04-23 14:15:06', '2018-04-23 12:16:47'),
-(6, 1, 1, 'test', 'test', 'test vicdeo', 'video', '[]', 1, 0, '2018-04-23 14:50:34', '2018-04-23 13:08:10'),
-(7, 1, 1, 'test2', 'test2 ', 'test 2 video', 'video', '[]', 1, 0, '2018-04-23 15:06:05', '2018-04-24 06:21:05'),
-(8, 1, 1, 'test', 'test3', 'test vicdeo', 'video', '[{"status":true,"originalName":"Video_of_Explore_Careers_on_Mobile__iPhone_.MOV","generatedName":"7b5393b271f07ead419c1f1e8fa2d593.MOV"}]', 1, 0, '2018-04-23 15:07:52', '2018-04-24 06:00:04'),
-(9, 2, 2, 'test video', 'test', 'test video', 'image', '[{"status":true,"originalName":"hotelsscroll1.jpg","generatedName":"77c53febad01006005211186d2160307.jpg"}]', 1, 0, '2018-04-25 11:55:25', '2018-04-26 10:59:22'),
-(10, 2, 2, 'testv', 'test', 'resr', 'video', '[{"status":true,"originalName":"Messages_-_Compose_-_Horizontal_Orientation.MOV","generatedName":"868e9f21a09baa7706cb41bfacff19dd.MOV"}]', 1, 0, '2018-04-25 12:09:07', '2018-04-26 11:04:55'),
-(11, 1, 1, 'testy', '', 'testy', 'image', '[]', 1, 0, '2018-04-25 13:54:41', '2018-04-26 09:33:42'),
-(12, 1, 1, 'test ty', 'test', 'test', 'video', '[]', 1, 0, '2018-04-26 12:31:42', '2018-04-26 10:31:42');
+(1, 1, 1, 'Music', 'Delhi', 'Musicians', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"62d6869b9ebba92a954b7b5a1a167a26.jpg"},{"status":true,"originalName":"2.jpg","generatedName":"df9e1e55e227a7cbbb63de580b909ce3.jpg"},{"status":true,"originalName":"3.jpg","generatedName":"762b0e4e98b96f79d28d0dbb7aee404f.jpg"},{"status":true,"originalName":"4.jpg","generatedName":"04b369f02704eeb2db0d9cc4491e0566.jpg"},{"status":true,"originalName":"5.jpg","generatedName":"bf9902e5030ba01b3034ee009792fd4f.jpg"}]', 1, 0, '2018-04-23 13:15:34', '2018-05-07 11:22:27'),
+(2, 1, 1, 'Painter', 'Jaipur', 'Painter', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"895491ad98b685825dde5b0446d6a1df.jpg"},{"status":true,"originalName":"2.jpg","generatedName":"a8103aedfa2701e2624e7468caa011e7.jpg"}]', 1, 0, '2018-04-23 14:02:46', '2018-05-07 11:22:45'),
+(3, 1, 1, 'Biographer', 'Mumbai', 'Biographer', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"f80aec9db4ec5b5b2e73c0231606eb75.jpg"},{"status":true,"originalName":"2.jpg","generatedName":"db0a991b69bb5624bad656f273c6532f.jpg"}]', 1, 0, '2018-04-23 14:04:24', '2018-05-07 11:24:45'),
+(4, 1, 1, 'Culture', 'Chandigarh', 'Culture', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"c362666a9881aef2bc22576e7eef0ca5.jpg"},{"status":true,"originalName":"2.jpg","generatedName":"e275e56c58222ea70d4a77dfb0d96fd3.jpg"},{"status":true,"originalName":"3.jpg","generatedName":"11126aef7c523fb5a1ba56248c62b4eb.jpg"}]', 1, 0, '2018-04-23 14:07:37', '2018-05-07 11:30:31'),
+(5, 1, 1, 'Museum', 'Hydrabad', 'Museum', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"53714daaec3821d5efd4cb6040d921f6.jpg"},{"status":true,"originalName":"2.jpg","generatedName":"0407c1eba460d2998382aa9e802d9f04.jpg"}]', 1, 0, '2018-04-23 14:15:06', '2018-05-07 11:30:46'),
+(6, 1, 1, 'Music ', 'Jaipur', 'Music', 'video', '[{"status":true,"originalName":"SampleVideo_1280x720_1mb.mp4","generatedName":"1f0a40cfc3e0eced91f21a5fff8942a6.mp4"}]', 1, 0, '2018-04-23 14:50:34', '2018-05-07 11:34:48'),
+(7, 1, 1, 'Painter', 'Delhi', 'Painter', 'video', '[{"status":true,"originalName":"SampleVideo_360x240_1mb.mp4","generatedName":"7a24bd39eb5b85e6dca91b9c37176583.mp4"}]', 1, 0, '2018-04-23 15:06:05', '2018-05-07 11:36:44'),
+(8, 1, 1, 'Museum', 'Chandigarh', 'Painter', 'video', '[{"status":true,"originalName":"SampleVideo_640x360_1mb.mp4","generatedName":"3d77ec0d62356f0205266460a180a800.mp4"}]', 1, 0, '2018-04-23 15:07:52', '2018-05-07 11:37:10'),
+(11, 1, 1, 'Sketcher', 'Banglore', 'Sketcher', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"9cc83beac3ea1298a944dda7426737a5.jpg"}]', 1, 0, '2018-04-25 13:54:41', '2018-05-07 11:30:57'),
+(13, 2, 2, 'Music E', 'Delhi', 'Music E', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"dc537dde4a9a4dae42b8d9367bfbb73c.jpg"},{"status":true,"originalName":"2.jpg","generatedName":"840f7eb0148502bfdf5448988f86cadd.jpg"},{"status":true,"originalName":"3.jpg","generatedName":"473c60da3ea1e984f09084141cb0fc7c.jpg"},{"status":true,"originalName":"4.jpg","generatedName":"ba35ebac957625a5ecb16b5c030d3268.jpg"},{"status":true,"originalName":"sketcher.jpg","generatedName":"ce9b5601948ff1aaff2184185c27252c.jpg"},{"status":true,"originalName":"culture.jpg","generatedName":"b1111c641e83abc945231e52b8560737.jpg"},{"status":true,"originalName":"painter.jpg","generatedName":"752b221a0532473886a041c68c9f0afc.jpg"},{"status":true,"originalName":"period.jpg","generatedName":"aaf0ff447fa0aedc3326af666e643e1c.jpg"}]', 1, 0, '2018-05-07 13:51:57', '2018-05-07 11:53:42'),
+(14, 2, 2, 'Painter E', 'Jaipur', 'Painter E', 'image', '[{"status":true,"originalName":"1.jpg","generatedName":"2ac8f7fdd222e3b429c63396a67cf3cd.jpg"},{"status":true,"originalName":"2.jpg","generatedName":"6cb148f6153577f281fbaf17fe7b504e.jpg"}]', 1, 0, '2018-05-07 13:55:40', '2018-05-07 11:55:40'),
+(15, 2, 2, 'Painting', 'Jaipur', 'Painting', 'video', '[{"status":true,"originalName":"SampleVideo_1280x720_1mb.mp4","generatedName":"45e3e1eb3eaa95ace85a9774f313c8c3.mp4"}]', 1, 0, '2018-05-07 13:56:08', '2018-05-07 11:56:08'),
+(16, 2, 2, 'Music', 'Delhi', 'Music', 'video', '[{"status":true,"originalName":"SampleVideo_360x240_1mb.mp4","generatedName":"14261389a9e3b2d794aa08b4b7cd79d4.mp4"}]', 1, 0, '2018-05-07 13:56:30', '2018-05-07 11:56:30');
 
 -- --------------------------------------------------------
 
@@ -1581,22 +1589,18 @@ CREATE TABLE IF NOT EXISTS `tg_event` (
   `event_is_deleted` tinyint(4) NOT NULL,
   `event_created_time` datetime NOT NULL,
   `event_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tg_event`
 --
 
 INSERT INTO `tg_event` (`event_id`, `user_id`, `user_role_id`, `event_requested_by_user_id`, `event_requested_to_user_id`, `event_title`, `event_description`, `event_date`, `event_time`, `event_cover_photo`, `event_is_accepted`, `event_is_active`, `event_is_deleted`, `event_created_time`, `event_updated_time`) VALUES
-(1, 1, 1, 0, 0, 'test event', 'test event', '04/04/2018', '', '', 0, 1, 0, '2018-04-24 10:38:00', '2018-04-24 08:38:00'),
-(2, 1, 1, 0, 0, 'test event3', 'test event3', '2018-04-03T18:30:00.000Z', '', '', 0, 1, 1, '2018-04-24 10:38:39', '2018-04-24 09:04:42'),
-(3, 1, 1, 0, 0, 'test event 11', 'test event 11', '04/11/2018', '', '', 0, 1, 1, '2018-04-24 11:07:57', '2018-04-24 09:08:06'),
-(4, 1, 1, 0, 0, 'test title', 'test title', '2018-04-10T18:30:00.000Z', '', '', 0, 1, 0, '2018-04-26 12:46:02', '2018-04-26 10:47:15'),
-(5, 1, 1, 0, 0, 'testr', 'test5', '05/04/2018', '', '[]', 0, 1, 0, '2018-05-04 07:36:09', '2018-05-04 05:36:09'),
-(6, 1, 1, 0, 0, 'teytr', 'ghdgeh', '05/04/2018', '', '[]', 0, 1, 0, '2018-05-04 07:37:12', '2018-05-04 05:37:12'),
-(7, 1, 1, 0, 0, 'dfgjb', 'dbhjs', '05/04/2018', '', '', 0, 1, 0, '2018-05-04 07:40:23', '2018-05-04 05:40:23'),
-(8, 1, 1, 0, 0, 'gfjhgf', 'gfhjgf', '05/04/2018', '', '', 0, 1, 0, '2018-05-04 07:42:37', '2018-05-04 05:42:37'),
-(9, 1, 1, 0, 0, 'testhvv', 'testhvvghjghjh\n\nhjdgfjjkd', '2018-05-02T18:30:00.000Z', '', '[{"status":true,"originalName":"3.gif","generatedName":"3831b0db52ab7eabfc99b6771577d4f2.gif"}]', 0, 1, 0, '2018-05-04 09:26:27', '2018-05-04 07:45:04');
+(1, 1, 1, 0, 0, 'Jaipur Dance Festival', 'test event', '04/04/2018', '', '', 0, 1, 0, '2018-04-24 10:38:00', '2018-05-07 11:43:01'),
+(2, 1, 1, 0, 0, 'Punjabi Bhangra', 'test event3', '2018-04-03T18:30:00.000Z', '', '', 0, 1, 0, '2018-04-24 10:38:39', '2018-05-07 11:43:59'),
+(3, 1, 1, 0, 0, 'Guitar Playing', 'test event 11', '04/11/2018', '', '', 0, 1, 0, '2018-04-24 11:07:57', '2018-05-07 11:44:01'),
+(4, 1, 1, 0, 0, 'Sketching Event', 'test title', '2018-04-10T18:30:00.000Z', '', '', 0, 1, 0, '2018-04-26 12:46:02', '2018-05-07 11:43:25'),
+(10, 1, 1, 0, 0, 'Music Eve', 'Music Eve', '05/03/2018', '', '[{"status":true,"originalName":"innerslider.png","generatedName":"85ee1b1eee9ed3e2989cce348b85ae42.png"}]', 0, 1, 0, '2018-05-07 13:45:36', '2018-05-07 11:45:36');
 
 -- --------------------------------------------------------
 
@@ -2261,7 +2265,7 @@ CREATE TABLE IF NOT EXISTS `tg_sessions` (
 --
 
 INSERT INTO `tg_sessions` (`session_id`, `user_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('f3e9b549bae717f7582ca2dc68b0e6e8', 0, '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 1522998358, 'a:4:{s:9:"user_data";s:0:"";s:18:"admin_session_data";a:30:{s:7:"user_id";s:1:"2";s:7:"role_id";s:1:"1";s:11:"hardware_id";s:0:"";s:10:"first_name";s:3:"H2H";s:9:"last_name";s:3:"H2H";s:8:"username";s:5:"admin";s:5:"email";s:13:"h2h@gmail.com";s:13:"user_password";s:65:"b8a83c3567f863928848234ac246ffa3753d4cea34f2df029c973fc298ad8a907";s:7:"address";s:4:"test";s:10:"country_id";s:1:"0";s:7:"zone_id";s:9:"rajasthan";s:9:"city_name";s:6:"jaipur";s:12:"phone_number";s:10:"1234567890";s:8:"location";s:0:"";s:17:"verification_code";s:0:"";s:10:"sms_status";s:0:"";s:12:"get_verified";s:0:"";s:14:"payment_method";s:0:"";s:5:"about";s:0:"";s:8:"user_dob";s:10:"1984-05-05";s:6:"gender";s:0:"";s:13:"profile_image";s:0:"";s:8:"key_code";s:6:"142572";s:8:"auth_key";s:65:"90efb161b2d982e474e9ebef8ebd77ccec7eb60111f02ca6bfc707cd343fe392f";s:10:"last_login";s:10:"1521863339";s:11:"login_count";s:3:"771";s:9:"is_active";s:1:"1";s:10:"is_deleted";s:1:"0";s:12:"created_time";s:19:"1970-01-01 00:00:00";s:12:"updated_time";s:19:"2015-09-23 03:19:54";}s:15:"last_login_time";i:1522988756;s:17:"flash:old:message";s:26:"Page Updated Successfully.";}');
+('af2decf6d12794774a4a7fa279458732', 0, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 1525691071, 'a:4:{s:9:"user_data";s:0:"";s:18:"admin_session_data";a:30:{s:7:"user_id";s:1:"2";s:7:"role_id";s:1:"1";s:11:"hardware_id";s:0:"";s:10:"first_name";s:3:"H2H";s:9:"last_name";s:3:"H2H";s:8:"username";s:5:"admin";s:5:"email";s:13:"h2h@gmail.com";s:13:"user_password";s:65:"b8a83c3567f863928848234ac246ffa3753d4cea34f2df029c973fc298ad8a907";s:7:"address";s:4:"test";s:10:"country_id";s:1:"0";s:7:"zone_id";s:9:"rajasthan";s:9:"city_name";s:6:"jaipur";s:12:"phone_number";s:10:"1234567890";s:8:"location";s:0:"";s:17:"verification_code";s:0:"";s:10:"sms_status";s:0:"";s:12:"get_verified";s:0:"";s:14:"payment_method";s:0:"";s:5:"about";s:0:"";s:8:"user_dob";s:10:"1984-05-05";s:6:"gender";s:0:"";s:13:"profile_image";s:0:"";s:8:"key_code";s:6:"142572";s:8:"auth_key";s:65:"90efb161b2d982e474e9ebef8ebd77ccec7eb60111f02ca6bfc707cd343fe392f";s:10:"last_login";s:10:"1522988756";s:11:"login_count";s:3:"772";s:9:"is_active";s:1:"1";s:10:"is_deleted";s:1:"0";s:12:"created_time";s:19:"1970-01-01 00:00:00";s:12:"updated_time";s:19:"2015-09-23 03:19:54";}s:15:"last_login_time";i:1525688986;s:17:"flash:old:message";s:26:"Page Updated Successfully.";}');
 
 -- --------------------------------------------------------
 
@@ -2279,18 +2283,21 @@ CREATE TABLE IF NOT EXISTS `tg_skill` (
   `skill_is_deleted` tinyint(4) NOT NULL,
   `skill_created_time` datetime NOT NULL,
   `skill_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `tg_skill`
 --
 
 INSERT INTO `tg_skill` (`skill_id`, `user_id`, `user_role_id`, `skill_title`, `skill_description`, `skill_is_active`, `skill_is_deleted`, `skill_created_time`, `skill_updated_time`) VALUES
-(1, 1, 1, 'test', 'test', 1, 0, '2018-04-09 09:28:22', '2018-04-24 12:12:25'),
+(1, 1, 1, 'Drawing', 'Drawing', 1, 0, '2018-04-09 09:28:22', '2018-05-07 11:39:27'),
 (2, 1, 1, 'test2', 'test', 1, 1, '2018-04-09 09:29:04', '2018-04-26 10:38:00'),
 (3, 1, 1, 'test', 'test', 1, 1, '2018-04-24 07:30:40', '2018-04-24 05:30:43'),
 (4, 1, 1, 'test', 'test', 1, 1, '2018-04-24 07:32:04', '2018-04-24 05:32:05'),
-(5, 1, 1, 'test', 'test', 1, 1, '2018-04-24 07:34:03', '2018-04-24 06:28:17');
+(5, 1, 1, 'test', 'test', 1, 1, '2018-04-24 07:34:03', '2018-04-24 06:28:17'),
+(6, 1, 1, 'Painting', 'Painitng', 1, 0, '2018-05-07 13:40:27', '2018-05-07 11:40:27'),
+(7, 1, 1, 'Guitar', 'Guitar', 1, 0, '2018-05-07 13:40:41', '2018-05-07 11:40:41'),
+(8, 1, 1, 'Dance', 'Dance', 1, 0, '2018-05-07 13:40:54', '2018-05-07 11:40:54');
 
 -- --------------------------------------------------------
 
@@ -2311,7 +2318,7 @@ CREATE TABLE IF NOT EXISTS `tg_slider_posts` (
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `post_is_deleted` tinyint(4) NOT NULL,
   `post_is_active` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tg_slider_posts`
@@ -2320,7 +2327,8 @@ CREATE TABLE IF NOT EXISTS `tg_slider_posts` (
 INSERT INTO `tg_slider_posts` (`post_id`, `user_id`, `post_slug`, `post_name`, `post_description`, `post_type`, `post_media_name`, `post_media_url`, `created_time`, `updated_time`, `post_is_deleted`, `post_is_active`) VALUES
 (1, 2, '', 'test1', 'test', 'image', 'logos12.jpg', '', '2017-12-31 09:58:16', '2018-04-06 04:33:20', 1, 1),
 (2, 2, '', 'Home Slider - 1', 'Slider 1', 'image', '1.jpg', '', '2018-04-06 05:33:46', '2018-04-06 04:33:47', 0, 1),
-(3, 2, '', 'Home Slider -2', 'Home Slider -2', 'image', '4.jpg', '', '2018-04-06 05:34:13', '2018-04-06 04:34:13', 0, 1);
+(3, 2, '', 'Home Slider -2', 'Home Slider -2', 'image', '4.jpg', '', '2018-04-06 05:34:13', '2018-04-06 04:34:13', 0, 1),
+(4, 2, '', 'Home Slider 3', 'Home Slider 3', 'image', '23d37802ce971ec3d8aae72952c3fe0a.png', '', '2018-05-07 11:53:30', '2018-05-07 10:53:30', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -2337,15 +2345,23 @@ CREATE TABLE IF NOT EXISTS `tg_sponsers` (
   `sponser_is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `sponser_created_time` datetime NOT NULL,
   `sponser_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tg_sponsers`
 --
 
 INSERT INTO `tg_sponsers` (`sponser_id`, `sponser_title`, `sponser_image`, `sponser_url`, `sponser_is_active`, `sponser_is_deleted`, `sponser_created_time`, `sponser_updated_time`) VALUES
-(1, 'Test Sponser', '1514712782.jpg', 'test', 1, 0, '2017-12-31 10:27:22', '2017-12-31 10:27:22'),
-(2, 'Test Sponsor2', '1522995344.jpg', 'http://google.com', 1, 0, '2018-04-06 07:15:44', '2018-04-06 06:15:44');
+(1, 'Adidas', '1525690142.png', 'http://google.com', 1, 0, '2018-05-07 11:49:23', '2018-05-07 10:49:23'),
+(2, 'EA', '1525690214.png', 'http://google.com', 1, 0, '2018-05-07 11:50:14', '2018-05-07 10:50:14'),
+(3, 'Emirates', '1525690230.png', 'http://google.com', 1, 0, '2018-05-07 11:50:30', '2018-05-07 10:50:30'),
+(4, 'Fox', '1525690245.png', 'http://google.com', 1, 0, '2018-05-07 11:50:45', '2018-05-07 10:50:45'),
+(5, 'kia', '1525690262.jpg', 'http://google.com', 1, 0, '2018-05-07 11:51:02', '2018-05-07 10:51:02'),
+(6, 'kona', '1525690273.png', 'http://google.com', 1, 0, '2018-05-07 11:51:13', '2018-05-07 10:51:13'),
+(7, 'Red Bull', '1525690285.png', 'http://google.com', 1, 0, '2018-05-07 11:51:25', '2018-05-07 10:51:25'),
+(8, 'Samsung', '1525690300.jpg', 'http://google.com', 1, 0, '2018-05-07 11:51:40', '2018-05-07 10:51:40'),
+(9, 'Unilab', '1525690313.png', 'http://google.com', 1, 0, '2018-05-07 11:51:53', '2018-05-07 10:51:53'),
+(10, 'Yamaha', '1525690323.png', 'http://google.com', 1, 0, '2018-05-07 11:52:03', '2018-05-07 10:52:03');
 
 -- --------------------------------------------------------
 
@@ -2371,13 +2387,13 @@ CREATE TABLE IF NOT EXISTS `tg_static_pages` (
 --
 
 INSERT INTO `tg_static_pages` (`page_id`, `page_title`, `page_slug`, `page_description`, `is_top`, `page_order`, `is_active`, `is_deleted`, `created_time`, `updated_time`) VALUES
-(1, 'test', 'test', '<p>\r\n tester</p>', 1, 1, 1, 0, '2017-12-31 09:42:52', '2017-12-31 09:42:37'),
-(2, 'About Us', 'about-us', '<div Open Sans", Arial, sans-serif; font-size: 14px;">\r\n  <p >\r\n  &nbsp;</p>\r\n  <div >\r\n   <h2 >\r\n   <br />\r\n   Why do we use it?</h2>\r\n   <p >\r\n   It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\r\n </div>\r\n</div>\r\n <div Open Sans", Arial, sans-serif; font-size: 14px;">\r\n  <h2 >\r\n  &nbsp;</h2>\r\n</div>\r\n<p>\r\n &nbsp;</p>', 1, 1, 1, 0, '2018-04-06 07:51:38', '2018-04-06 06:51:38'),
+(1, 'test', 'test', '<p>\r\n tester</p>', 1, 1, 1, 1, '2017-12-31 09:42:52', '2017-12-31 09:42:37'),
+(2, 'About Us', 'about-us', '<div class="lede" font-size:="" helvetica="">\r\n <h2 class="hd-title">\r\n  &nbsp;</h2>\r\n <p crims="">\r\n  Saatchi Art offers an unparalleled selection of paintings, drawings, sculpture and photography in a range of prices, and it provides artists from around the world with an expertly curated environment in which to exhibit and sell their work.</p>\r\n <p crims="">\r\n  Based in Los Angeles, Saatchi Art is redefining the experience of buying and selling art by making it easy, convenient and welcoming for both collectors and artists.</p>\r\n</div>\r\n<h1 art="" class="in-article" color:="" font-weight:="" fugue="" fund="" text-rendering:="">\r\n Finalists announced for Art Fund Museum of the Year 2018</h1>\r\n<ul class="details">\r\n <li>\r\n  1 May 2018</li>\r\n</ul>\r\n<div both="" class="clear" clear:="" font-size:="" helvetica="">\r\n &nbsp;</div>\r\n<div class="body_content" font-size:="" helvetica="">\r\n <div class="lede">\r\n  <p>\r\n   We&#39;re pleased to announce the five finalists for Art Fund Museum of the Year 2018, the world&rsquo;s largest and most prestigious prize for museums.</p>\r\n </div>\r\n <div class="responsive-video-container">\r\n  <p>\r\n   &nbsp;</p>\r\n </div>\r\n <p>\r\n  Five UK museums have been selected as finalists for&nbsp;<a href="https://www.artfund.org/supporting-museums/museum-of-the-year">Art Fund Museum of the Year 2018</a>, the world&rsquo;s largest museum prize, which celebrates innovation and exceptional achievement in cultural venues across the UK.</p>\r\n <p>\r\n  The museums are:</p>\r\n <h2>\r\n  Brooklands Museum, Weybridge</h2>\r\n <div class="image widescreen">\r\n  <div class="image-zoom-outer">\r\n   <div class="image-zoom-inner">\r\n    <a class="image-zoom" data-fullsize="/assets/supporting-museums/museum-of-the-year/2018/brooklands-museum-lnd.jpg" data-target="#modal-image-zoom" data-toggle="modal" href="https://www.artfund.org/news/2018/05/01/museum-of-the-year-2018-finalists"><img alt="Brooklands Museum Photo: Marc Atkins" class="noborder" src="https://www.artfund.org/thumbnail/850/assets/supporting-museums/museum-of-the-year/2018/brooklands-museum-lnd.jpg" title="Brooklands Museum Photo: Marc Atkins" /></a></div>\r\n  </div>\r\n </div>\r\n</div>\r\n<p>\r\n &nbsp;</p>', 1, 1, 1, 0, '2018-05-07 12:06:06', '2018-04-06 06:51:38'),
 (3, 'Contact Us', 'contact-us', '<h  >\r\n Where does it come from?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>', 1, 2, 1, 0, '2018-04-06 07:52:17', '2018-04-06 06:52:17'),
 (4, 'Popular Events', 'popular-events', '<h  >\r\n Where can I get some?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', 1, 3, 1, 0, '2018-04-06 07:53:12', '2018-04-06 06:53:12'),
 (5, 'Blog', 'blog', '<h  >\r\n Why do we use it?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>', 1, 4, 1, 0, '2018-04-06 07:53:36', '2018-04-06 06:53:36'),
-(6, 'FAQ', 'faq', '<h  >\r\n Where can I get some?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', 1, 2, 1, 0, '2018-04-06 08:06:24', '2018-04-06 07:06:24'),
-(7, 'Help', 'help', '<p>\r\n test</p>\r\n<p>\r\n &nbsp;</p>\r\n<h2>\r\n Where does it come from?</h2>\r\n<p font-size:="" open="">\r\n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\r\n<p font-size:="" open="">\r\n The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p>\r\n &nbsp;</p>', 1, 3, 1, 0, '2018-04-06 08:10:42', '2018-04-06 07:10:11');
+(6, 'FAQ', 'faq', '<div class="row" font-size:="" open="">\r\n <div class="col-sm-8">\r\n  <ul class="list-unstyled list-striped list-icons no-top">\r\n   <li background:="" line-height:="" open="">\r\n    148 pages in every bi-monthly issue</li>\r\n   <li line-height:="" open="">\r\n    More like a book than a magazine</li>\r\n   <li background:="" line-height:="" open="">\r\n    More articles for your money</li>\r\n   <li line-height:="" open="">\r\n    High quality, full color glossy magazine in perfect binding</li>\r\n   <li background:="" line-height:="" open="">\r\n    Launched in 1998</li>\r\n  </ul>\r\n </div>\r\n <div class="col-sm-4">\r\n  <img alt="Magazines" class="img-responsive" src="https://www.internationalartist.com/images/about/index/lg-magazines.jpg" /></div>\r\n</div>\r\n<p font-size:="" open="">\r\n In each 148 page bi-monthly issue of International Artist magazine we take you inside the studios of the world&#39;s best artists. They tell you the thought processes behind their creative methods and reveal their painting techniques.</p>\r\n<p font-size:="" open="">\r\n You get to look over the shoulders of artists from all parts of the world to see what they are painting.</p>\r\n<p font-size:="" open="">\r\n Beginners can take heart in reading that even the most accomplished professional artists are never satisfied.</p>\r\n<p font-size:="" open="">\r\n If you are an artist with intermediate ability, you&#39;ll be able to compare your skills with artists in many other countries, where they are also satisfying their creative urges.</p>\r\n<p font-size:="" open="">\r\n And for the professional artist - what&#39;s in it for you? This truly international magazine offers a unique opportunity to see your work exposed to a worldwide audience. It would be hard to find a medium that has the capacity to so comprehensively showcase and publicise your work than International Artist magazine.</p>\r\n<p>\r\n &nbsp;</p>', 1, 2, 1, 0, '2018-05-07 12:05:25', '2018-04-06 07:06:24'),
+(7, 'Help', 'help', '<div helvetica="" id="about-content">\r\n <div id="about-top-2">\r\n  <span id="about-top-2-text">We exist so you can have the art you love. This means giving you easy access to<br />\r\n  incredible art images and top-notch craftsmanship. Because when you find art you<br />\r\n  love, you&#39;ll love your space more... and that&#39;s what it&#39;s all about.</span></div>\r\n</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div 0px="" helvetica="" margin:="" width:="">\r\n <div id="about-incredible-1">\r\n  <h2>\r\n   Incredible art every time</h2>\r\n  <span class="about-text">We work with passion to bring you the world&#39;s largest art collection.<br />\r\n  Whatever your interest, your d&eacute;cor style, your inspiration &ndash; we&#39;re<br />\r\n  sure to have that piece you can&#39;t live without.&nbsp;<br />\r\n  <br />\r\n  <a href="https://www.art.com/shop/wall-art/">Shop Now</a></span></div>\r\n <div id="about-incredible-2">\r\n  <img alt="Incredible art every time" border="0" height="557" src="http://cache1.artprintimages.com/images/jump_pages/rebrand/about/about-incredible-2.jpg" width="524" /></div>\r\n</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div helvetica="" id="about-delight-top-1">\r\n <a href="https://www.art.com/~/craftsmanship/"><img alt="See our passion for perfection" height="293" src="http://cache1.artprintimages.com/images/jump_pages/rebrand/about/about-delight-1v4.jpg" width="593" /></a></div>\r\n<div helvetica="" id="about-delight-top-2">\r\n <h2>\r\n  Delight,<br />\r\n  at every step</h2>\r\n <span class="about-text">We believe art is dynamic, personal and connected to now, and the experience of buying and living with it should be too. From the moment you browse our site to the day your art is delivered, our team has one goal in mind: to delight you every step of the way.&nbsp;<br />\r\n <br />\r\n <a href="https://www.art.com/asp/customerservice/shippingreturns-asp/_/posters.htm">See Our No-Risk Return Policy</a></span></div>\r\n<div class="clear" helvetica="">\r\n &nbsp;</div>\r\n<div helvetica="" id="about-delight-top-3">\r\n <img alt=" " height="235" src="http://cache1.artprintimages.com/images/jump_pages/rebrand/about/about-delight-2v2.jpg" width="311" /></div>\r\n<div class="about-delight-top-4" helvetica="">\r\n <span class="about-pop-up-text">See our passion for perfection</span></div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div helvetica="" id="about-inspire-1">\r\n <h2>\r\n  Get Inspired Be Inspired</h2>\r\n <span class="about-text">You may know what art is right for you and your space... or you may need guidance to discover what you love. Either way, we&#39;ve got all sorts of tools to help you explore, experiment and express yourself.<br />\r\n <br />\r\n <a href="https://www.art.com/~/design-inspiration/">Get Inspired</a></span></div>\r\n<div class="about-12-width" helvetica="">\r\n &nbsp;</div>\r\n<div helvetica="" id="about-inspire-3">\r\n <img alt="Get Inspired Be Inspired" src="http://cache1.artprintimages.com/images/jump_pages/rebrand/about/about-inspired-2.jpg" /></div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div class="clear-20" helvetica="">\r\n &nbsp;</div>\r\n<div helvetica="" id="about-hang-1">\r\n <h2>\r\n  Hang with us</h2>\r\n <span class="about-text">Each and every day, we have more to offer you so keep in touch &ndash; you never know what you&#39;ll discover.</span></div>\r\n<div class="about-feature" helvetica="">\r\n <div class="aboutusFeed">\r\n  <img alt="Community" height="135" src="http://cache1.artprintimages.com/images/jump_pages/rebrand/about/about-community.jpg" width="243" /></div>\r\n</div>\r\n<p>\r\n &nbsp;</p>', 1, 3, 1, 0, '2018-05-07 12:04:31', '2018-04-06 07:10:11');
 
 -- --------------------------------------------------------
 
@@ -2423,9 +2439,9 @@ CREATE TABLE IF NOT EXISTS `tg_users` (
 --
 
 INSERT INTO `tg_users` (`user_id`, `role_id`, `hardware_id`, `first_name`, `last_name`, `username`, `email`, `user_password`, `address`, `country_id`, `zone_id`, `city_name`, `phone_number`, `location`, `verification_code`, `sms_status`, `get_verified`, `payment_method`, `about`, `user_dob`, `gender`, `profile_image`, `key_code`, `auth_key`, `last_login`, `login_count`, `is_active`, `is_deleted`, `created_time`, `updated_time`) VALUES
-(1, 1, '', 'Vishnu', 'Bansal', 'admin', 'vishnubansalcomp@gmail.com', '48f34ce6c33038295139eaa6882cb79c95d958c53e01a66937c21d83cfac00237', 'testvehv', 99, '1501', 'jaipur', '1234567890', '', '', '', '', '', 'This is super administrator.', '1984-11-16', 'male', '', '119903', '', 0, 658, 0, 0, '2014-02-21 11:52:16', '2014-07-14 21:04:27'),
-(2, 1, '', 'H2H', 'H2H', 'admin', 'h2h@gmail.com', 'b8a83c3567f863928848234ac246ffa3753d4cea34f2df029c973fc298ad8a907', 'test', 0, 'rajasthan', 'jaipur', '1234567890', '', '', '', '', '', '', '1984-05-05', '', '', '142572', '90efb161b2d982e474e9ebef8ebd77ccec7eb60111f02ca6bfc707cd343fe392f', 1522988756, 772, 1, 0, '1970-01-01 00:00:00', '2015-09-22 21:49:54'),
-(3, 2, '', 'sure', 'jajn', 'suren', 'surendrabaid@gmail.com', 'f4d270b0e1fb3e5674d31fe80e75b74d1a814a92543aa94941230ec93cf7a9196', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 5, 1, 0, '0000-00-00 00:00:00', '2015-08-30 14:40:20'),
+(1, 1, '', 'Vishnu', 'Bansal', 'admin', 'vishnubansalcomp@gmail.com', '48f34ce6c33038295139eaa6882cb79c95d958c53e01a66937c21d83cfac00237', 'Narayan Vihar', 99, '1501', 'jaipur', '1234567890', '', '', '', '', '', 'This is super administrator.', '1984-11-16', 'male', '', '119903', '', 0, 658, 0, 0, '2014-02-21 11:52:16', '2014-07-14 21:04:27'),
+(2, 1, '', 'H2H', 'H2H', 'admin', 'h2h@gmail.com', 'b8a83c3567f863928848234ac246ffa3753d4cea34f2df029c973fc298ad8a907', 'test', 0, 'rajasthan', 'jaipur', '1234567890', '', '', '', '', '', '', '1984-05-05', '', '', '142572', '90efb161b2d982e474e9ebef8ebd77ccec7eb60111f02ca6bfc707cd343fe392f', 1525688986, 773, 1, 0, '1970-01-01 00:00:00', '2015-09-22 21:49:54'),
+(3, 2, '', 'sure', 'jajn', 'suren', 'surendrabaid@gmail.com', 'f4d270b0e1fb3e5674d31fe80e75b74d1a814a92543aa94941230ec93cf7a9196', 'Nahjjh ganj', 99, '1501', 'jaipur', '1234567890', '', '', '', '', '', '', '', '', '', '', '', 0, 5, 1, 0, '0000-00-00 00:00:00', '2015-08-30 14:40:20'),
 (4, 2, '', 'Surendar', 'baid', 'suru', 'surendrabai1d@gmail.com', 'f55e8ce9f9fe5d14607ee87865bd9714552b75f457c52adda779a7eab45c3cfe7', '', 0, '', '', '', '', '', '', '', '', 'Hshshsh', '2015-09-02', '', '', '', '', 0, 3, 1, 1, '0000-00-00 00:00:00', '2015-09-04 13:46:30'),
 (5, 0, '', '', '', '', '', '', '', 0, '', '', '', '', 'a27c370c7fe7d9128ba9ef81976edeea8a93cf3b6eff', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-06 11:35:02'),
 (6, 4, '', 'test', 'test', '', '', '', '', 99, '1505', 'test', '1234567890', '302002', '7c71d21c95045159a6d4d7b1691395e69964fe45cd5a', '', '', '', '', '12/11/2018', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-06 11:35:03'),
@@ -2722,7 +2738,7 @@ CREATE TABLE IF NOT EXISTS `tg_user_logo_info` (
 --
 
 INSERT INTO `tg_user_logo_info` (`user_id`, `user_role_id`, `user_logo_info`, `created_time`, `updated_time`) VALUES
-(1, 1, '[{"status":true,"originalName":"500_8.jpg","generatedName":"14284d7429ba8d3a615437bfdfbf2150.jpg"}]', '0000-00-00 00:00:00', '2018-04-25 10:45:47'),
+(1, 1, '[{"status":true,"originalName":"500_4.jpg","generatedName":"f8ed8bd3dc0e1ab331c3581ab1727b7f.jpg"}]', '0000-00-00 00:00:00', '2018-05-07 11:44:41'),
 (3, 2, '[{"status":true,"originalName":"logo3.jpg","generatedName":"561d3eb5ee3403039286f9463060bbda.jpg"}]', '0000-00-00 00:00:00', '2018-04-25 11:28:14');
 
 -- --------------------------------------------------------
@@ -2748,7 +2764,7 @@ CREATE TABLE IF NOT EXISTS `tg_user_other_info` (
 --
 
 INSERT INTO `tg_user_other_info` (`user_id`, `user_role_id`, `user_artist_category`, `user_artist_language`, `user_artist_physical_desc`, `user_artist_convince_travel`, `user_artist_convince_passport`, `created_time`, `updated_time`) VALUES
-(1, 1, '[{"artist_category_id":"1"}]', '[{"id":"1","itemName":"english"}]', '{"height":"34","weight":"54","complexion":"test","bodyType":"test"}', 'no', 'yes', '0000-00-00 00:00:00', '2018-04-24 12:01:43');
+(1, 1, '[{"artist_category_id":"1"},{"artist_category_id":"8"},{"artist_category_id":"7"}]', '[{"id":"1","itemName":"english"}]', '{"height":"34","weight":"54","complexion":"Fair","bodyType":"Slim"}', 'no', 'yes', '0000-00-00 00:00:00', '2018-05-07 11:41:51');
 
 -- --------------------------------------------------------
 
@@ -2770,8 +2786,8 @@ CREATE TABLE IF NOT EXISTS `tg_user_personal_info` (
 --
 
 INSERT INTO `tg_user_personal_info` (`user_id`, `user_role_id`, `user_profile_title`, `user_about_info`, `created_time`, `updated_time`) VALUES
-(1, 1, 'test4', 'test4', '0000-00-00 00:00:00', '2018-04-24 10:01:45'),
-(2, 2, '', '', '0000-00-00 00:00:00', '2018-04-24 09:42:40');
+(1, 1, 'Vishnu Bansal', 'Software Engineer', '0000-00-00 00:00:00', '2018-05-07 11:41:51'),
+(3, 2, 'General E', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '0000-00-00 00:00:00', '2018-05-07 11:51:15');
 
 -- --------------------------------------------------------
 
@@ -2792,7 +2808,7 @@ CREATE TABLE IF NOT EXISTS `tg_user_slider_images` (
 --
 
 INSERT INTO `tg_user_slider_images` (`user_id`, `user_role_id`, `user_slider_images`, `created_time`, `updated_time`) VALUES
-(1, 1, '[{"status":true,"originalName":"hotelsscroll1.jpg","generatedName":"4c767987d9fee82ff0eb36872ce86cfd.jpg"},{"status":true,"originalName":"hotelsscroll2.jpg","generatedName":"05f6c4cbeca75f1ed7dbb478ce177b3e.jpg"}]', '0000-00-00 00:00:00', '2018-04-25 11:35:30'),
+(1, 1, '[{"status":true,"originalName":"1.jpg","generatedName":"e2f2f1f06a8013bd664e0716e48cda39.jpg"},{"status":true,"originalName":"4.jpg","generatedName":"1cc0341d2fefbe9b2f047cc323703bfb.jpg"},{"status":true,"originalName":"innerslider.png","generatedName":"dfecbac3ad2814754a934ae8c36fec68.png"}]', '0000-00-00 00:00:00', '2018-05-07 11:44:50'),
 (3, 2, '', '0000-00-00 00:00:00', '2018-04-25 04:25:06');
 
 -- --------------------------------------------------------
@@ -7021,7 +7037,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=79;
 -- AUTO_INCREMENT for table `tg_artist_category`
 --
 ALTER TABLE `tg_artist_category`
-MODIFY `artist_category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `artist_category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tg_captcha`
 --
@@ -7031,7 +7047,7 @@ MODIFY `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `tg_catalogue`
 --
 ALTER TABLE `tg_catalogue`
-MODIFY `post_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `post_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tg_cities`
 --
@@ -7056,7 +7072,7 @@ MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
 -- AUTO_INCREMENT for table `tg_event`
 --
 ALTER TABLE `tg_event`
-MODIFY `event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tg_gcm_users`
 --
@@ -7096,17 +7112,17 @@ MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `tg_skill`
 --
 ALTER TABLE `tg_skill`
-MODIFY `skill_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `skill_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tg_slider_posts`
 --
 ALTER TABLE `tg_slider_posts`
-MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tg_sponsers`
 --
 ALTER TABLE `tg_sponsers`
-MODIFY `sponser_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `sponser_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tg_static_pages`
 --

@@ -98,7 +98,8 @@
     </div>
     <div *ngIf="loadContentStatus">
       <div class="mb-3 videoFrame" *ngFor="let attachmentItem of artistVideosPerTitleData; let i = index;">
-        <a *ngIf="showForm" class="delete-icon" href="javascript:void(0)" data-toggle="modal" data-target="#videodeleteModel" (click)="showDeletionConfirmationPopup(i)">X</a>
+        <!-- data-target="#videodeleteModel" (click)="showDeletionConfirmationPopup(i)" -->
+        <a *ngIf="showForm" class="delete-icon" href="javascript:void(0)" data-toggle="modal">X</a>
         <!-- <img class="img-fluid" *ngIf="attachmentItem?.generatedName" src="{{uploadUrl}}/uploads/{{attachmentItem?.generatedName}}"
                       alt="ads" title="ads" class="img-responsive" (error)="img.src = updateUrl()" #img> -->
         <video class="video" controls>

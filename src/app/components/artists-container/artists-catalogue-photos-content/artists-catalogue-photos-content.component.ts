@@ -47,6 +47,7 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
 
   ngOnInit() {
     this.uploadUrl = this.config.apiEndpoint;
+    this.files = [];
     this.getPhotosTitleData();
   }
 
@@ -188,6 +189,9 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
             } else {
               this.photoCatalogueApiStatus = 'save';
             }
+            this.artistPhotosPerTitleData = [];
+            this.files = [];
+            
             this.getPhotosTitleData();
           }
         }, (err) => {
@@ -219,7 +223,7 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
   preparePhotoCatalogueJson() {
     const resultString = this.files.map((data) => data['responseStatus'] === 200 ? data.response : '').filter((e) => e !== '');
     let mergeArray = resultString;
-    if (this.artistPhotosPerTitleData.length > 0 && this.selectedPhotoCatalogPostId > 0) {
+    if (this.artistPhotosPerTitleData && this.artistPhotosPerTitleData.length > 0 && this.selectedPhotoCatalogPostId > 0) {
       mergeArray = resultString.concat(this.artistPhotosPerTitleData);
     }
     console.log('resultString--', resultString);
@@ -252,6 +256,7 @@ export class ArtistsCataloguePhotosContentComponent implements OnInit {
   }
 
   resetForm(artistPhotoForm) {
+    this.selectedPhotoCatalogPostId = 0;
     artistPhotoForm.reset();
   }
 

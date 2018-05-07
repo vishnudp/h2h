@@ -61,6 +61,7 @@ export class ArtistsSkillsContentComponent implements OnInit {
           } else {
             this.skillApiStatus = 'save';
           }
+          
           this.getSkills();
           this.resetForm(artistSkillForm);
         }
@@ -113,6 +114,7 @@ export class ArtistsSkillsContentComponent implements OnInit {
   }
 
   resetForm(artistSkillForm) {
+    this.selectedSkillId = 0;
     artistSkillForm.reset();
   }
 

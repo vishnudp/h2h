@@ -192,6 +192,9 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
           } else {
             this.videoCatalogueApiStatus = 'save';
           }
+          this.artistVideosPerTitleData = [];
+          this.files = [];
+          
           this.getVideosTitleData();
         }
       }, (err) => {
@@ -223,7 +226,7 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
   prepareVideoCatalogueJson() {
     const resultString = this.files.map((data) =>  data['responseStatus'] === 200 ? data.response : '').filter((e) => e !== '' );
     let mergeArray = resultString;
-    if (this.artistVideosPerTitleData.length > 0 && this.selectedVideosCatalogPostId > 0) {
+    if (this.artistVideosPerTitleData && this.artistVideosPerTitleData.length > 0 && this.selectedVideosCatalogPostId > 0) {
       mergeArray = resultString.concat(this.artistVideosPerTitleData);
     }
     console.log('resultString--', resultString);
@@ -255,6 +258,7 @@ export class ArtistsCatalogueVideosContentComponent implements OnInit {
   }
 
   resetForm(artistVideoForm) {
+    this.selectedVideosCatalogPostId = 0;
     artistVideoForm.reset();
   }
 

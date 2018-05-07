@@ -1,0 +1,6 @@
+[04-May-2015 17:06:20 UTC] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/anuttam/public_html/talent_groups/talent_services/conn.php on line 4
+[04-May-2015 17:06:34 UTC] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/anuttam/public_html/talent_groups/talent_services/conn.php on line 4
+[04-May-2015 17:06:40 UTC] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/anuttam/public_html/talent_groups/talent_services/conn.php on line 4
+[07-May-2015 06:24:48 UTC] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/anuttam/public_html/talent_groups/talent_services/conn.php on line 4
+[13-May-2015 05:44:35 UTC] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/anuttam/public_html/talent_groups/talent_services/conn.php on line 4
+[20-May-2015 11:01:55 UTC] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/anuttam/public_html/talent_groups/talent_services/conn.php on line 4

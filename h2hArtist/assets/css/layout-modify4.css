@@ -1,0 +1,68 @@
+@media only screen and (max-width : 1280px) {
+
+.login{
+	padding:6px 20px;
+	margin-top:10px;}
+
+.answer-key span{
+	margin-top:15px;}
+
+
+.answer-key{ background-position:left center;}
+.question-detail{
+	height:164px;}
+.content{
+	padding-top:1%;}
+
+.question-hint{
+	margin-top:4px;
+	height:41px;}
+
+.answer-key{
+	margin-bottom:12px;
+	height:71px;}
+
+.answer-key p{
+	line-height:71px;}
+
+.question{
+	height:321px;}
+	
+
+.sponsor-box{
+	padding-top:16px;
+	}	
+
+
+.login-form p input[type="text"], .login-form p input[type="password"]{
+	width:96%;}	
+
+
+.options-wrap{
+	min-height:122px;
+	margin-bottom:9px;}
+		
+
+.options-wrap .sign-zone img{height: 45%;
+    max-width: 42%;
+	margin-bottom:0px ;
+	margin-top:0px !important;}
+	
+
+#remain{
+	padding:1%;
+	margin:1% auto;
+	font-size:57px;}
+
+
+
+
+.time-left p{
+	margin:5px 0;}
+
+.time-left{
+	margin-bottom:6px;}	
+
+}
+
+

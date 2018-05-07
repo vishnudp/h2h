@@ -1,0 +1,36 @@
+/*ie8---------------------------------------------------------------------------------------------- class*/
+
+.ie8 body{
+display:block ;}
+
+	
+.ie8 .login{
+	padding:19px 59px;
+	margin-top:24px;}
+
+.ie8 .answer-key span{
+	margin-top:15px;}
+
+
+.ie8 .answer-key{ background-position:left center;  display:none !important;}
+
+.ie8 .content{
+	padding-top:1%;}
+
+.ie8 .question-hint{
+	margin-top:4px;
+	height:58px;}
+
+.ie8 .answer-key{
+	margin-bottom:12px;
+	height:71px;}
+
+.ie8 .answer-key p{
+	line-height:71px;}
+
+.ie8 .question{
+	height:321px;}
+
+
+
+
