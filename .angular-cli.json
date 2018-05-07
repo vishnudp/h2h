@@ -31,7 +31,8 @@
         "../src/assets/js/bootstrap.min.js",
         "../src/assets/js/main.js",
         "../src/assets/js/jquery-ui.js",
-        "../node_modules/jspdf/dist/jspdf.min.js"
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

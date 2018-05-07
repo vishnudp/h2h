@@ -18,7 +18,8 @@ export class ArtistsOpenBookingContentComponent implements OnInit {
   	displayColumns : [{
   		field : "booking_date",
   		title : "Booking date",
-  		width : '11%'
+  		width : '11%',
+      pdfWidth : 30
   	},{
   		field : "booking_title",
   		title : "Booking title"
@@ -27,7 +28,8 @@ export class ArtistsOpenBookingContentComponent implements OnInit {
   		title : "Client details"
   	},{
   		field : "payment_status",
-  		title : "Payment status"
+  		title : "Payment status",
+      pdfWidth : 30
   	}],
   	actions : true,
   	dataSource : this.createFakeData(100)
@@ -39,7 +41,7 @@ export class ArtistsOpenBookingContentComponent implements OnInit {
   		arr.push({
 	  		booking_date : i%31 + '/' + (i+15)%13 + '/' + 2000+((i+8)%21),
 	  		booking_title : "000"+i,
-			client_details : 'LIC Corporation of India',
+			client_details : 'LIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of IndiaLIC Corporation of India',
 			payment_status : 'Advance'
 		})
   	}
