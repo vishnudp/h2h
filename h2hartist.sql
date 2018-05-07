@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2018 at 11:07 AM
+-- Generation Time: May 07, 2018 at 12:20 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -2416,7 +2416,7 @@ CREATE TABLE IF NOT EXISTS `tg_users` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL,
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `tg_users`
@@ -2445,7 +2445,9 @@ INSERT INTO `tg_users` (`user_id`, `role_id`, `hardware_id`, `first_name`, `last
 (20, 0, '', '', '', '', '', '', '', 0, '', '', '', '', '03ad15fd3094c9de9da9f8fcb0372b84a0819d170a57', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:01:57'),
 (21, 4, '', 'lovlesh', 'gupta', 'lovle', 'lovlesh@gmail.com', '', '', 99, '1501', 'jaipur', '(123)123-1234', '30201', '9dce17da77df8817d68142c24a5be20bf4ac798b612f', '', '', '', '', '04/02/2018', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:01:57'),
 (22, 0, '', '', '', '', '', '', '', 0, '', '', '', '', '11686ac9ead64e6aec4cff57cf1d56edcb7da4cb91ea', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:03:51'),
-(23, 5, '', 'komal', 'gupta', 'komal', 'komal@gmail.com', '', '', 99, '1501', 'jaipur', '(123)123-1245', '30205', '552e8f4804da36b82d7c12514b3926b04cdee4932ae9', '', '', '', '', '04/03/2018', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:03:51');
+(23, 5, '', 'komal', 'gupta', 'komal', 'komal@gmail.com', '', '', 99, '1501', 'jaipur', '(123)123-1245', '30205', '552e8f4804da36b82d7c12514b3926b04cdee4932ae9', '', '', '', '', '04/03/2018', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-04-26 09:03:51'),
+(24, 0, '', '', '', '', '', '', '', 0, '', '', '', '', 'c217f52029e95c275d64a89c80535d047a349395db63', '', '', '', '', '', '', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-05-04 09:21:31'),
+(25, 4, '', 'test', 'test', 'testd', 'vishnubansalcomp@gmail.com', '', '', 99, '1501', 'jaipur', '(123)123-1234', '30202', '6e75acba306b2f9abade1383885242d1a9e34d60808b', '', '', '', '', '05/02/2018', 'male', '', '', '', 0, 0, 1, 0, '0000-00-00 00:00:00', '2018-05-04 09:21:32');
 
 -- --------------------------------------------------------
 
@@ -7114,7 +7116,7 @@ MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `tg_users`
 --
 ALTER TABLE `tg_users`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `tg_user_info`
 --

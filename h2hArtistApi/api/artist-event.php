@@ -12,8 +12,11 @@ include('../config/config.php');
 /**  Switch Case to Get Action from controller  **/
 
 switch($_GET['action'])  {
+    case 'upload_artist_event_images' :
+          upload_artist_event_images();
+          break; 
     case 'addEvent':
-    addEvent();
+          addEvent();
     break;
     case 'get_event':
           get_event();
@@ -26,6 +29,46 @@ switch($_GET['action'])  {
           break;
 }
 
+function upload_artist_event_images() {
+    $data = json_decode(file_get_contents("php://input")); 
+      print_r($data);
+          if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                  echo json_encode(array('status' => false));
+                  exit;
+                }
+                 
+                $path = 'uploads/';
+                 
+                if (isset($_FILES['file'])) {
+                  $originalName = $_FILES['file']['name'];
+                  $ext = '.'.pathinfo($originalName, PATHINFO_EXTENSION);
+                  $generatedName = md5($_FILES['file']['tmp_name']).$ext;
+                  $filePath = $path.$generatedName;
+                 
+                  if (!is_writable($path)) {
+                    echo json_encode(array(
+                      'status' => false,
+                      'msg'    => 'Destination directory not writable.'
+                    ));
+                    exit;
+                  }
+                 
+                  if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
+                    echo json_encode(array(
+                      'status'        => true,
+                      'originalName'  => $originalName,
+                      'generatedName' => $generatedName
+                    ));
+                  }
+                }
+                else {
+                  echo json_encode(
+                    array('status' => false, 'msg' => 'No file uploaded.')
+                  );
+                  exit;
+                }
+  }
+
 function addEvent() {
   $data = json_decode(file_get_contents("php://input")); 
   if ($data) {
@@ -34,6 +77,7 @@ function addEvent() {
     $event_title           = $data->event_title;
     $event_description     = $data->event_description;
     $event_date            = $data->event_date;
+    $event_cover_photo     = $data->event_cover_photo;
     $event_is_active           = 1;
     $event_is_deleted        = 0;
     $event_created_time        = date('Y-m-d H:i:s');
@@ -43,6 +87,7 @@ function addEvent() {
         event_title, 
         event_description, 
         event_date,
+        event_cover_photo,
         event_is_active, 
         event_is_deleted, 
         event_created_time ) values (
@@ -51,6 +96,7 @@ function addEvent() {
             '".$event_title."',
             '".$event_description."',
             '".$event_date."',
+            '".$event_cover_photo."',
             '".$event_is_active."',
             '".$event_is_deleted."',
             '".$event_created_time."'
@@ -79,6 +125,7 @@ function get_event() {
                     "event_title"            => $rows['event_title'],
                     "event_description"     => $rows['event_description'],
                     "event_date"     => $rows['event_date'],
+                    "event_cover_photo" => json_decode($rows['event_cover_photo'])
                     );
     }
     
@@ -88,13 +135,14 @@ function get_event() {
 function update_event() {
     $data = json_decode(file_get_contents("php://input"));    
     if ($data) { 
-    $event_id = $data->event_id; 
-    $user_id     = $data->user_id;
-    $user_role_id      = $data->user_role_id;
-    $event_title           = $data->event_title;
-    $event_description     = $data->event_description;
-    $event_date     = $data->event_date;
-    $qry = mysql_query("UPDATE tg_event set event_title = '".$event_title."' , event_description = '".$event_description."', event_date = '".$event_date."' WHERE event_id = ".$event_id);
+    $event_id           = $data->event_id; 
+    $user_id            = $data->user_id;
+    $user_role_id       = $data->user_role_id;
+    $event_title        = $data->event_title;
+    $event_description  = $data->event_description;
+    $event_date         = $data->event_date;
+    $event_cover_photo  = $data->event_cover_photo;
+    $qry = mysql_query("UPDATE tg_event set event_title = '".$event_title."' , event_description = '".$event_description."', event_date = '".$event_date."', event_cover_photo='".$event_cover_photo."' WHERE event_id = ".$event_id);
     if ($qry) {
         $arr = array('msg' => "Event Updated Successfully!!!", 'error' => '');
         $jsn = json_encode($arr);
