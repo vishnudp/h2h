@@ -1,17 +1,15 @@
 import { Component, ViewChild, ElementRef, Input, Output, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {fromEvent} from 'rxjs/observable/fromEvent';
-import * as jsPDF from 'jspdf'
+declare var jsPDF: any; // Important
 
 @Component({
 	selector : 'app-booking-list',
 	templateUrl : './booking-list.component.html'
 })
 
-
 export class BookingListComponent implements OnInit, AfterViewInit {
   	@ViewChild('searchInput') searchInput : ElementRef;
-	
 	@Input() config;
 	@Output() initialized = new EventEmitter();;
 	dataSource :any[] = [];
@@ -75,75 +73,50 @@ export class BookingListComponent implements OnInit, AfterViewInit {
     	return false;
 	}
 
-	saveAsPDF (argument) {
-		var table1 = 
-        this.dataSource /*tableToJson($('#table1').get(0))*/,
-        cellWidth = 35,
-        cellContents,
-        leftMargin = 2,
-        topMargin = 12,
-        topMarginTable = 55,
-        headerRowHeight = 13,
-        rowHeight = 9,
+	saveAsPDF() {
+		this.config.displayColumns.map((o: any)=>{o.dataKey = o.field})
+		var doc = new jsPDF('l');
+		doc.setProperties({
+	        title: 'Test PDF Document',
+	        subject: 'This is the subject',
+	        author: 'author',
+	        keywords: 'generated, javascript, web 2.0, ajax',
+	        creator: 'author'
+	    });
+		var totalPagesExp = "{total_pages_count_string}";
 
-         l = {
-         orientation: 'l',
-         unit: 'mm',
-         format: 'a3',
-         compress: true,
-         fontSize: 8,
-         lineHeight: 1,
-         autoSize: false,
-         printHeaders: true
-     };
+	    var pageContent = function (data) {
+	        // HEADER
+	        doc.setFontSize(20);
+	        doc.setTextColor(40);
+	        doc.setFontStyle('normal');
+	        doc.text("Report", data.settings.margin.left, 22);
 
-    var doc = new jsPDF(l, '', '', '');
+	        // FOOTER
+	        var str = "Page " + data.pageCount + " of " + totalPagesExp;
+	        doc.setFontSize(10);
+	        doc.text(str, data.settings.margin.left, doc.internal.pageSize.height - 10);
+	    };
 
-    doc.setProperties({
-        title: 'Test PDF Document',
-        subject: 'This is the subject',
-        author: 'author',
-        keywords: 'generated, javascript, web 2.0, ajax',
-        creator: 'author'
-    });
+    	doc.autoTable(this.config.displayColumns, this.dataSource, {
+	        //startY: doc.autoTable.previous.finalY + 15,
+	        theme: "grid",
+	        margin: {horizontal: 7, top : 30},
+	        bodyStyles: {valign: 'middle'},
+        	styles: {overflow: 'linebreak', columnWidth: 'wrap'},
+	        // drawHeaderRow: function (row, data) {
+	        //    row.height = 10;
+	        // },
+	        addPageContent: pageContent,
+	        columnStyles: {
+	        	client_details: {
+	                columnWidth: '107'
+	            },
+	        	//text: {columnWidth: 'wrap'}
+	        }
+	    });
+	    doc.putTotalPages(totalPagesExp);
 
-    doc.cellInitialize();
-    
-    this.config.displayColumns.forEach((data,i)=>{
-	    doc.margins = 1;
-        doc.setFont("helvetica");
-        doc.setFontType("bold");
-        doc.setFontSize(9);
-        doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, (data.title || data.field), 0);
-    })
-    table1.forEach((row,i)=>{
-	    this.config.displayColumns.forEach((data,j)=>{
-	    	doc.margins = 1;
-	        doc.setFont("courier ");
-	        doc.setFontType("bolditalic ");
-	        doc.setFontSize(6.5);                    
-	        doc.cell(leftMargin, topMargin, cellWidth, rowHeight, row[data.field], i+1);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
-	    })
-    })
-
-    doc.save('sample Report.pdf');
-
+		doc.save('table.pdf');
 	}
-
-	// saveData = (function () {
-	//     var a : any = document.createElement("a");
-	//     document.body.appendChild(a);
-	//     a.style = "display: none";
-	//     return function (data, fileName) {
-	//         var json = JSON.stringify(data),
-	//             blob = new Blob([json], {type: "octet/stream"}),
-	//             url = window.URL.createObjectURL(blob);
-	//         a.href = url;
-	//         a.download = fileName;
-	//         a.click();
-	//         window.URL.revokeObjectURL(url);
-	//     };
-	// }());
-
-
 }
