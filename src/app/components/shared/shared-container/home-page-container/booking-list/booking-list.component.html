@@ -24,7 +24,7 @@
                 <label for="exampleInputEmail1">Export to Excel</label>
                 <div class="clearfix"></div>
                 <div class="btn-group">
-                  <button *ngIf="config.options?.excel" type="button" class="btn btn-default"><i class="fa fa-fw fa-file-excel-o"></i></button>
+                  <button *ngIf="config.options?.excel" (click)="excelService.exportAsExcelFile(this.dataSource,'open-bookings')" type="button" class="btn btn-default"><i class="fa fa-fw fa-file-excel-o"></i></button>
                   <button *ngIf="config.options?.download" (click)="saveAsPDF()" type="button" class="btn btn-default"><i class="fa fa-fw fa-download"></i></button>
                   <button *ngIf="config.options?.print" type="button" class="btn btn-default"><i class="fa fa-fw fa-print"></i></button>
                 </div>

@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef, Input, Output, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
-import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
-import {fromEvent} from 'rxjs/observable/fromEvent';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+import { ExcelService } from '../../../../../services/common-services/excel.service';
+
 declare var jsPDF: any; // Important
 
 @Component({
@@ -19,7 +21,7 @@ export class BookingListComponent implements OnInit, AfterViewInit {
 	len : number = 0;
 	pageArr = [];
 	tempDs = [];
-	constructor() {
+	constructor(private excelService : ExcelService) {
 	}
 
 	ngOnInit() {
@@ -117,6 +119,6 @@ export class BookingListComponent implements OnInit, AfterViewInit {
 	    });
 	    doc.putTotalPages(totalPagesExp);
 
-		doc.save('table.pdf');
+		doc.save('open-bookings.pdf');
 	}
 }

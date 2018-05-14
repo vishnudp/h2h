@@ -64,6 +64,7 @@ let providers = {
     svc.CommonRequestResponseService,
     svc.CommonAuthenticationService,
     svc.CommonDataSharedService,
+    svc.ExcelService,
     svc.GeneralApiFunctionsService,
     svc.SetGetDataService
   ],
