@@ -55,7 +55,7 @@
               </span>
               <div class="row" *ngFor="let skill of skills; let i = index">
                 <div class="col-lg-4">
-                  <select class="form-control" [(ngModel)]="skill.type" (change)="changeSkill(i)" name="skill{{i}}.type">
+                  <select class="form-control" [(ngModel)]="skill.type" name="skill{{i}}.type">
                     <option disabled=true value=undefined>Choose Skill</option>                      
                     <option [hidden]="skillOptionDisable(sk.id)" *ngFor="let sk of skillType" [value]="sk.id">{{sk.name}}</option>
                   </select>

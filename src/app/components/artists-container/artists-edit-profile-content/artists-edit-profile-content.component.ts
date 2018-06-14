@@ -47,6 +47,17 @@ export class ArtistsEditProfileContentComponent implements OnInit {
     {id:4, name: 'DJ'},
     {id:5, name: 'Entertainer'}
   ];
+  venues = '';
+  genres = '';
+  domesticID = '';
+  domesticIDDesc = '';
+  intPassport = '';
+  intPassportDesc = '';
+  intPassportPhoto = '';
+  intPassportPhotoDesc = '';
+  intEduCer = '';
+  intEduCerDesc = '';
+
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
     private _commonRequestResponseService: CommonRequestResponseService,
@@ -280,13 +291,17 @@ export class ArtistsEditProfileContentComponent implements OnInit {
     };
     return inputJson;
   }
-
+  
   prepareOtherInfo() {
+    let intArr: any[] = [];
     const inputJson = {
       user_id : 1,
       user_role_id : 1,
       user_artist_category : JSON.stringify(this.artistCategory),
       user_artist_language : JSON.stringify(this.selectedLanguage),
+      user_skills:this.skills,
+      user_venue : this.venues,
+      user_genres : this.genres
       /*user_artist_physical_description : JSON.stringify({ height : this.height ,
                                            weight : this.weight ,
                                           complexion : this.complexion ,
@@ -294,10 +309,19 @@ export class ArtistsEditProfileContentComponent implements OnInit {
       /*user_artist_convence_travel : this.readyToTravel,
       user_artist_convence_passport : this.passportStatus*/
     };
+    let len = inputJson.user_skills.length;
+    len && !inputJson.user_skills[len-1].type && inputJson.user_skills.pop();
+    this.domesticID && (inputJson['domesticDoc'] = [{'type': 'id', 'doc': this.domesticID, 'description': this.domesticIDDesc}]);
+
+    this.intPassport && intArr.push({'type': 'passport_id', 'doc': this.intPassport, 'description': this.intPassportDesc});    
+    this.intPassportPhoto && intArr.push({'type': 'passport_photo', 'doc': this.intPassportPhoto, 'description': this.intPassportPhotoDesc});
+    this.intEduCer && intArr.push({'type': 'education_certificate', 'doc': this.intEduCer, 'description': this.intEduCerDesc});
+    intArr.length && (inputJson['internationalDoc'] = intArr);
+    //console.log('inputJson',inputJson);
     return inputJson;
   }
 
-  onItemSelect(item: any) {
+  /*onItemSelect(item: any) {
     console.log(item);
     console.log(this.selectedLanguage);
   }
@@ -310,9 +334,9 @@ export class ArtistsEditProfileContentComponent implements OnInit {
   }
   onDeSelectAll(items: any) {
     console.log(this.selectedLanguage);
-  }
+  }*/
   onSelect(object) {
-    console.log('object--', object);
+    //console.log('object--', object);
     if (object.checked) {
       this.artistCategory.push( { artist_category_id : object.artist_category_id } );
     } else if (!object.checked) {
