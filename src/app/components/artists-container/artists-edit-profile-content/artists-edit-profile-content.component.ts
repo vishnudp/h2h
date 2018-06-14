@@ -20,10 +20,10 @@ export class ArtistsEditProfileContentComponent implements OnInit {
   profileTitle = '';
   aboutUser = '';
   gender = 'male';
-  height = '';
+  /*height = '';
   weight = '';
   complexion = '';
-  bodyType = '';
+  bodyType = '';*/
   email = '';
   contactNumber = '';
   address = '';
@@ -32,13 +32,21 @@ export class ArtistsEditProfileContentComponent implements OnInit {
   city = '';
   artistCategory = [];
   selectedLanguage = [];
-  readyToTravel = 'yes';
-  passportStatus = 'yes';
+  /*readyToTravel = 'yes';
+  passportStatus = 'yes';*/
   proflieUpdateApiStatus = '';
   userPersonalData = [];
 
   userContactData = [];
   userOtherData = [];
+  skills = [];
+  skillType = [
+    {id:1, name: 'Vocalist'},
+    {id:2, name: 'Musician'},
+    {id:3, name: 'Dancer'},
+    {id:4, name: 'DJ'},
+    {id:5, name: 'Entertainer'}
+  ];
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
     private _commonRequestResponseService: CommonRequestResponseService,
@@ -52,6 +60,14 @@ export class ArtistsEditProfileContentComponent implements OnInit {
     this.getUserContactData();
     this.getUserOtherData();
   }
+
+  skillOptionDisable = (id) => this.skills.findIndex(item => item.type == id) > -1;
+
+  get addSkill() {
+    return this.skills.findIndex(item => item.type == undefined) > -1;
+  }
+
+
 
   getCountryData() {
     this._generalApiFunctionsService.getCountryData().subscribe((res) => {
@@ -180,12 +196,12 @@ export class ArtistsEditProfileContentComponent implements OnInit {
   setOtherData(otherData) {
     this.artistCategory = otherData['user_artist_category'];
     this.languageData = otherData['user_artist_language'];
-    this.height = otherData['user_artist_physical_desc']['height'];
-    this.weight = otherData['user_artist_physical_desc']['weight'];
-    this.complexion = otherData['user_artist_physical_desc']['complexion'];
-    this.bodyType = otherData['user_artist_physical_desc']['bodyType'];
-    this.readyToTravel = otherData['user_artist_convince_travel'];
-    this.passportStatus = otherData['user_artist_convince_passport'];
+    // this.height = otherData['user_artist_physical_desc']['height'];
+    // this.weight = otherData['user_artist_physical_desc']['weight'];
+    // this.complexion = otherData['user_artist_physical_desc']['complexion'];
+    // this.bodyType = otherData['user_artist_physical_desc']['bodyType'];
+    /*this.readyToTravel = otherData['user_artist_convince_travel'];
+    this.passportStatus = otherData['user_artist_convince_passport'];*/
   }
 
   updateProfile() {
@@ -271,12 +287,12 @@ export class ArtistsEditProfileContentComponent implements OnInit {
       user_role_id : 1,
       user_artist_category : JSON.stringify(this.artistCategory),
       user_artist_language : JSON.stringify(this.selectedLanguage),
-      user_artist_physical_description : JSON.stringify({ height : this.height ,
+      /*user_artist_physical_description : JSON.stringify({ height : this.height ,
                                            weight : this.weight ,
                                           complexion : this.complexion ,
-                                          bodyType : this.bodyType }),
-      user_artist_convence_travel : this.readyToTravel,
-      user_artist_convence_passport : this.passportStatus
+                                          bodyType : this.bodyType }),*/
+      /*user_artist_convence_travel : this.readyToTravel,
+      user_artist_convence_passport : this.passportStatus*/
     };
     return inputJson;
   }

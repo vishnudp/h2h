@@ -10,7 +10,7 @@ import { ArtistsEditProfileContentComponent } from './../components/artists-cont
 
 import { ArtistsCatalogueContentComponent } from './../components/artists-container/artists-catalogue-content/artists-catalogue-content.component';
 
-import { ArtistsSkillsContentComponent } from './../components/artists-container/artists-skills-content/artists-skills-content.component';
+/*import { ArtistsSkillsContentComponent } from './../components/artists-container/artists-skills-content/artists-skills-content.component';*/
 
 import { ArtistsBookingContentComponent } from './../components/artists-container/artists-booking-content/artists-booking-content.component';
 import { ArtistsOpenBookingContentComponent } from './../components/artists-container/artists-open-booking-content/artists-open-booking-content.component';
@@ -31,7 +31,7 @@ import { ArtistsRoutingModule } from'./artists-routing.module';
     ArtistsMyProfileContentComponent,
     ArtistsEditProfileContentComponent,
     ArtistsCatalogueContentComponent,
-    ArtistsSkillsContentComponent,
+    /*ArtistsSkillsContentComponent,*/
     ArtistsBookingContentComponent,
     ArtistsOpenBookingContentComponent,
     ArtistsPastBookingContentComponent,
@@ -55,7 +55,7 @@ import { ArtistsRoutingModule } from'./artists-routing.module';
     ArtistsMyProfileContentComponent,
     ArtistsEditProfileContentComponent,
     ArtistsCatalogueContentComponent,
-    ArtistsSkillsContentComponent,
+    /*ArtistsSkillsContentComponent,*/
     ArtistsBookingContentComponent,
     ArtistsOpenBookingContentComponent,
     ArtistsPastBookingContentComponent,

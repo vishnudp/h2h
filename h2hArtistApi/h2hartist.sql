@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
--- http://www.phpmyadmin.net
+-- version 4.8.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2018 at 02:18 PM
--- Server version: 5.6.20
--- PHP Version: 5.5.15
+-- Generation Time: Jun 14, 2018 at 04:13 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `h2hartist`
@@ -26,13 +28,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `tg_actions`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_actions` (
-`id` int(11) NOT NULL,
+CREATE TABLE `tg_actions` (
+  `id` int(11) NOT NULL,
   `controller_id` int(11) NOT NULL,
   `action` varchar(255) NOT NULL,
   `action_url` varchar(255) DEFAULT '',
   `alias` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_actions`
@@ -82,8 +84,8 @@ INSERT INTO `tg_actions` (`id`, `controller_id`, `action`, `action_url`, `alias`
 -- Table structure for table `tg_artist_category`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_artist_category` (
-`artist_category_id` int(11) NOT NULL,
+CREATE TABLE `tg_artist_category` (
+  `artist_category_id` int(11) NOT NULL,
   `artist_category_slug` varchar(255) NOT NULL,
   `artist_category_name` varchar(255) NOT NULL,
   `artist_category_description` text NOT NULL,
@@ -94,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `tg_artist_category` (
   `artist_category_is_deleted` tinyint(4) NOT NULL,
   `artist_category_is_active` tinyint(4) NOT NULL DEFAULT '1',
   `artist_category_created_by` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_artist_category`
@@ -109,7 +111,7 @@ INSERT INTO `tg_artist_category` (`artist_category_id`, `artist_category_slug`, 
 -- Table structure for table `tg_block_ip_list`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_block_ip_list` (
+CREATE TABLE `tg_block_ip_list` (
   `block_ip_list_id` int(11) NOT NULL,
   `block_ip_list_ipaddress` varchar(255) NOT NULL,
   `login_attempt` int(11) NOT NULL DEFAULT '0',
@@ -166,12 +168,12 @@ INSERT INTO `tg_block_ip_list` (`block_ip_list_id`, `block_ip_list_ipaddress`, `
 -- Table structure for table `tg_captcha`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_captcha` (
-`captcha_id` bigint(13) unsigned NOT NULL,
-  `captcha_time` int(10) unsigned NOT NULL,
+CREATE TABLE `tg_captcha` (
+  `captcha_id` bigint(13) UNSIGNED NOT NULL,
+  `captcha_time` int(10) UNSIGNED NOT NULL,
   `ip_address` varchar(16) NOT NULL DEFAULT '0',
   `word` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -179,8 +181,8 @@ CREATE TABLE IF NOT EXISTS `tg_captcha` (
 -- Table structure for table `tg_catalogue`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_catalogue` (
-`post_id` int(11) unsigned NOT NULL,
+CREATE TABLE `tg_catalogue` (
+  `post_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `post_title` varchar(255) NOT NULL,
@@ -192,23 +194,23 @@ CREATE TABLE IF NOT EXISTS `tg_catalogue` (
   `post_is_deleted` tinyint(4) NOT NULL,
   `post_created_time` datetime NOT NULL,
   `post_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_catalogue`
 --
 
 INSERT INTO `tg_catalogue` (`post_id`, `user_id`, `user_role_id`, `post_title`, `post_place`, `post_description`, `post_type`, `post_attachment`, `post_is_active`, `post_is_deleted`, `post_created_time`, `post_updated_time`) VALUES
-(1, 1, 1, 'test Catalogue', 'test', 'test Cataloguetest Cataloguetest Cataloguetest Catalogue', 'image', '[{"status":true,"originalName":"account-home.png","generatedName":"77baf46ebf4e4a18ec1cbd4462169654.png"},{"status":true,"originalName":"big-partner2.png","generatedName":"762f98ac716f6e7460c66eed8d990cab.png"},{"status":true,"originalName":"big-tour.png","generatedName":"45e450a985c81f3a3e79644fcf370f1d.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"ad-logo-homes.png","generatedName":"89646c4214c3dc686d9796ddad13f608.png"},{"status":true,"originalName":"ad-space.png","generatedName":"f007434300881f90df44e202ee45b171.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"about-banner.jpg","generatedName":"4d5356c81e56e48a46c7b3d15e6d78d4.jpg"},{"status":true,"originalName":"account-home.png","generatedName":"f9009b6cf01a62350fb9f60d44a1a5ee.png"},{"status":true,"originalName":"a1.jpg","generatedName":"35689bd0c00b98a85313922dc81b6717.jpg"},{"status":true,"originalName":"account-management.png","generatedName":"b0e5162c1cfbd04e4ebfde88a6e2e156.png"}]', 1, 0, '2018-04-23 13:15:34', '2018-04-25 11:54:28'),
-(2, 1, 1, 'test Catalogue', 'test Catalogue', 'test Cataloguetest Cataloguetest Cataloguetest Catalogue', 'image', '[{"status":true,"originalName":"ui-icons_777777_256x240.png","generatedName":"66ee78dde3f442d29882285870816ec9.png"},{"status":true,"originalName":"ui-icons_cc0000_256x240.png","generatedName":"8e1de196bc43e74332750199bc70dca3.png"},{"status":true,"originalName":"account-home.png","generatedName":"77baf46ebf4e4a18ec1cbd4462169654.png"},{"status":true,"originalName":"big-partner2.png","generatedName":"762f98ac716f6e7460c66eed8d990cab.png"},{"status":true,"originalName":"big-tour.png","generatedName":"45e450a985c81f3a3e79644fcf370f1d.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-article.png","generatedName":"06cc6c87a5a3c94482550744df5511ae.png"},{"status":true,"originalName":"advice-article-default.png","generatedName":"74616da57256213c5d1f3cfddc528d72.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"ad-logo-homes.png","generatedName":"89646c4214c3dc686d9796ddad13f608.png"},{"status":true,"originalName":"ad-space.png","generatedName":"f007434300881f90df44e202ee45b171.png"},{"status":true,"originalName":"advice-category-banner-bg.png","generatedName":"2a46eb74d581d3a2ab9679f4e8cdf4b2.png"},{"status":true,"originalName":"application1.png","generatedName":"745e1552bd8b1d0ff56b899d69dc4fec.png"},{"status":true,"originalName":"about-banner.jpg","generatedName":"4d5356c81e56e48a46c7b3d15e6d78d4.jpg"},{"status":true,"originalName":"account-home.png","generatedName":"f9009b6cf01a62350fb9f60d44a1a5ee.png"},{"status":true,"originalName":"a1.jpg","generatedName":"35689bd0c00b98a85313922dc81b6717.jpg"},{"status":true,"originalName":"account-management.png","generatedName":"b0e5162c1cfbd04e4ebfde88a6e2e156.png"}]', 1, 0, '2018-04-23 14:02:46', '2018-04-24 06:16:38'),
-(3, 1, 1, 'test catalogue4', 'test catalogue4', 'test catalogue4test catalogue4test catalogue4test catalogue4', 'image', '[{"status":true,"originalName":"recruiter-what-is-contractRecruit.jpg","generatedName":"dae3d7971ab4048b605a32bb1229cae8.jpg"},{"status":true,"originalName":"regional-stats.jpg","generatedName":"d2af235999e6745dad2f7b0ffdbf7b1b.jpg"}]', 1, 0, '2018-04-23 14:04:24', '2018-04-23 12:04:24'),
-(4, 1, 1, 'test catalogue5', 'test catalogue5', 'test catalogue5test catalogue5test catalogue5test catalogue5test catalogue5', 'image', '[{"status":true,"originalName":"mvl-advisors.png","generatedName":"c0a71566d15e63c6e5687fdb86d29159.png"},{"status":true,"originalName":"news-artical-icon.png","generatedName":"6e8b129797e147e41b3da6241b8a54dd.png"}]', 1, 0, '2018-04-23 14:07:37', '2018-04-23 12:07:37'),
-(5, 1, 1, 'catalogue6', 'catalogue6', 'catalogue6', 'image', '[{"status":true,"originalName":"application1.png","generatedName":"1f7f8fd42cecd1e4ff57ecafdeb965f1.png"},{"status":true,"originalName":"big-partner1.png","generatedName":"9a9fc278e559173d630206a6941c5a3c.png"}]', 1, 0, '2018-04-23 14:15:06', '2018-04-23 12:16:47'),
+(1, 1, 1, 'test Catalogue', 'test', 'test Cataloguetest Cataloguetest Cataloguetest Catalogue', 'image', '[{\"status\":true,\"originalName\":\"account-home.png\",\"generatedName\":\"77baf46ebf4e4a18ec1cbd4462169654.png\"},{\"status\":true,\"originalName\":\"big-partner2.png\",\"generatedName\":\"762f98ac716f6e7460c66eed8d990cab.png\"},{\"status\":true,\"originalName\":\"big-tour.png\",\"generatedName\":\"45e450a985c81f3a3e79644fcf370f1d.png\"},{\"status\":true,\"originalName\":\"advice-article.png\",\"generatedName\":\"06cc6c87a5a3c94482550744df5511ae.png\"},{\"status\":true,\"originalName\":\"advice-article-default.png\",\"generatedName\":\"74616da57256213c5d1f3cfddc528d72.png\"},{\"status\":true,\"originalName\":\"advice-article.png\",\"generatedName\":\"06cc6c87a5a3c94482550744df5511ae.png\"},{\"status\":true,\"originalName\":\"advice-article-default.png\",\"generatedName\":\"74616da57256213c5d1f3cfddc528d72.png\"},{\"status\":true,\"originalName\":\"advice-category-banner-bg.png\",\"generatedName\":\"2a46eb74d581d3a2ab9679f4e8cdf4b2.png\"},{\"status\":true,\"originalName\":\"application1.png\",\"generatedName\":\"745e1552bd8b1d0ff56b899d69dc4fec.png\"},{\"status\":true,\"originalName\":\"ad-logo-homes.png\",\"generatedName\":\"89646c4214c3dc686d9796ddad13f608.png\"},{\"status\":true,\"originalName\":\"ad-space.png\",\"generatedName\":\"f007434300881f90df44e202ee45b171.png\"},{\"status\":true,\"originalName\":\"advice-category-banner-bg.png\",\"generatedName\":\"2a46eb74d581d3a2ab9679f4e8cdf4b2.png\"},{\"status\":true,\"originalName\":\"application1.png\",\"generatedName\":\"745e1552bd8b1d0ff56b899d69dc4fec.png\"},{\"status\":true,\"originalName\":\"about-banner.jpg\",\"generatedName\":\"4d5356c81e56e48a46c7b3d15e6d78d4.jpg\"},{\"status\":true,\"originalName\":\"account-home.png\",\"generatedName\":\"f9009b6cf01a62350fb9f60d44a1a5ee.png\"},{\"status\":true,\"originalName\":\"a1.jpg\",\"generatedName\":\"35689bd0c00b98a85313922dc81b6717.jpg\"},{\"status\":true,\"originalName\":\"account-management.png\",\"generatedName\":\"b0e5162c1cfbd04e4ebfde88a6e2e156.png\"}]', 1, 0, '2018-04-23 13:15:34', '2018-04-25 11:54:28'),
+(2, 1, 1, 'test Catalogue', 'test Catalogue', 'test Cataloguetest Cataloguetest Cataloguetest Catalogue', 'image', '[{\"status\":true,\"originalName\":\"ui-icons_777777_256x240.png\",\"generatedName\":\"66ee78dde3f442d29882285870816ec9.png\"},{\"status\":true,\"originalName\":\"ui-icons_cc0000_256x240.png\",\"generatedName\":\"8e1de196bc43e74332750199bc70dca3.png\"},{\"status\":true,\"originalName\":\"account-home.png\",\"generatedName\":\"77baf46ebf4e4a18ec1cbd4462169654.png\"},{\"status\":true,\"originalName\":\"big-partner2.png\",\"generatedName\":\"762f98ac716f6e7460c66eed8d990cab.png\"},{\"status\":true,\"originalName\":\"big-tour.png\",\"generatedName\":\"45e450a985c81f3a3e79644fcf370f1d.png\"},{\"status\":true,\"originalName\":\"advice-article.png\",\"generatedName\":\"06cc6c87a5a3c94482550744df5511ae.png\"},{\"status\":true,\"originalName\":\"advice-article-default.png\",\"generatedName\":\"74616da57256213c5d1f3cfddc528d72.png\"},{\"status\":true,\"originalName\":\"advice-article.png\",\"generatedName\":\"06cc6c87a5a3c94482550744df5511ae.png\"},{\"status\":true,\"originalName\":\"advice-article-default.png\",\"generatedName\":\"74616da57256213c5d1f3cfddc528d72.png\"},{\"status\":true,\"originalName\":\"advice-category-banner-bg.png\",\"generatedName\":\"2a46eb74d581d3a2ab9679f4e8cdf4b2.png\"},{\"status\":true,\"originalName\":\"application1.png\",\"generatedName\":\"745e1552bd8b1d0ff56b899d69dc4fec.png\"},{\"status\":true,\"originalName\":\"ad-logo-homes.png\",\"generatedName\":\"89646c4214c3dc686d9796ddad13f608.png\"},{\"status\":true,\"originalName\":\"ad-space.png\",\"generatedName\":\"f007434300881f90df44e202ee45b171.png\"},{\"status\":true,\"originalName\":\"advice-category-banner-bg.png\",\"generatedName\":\"2a46eb74d581d3a2ab9679f4e8cdf4b2.png\"},{\"status\":true,\"originalName\":\"application1.png\",\"generatedName\":\"745e1552bd8b1d0ff56b899d69dc4fec.png\"},{\"status\":true,\"originalName\":\"about-banner.jpg\",\"generatedName\":\"4d5356c81e56e48a46c7b3d15e6d78d4.jpg\"},{\"status\":true,\"originalName\":\"account-home.png\",\"generatedName\":\"f9009b6cf01a62350fb9f60d44a1a5ee.png\"},{\"status\":true,\"originalName\":\"a1.jpg\",\"generatedName\":\"35689bd0c00b98a85313922dc81b6717.jpg\"},{\"status\":true,\"originalName\":\"account-management.png\",\"generatedName\":\"b0e5162c1cfbd04e4ebfde88a6e2e156.png\"}]', 1, 0, '2018-04-23 14:02:46', '2018-04-24 06:16:38'),
+(3, 1, 1, 'test catalogue4', 'test catalogue4', 'test catalogue4test catalogue4test catalogue4test catalogue4', 'image', '[{\"status\":true,\"originalName\":\"recruiter-what-is-contractRecruit.jpg\",\"generatedName\":\"dae3d7971ab4048b605a32bb1229cae8.jpg\"},{\"status\":true,\"originalName\":\"regional-stats.jpg\",\"generatedName\":\"d2af235999e6745dad2f7b0ffdbf7b1b.jpg\"}]', 1, 0, '2018-04-23 14:04:24', '2018-04-23 12:04:24'),
+(4, 1, 1, 'test catalogue5', 'test catalogue5', 'test catalogue5test catalogue5test catalogue5test catalogue5test catalogue5', 'image', '[{\"status\":true,\"originalName\":\"mvl-advisors.png\",\"generatedName\":\"c0a71566d15e63c6e5687fdb86d29159.png\"},{\"status\":true,\"originalName\":\"news-artical-icon.png\",\"generatedName\":\"6e8b129797e147e41b3da6241b8a54dd.png\"}]', 1, 0, '2018-04-23 14:07:37', '2018-04-23 12:07:37'),
+(5, 1, 1, 'catalogue6', 'catalogue6', 'catalogue6', 'image', '[{\"status\":true,\"originalName\":\"application1.png\",\"generatedName\":\"1f7f8fd42cecd1e4ff57ecafdeb965f1.png\"},{\"status\":true,\"originalName\":\"big-partner1.png\",\"generatedName\":\"9a9fc278e559173d630206a6941c5a3c.png\"}]', 1, 0, '2018-04-23 14:15:06', '2018-04-23 12:16:47'),
 (6, 1, 1, 'test', 'test', 'test vicdeo', 'video', '[]', 1, 0, '2018-04-23 14:50:34', '2018-04-23 13:08:10'),
 (7, 1, 1, 'test2', 'test2 ', 'test 2 video', 'video', '[]', 1, 0, '2018-04-23 15:06:05', '2018-04-24 06:21:05'),
-(8, 1, 1, 'test', 'test3', 'test vicdeo', 'video', '[{"status":true,"originalName":"Video_of_Explore_Careers_on_Mobile__iPhone_.MOV","generatedName":"7b5393b271f07ead419c1f1e8fa2d593.MOV"}]', 1, 0, '2018-04-23 15:07:52', '2018-04-24 06:00:04'),
-(9, 2, 2, 'test', 'test', 'test', 'image', '[{"status":true,"originalName":"hotelsscroll1.jpg","generatedName":"77c53febad01006005211186d2160307.jpg"}]', 1, 0, '2018-04-25 11:55:25', '2018-04-25 09:55:25'),
-(10, 2, 2, 'test', 'test', 'resr', 'video', '[{"status":true,"originalName":"Messages_-_Compose_-_Horizontal_Orientation.MOV","generatedName":"868e9f21a09baa7706cb41bfacff19dd.MOV"}]', 1, 0, '2018-04-25 12:09:07', '2018-04-25 11:37:26'),
+(8, 1, 1, 'test', 'test3', 'test vicdeo', 'video', '[{\"status\":true,\"originalName\":\"Video_of_Explore_Careers_on_Mobile__iPhone_.MOV\",\"generatedName\":\"7b5393b271f07ead419c1f1e8fa2d593.MOV\"}]', 1, 0, '2018-04-23 15:07:52', '2018-04-24 06:00:04'),
+(9, 2, 2, 'test', 'test', 'test', 'image', '[{\"status\":true,\"originalName\":\"hotelsscroll1.jpg\",\"generatedName\":\"77c53febad01006005211186d2160307.jpg\"}]', 1, 0, '2018-04-25 11:55:25', '2018-04-25 09:55:25'),
+(10, 2, 2, 'test', 'test', 'resr', 'video', '[{\"status\":true,\"originalName\":\"Messages_-_Compose_-_Horizontal_Orientation.MOV\",\"generatedName\":\"868e9f21a09baa7706cb41bfacff19dd.MOV\"}]', 1, 0, '2018-04-25 12:09:07', '2018-04-25 11:37:26'),
 (11, 1, 1, '', '', '', 'image', '[]', 1, 0, '2018-04-25 13:54:41', '2018-04-25 11:54:41');
 
 -- --------------------------------------------------------
@@ -217,14 +219,14 @@ INSERT INTO `tg_catalogue` (`post_id`, `user_id`, `user_role_id`, `post_title`, 
 -- Table structure for table `tg_cities`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_cities` (
-`city_id` int(11) NOT NULL,
+CREATE TABLE `tg_cities` (
+  `city_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=892 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_cities`
@@ -1129,8 +1131,8 @@ INSERT INTO `tg_cities` (`city_id`, `zone_id`, `country_id`, `name`, `code`, `st
 -- Table structure for table `tg_contact_info`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_contact_info` (
-`contact_id` int(11) NOT NULL,
+CREATE TABLE `tg_contact_info` (
+  `contact_id` int(11) NOT NULL,
   `type` varchar(255) CHARACTER SET utf8 NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `current_address` text CHARACTER SET utf8 NOT NULL,
@@ -1140,7 +1142,7 @@ CREATE TABLE IF NOT EXISTS `tg_contact_info` (
   `contact_is_deleted` tinyint(4) NOT NULL,
   `created_at` varchar(255) CHARACTER SET utf8 NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=78 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_contact_info`
@@ -1176,54 +1178,54 @@ INSERT INTO `tg_contact_info` (`contact_id`, `type`, `name`, `current_address`, 
 (27, 'muni', 'Pulkit Kumar ji', 'Oswal Bhawan, Shahadra, New Delhi', 'Dalaram Kashid', '9784472944', 1, 0, '2015-09-22 12:33:44', '2015-09-22 07:03:44'),
 (28, 'muni', 'Anant Kumar ji', 'Oswal Bhawan, Shahadra, New Delhi', 'Dalaram Kashid', '9784472944', 1, 0, '2015-09-22 12:32:38', '2015-09-22 07:02:38'),
 (29, 'muni', 'Ramya Kumar ji', 'Oswal Bhawan, Shahdra, New Delhi', 'Dalaram Kashid', '9784472944', 1, 0, '2015-09-22 12:33:08', '2015-09-22 07:03:08'),
-(30, 'muni', 'Muni Shri Sumermal ji "Sudarshan"', 'C-14, Green Park, Main,  New Delhi', 'Sagar Kashid', '+919971615838', 1, 0, '2015-09-22 11:40:45', '2015-09-22 06:10:45'),
-(31, 'muni', 'Muni Shri Tanmay Kumar ji "Ladnun"', 'C-14, Green Park Main, New Delhi', 'Sagar Kashid', '+919971615838', 1, 0, '2015-09-22 11:41:50', '2015-09-22 06:11:50'),
+(30, 'muni', 'Muni Shri Sumermal ji \"Sudarshan\"', 'C-14, Green Park, Main,  New Delhi', 'Sagar Kashid', '+919971615838', 1, 0, '2015-09-22 11:40:45', '2015-09-22 06:10:45'),
+(31, 'muni', 'Muni Shri Tanmay Kumar ji \"Ladnun\"', 'C-14, Green Park Main, New Delhi', 'Sagar Kashid', '+919971615838', 1, 0, '2015-09-22 11:41:50', '2015-09-22 06:11:50'),
 (32, 'muni', 'Nachiketa Munishri Anushasan Kumar ji', 'C-14, Green park Main, New Delhi', 'Sagar Kashid', '+919971615838', 1, 0, '2015-09-22 11:42:41', '2015-09-22 06:12:41'),
-(33, 'muni', 'Muni Shri Niraj Kumar ji "Jaipur"', 'Terapanth Bhawan, Anukampa, Chhatarpur, New Delhi', 'Suresh Kashid', '+91-7838052299', 1, 0, '2015-09-22 11:45:34', '2015-09-22 06:15:34'),
+(33, 'muni', 'Muni Shri Niraj Kumar ji \"Jaipur\"', 'Terapanth Bhawan, Anukampa, Chhatarpur, New Delhi', 'Suresh Kashid', '+91-7838052299', 1, 0, '2015-09-22 11:45:34', '2015-09-22 06:15:34'),
 (34, 'muni', 'Niraj Kumar ji', 'Terapanth Bhawan, Chhatarpur, New Delhi', 'Suresh Kashid', '+91-7838052299', 1, 0, '2015-09-22 12:31:28', '2015-09-22 07:01:28'),
 (35, 'muni', 'Somya Kumar ji', 'Terapanth Bhawan, Anukampa, Chhatarpur, New Delhi', 'Suresh Kashid', '+91-7838052299', 1, 0, '2015-09-22 12:30:47', '2015-09-22 07:00:47'),
 (36, 'muni', 'Nikunj Kumar ji', 'Terapanth Bhawan, Anukampa, Chhatarpur, New Delhi', 'Suresh Kasid', '+91-7838052299', 1, 0, '2015-09-22 12:30:16', '2015-09-22 07:00:16'),
 (37, 'saadhvi', 'Sanghmitra ji', 'Pitampura, New Delhi', '', '', 1, 0, '2015-09-22 12:29:01', '2015-09-22 06:59:01'),
-(38, 'saadhvi', 'Sadhvi Shilprabha ji "Sardarshahar"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:50:15', '2015-09-22 06:20:15'),
-(39, 'saadhvi', 'Sadhvi Shri Samadhiprabha ji "Uchanamandi"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:53:32', '2015-09-22 06:23:32'),
-(40, 'saadhvi', 'Sadhvi shri Prasannyasha ji "kalu"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:55:29', '2015-09-22 06:25:29'),
-(41, 'saadhvi', 'Sadhvi Shri Madhuryaprabha ji "Kalu"', 'Shalimar Baugh', '', '', 1, 0, '2015-09-22 11:56:14', '2015-09-22 06:26:14'),
-(42, 'saadhvi', 'Sadhvi Shri Kumudprabha ji "Delhi"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:56:56', '2015-09-22 06:26:57'),
+(38, 'saadhvi', 'Sadhvi Shilprabha ji \"Sardarshahar\"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:50:15', '2015-09-22 06:20:15'),
+(39, 'saadhvi', 'Sadhvi Shri Samadhiprabha ji \"Uchanamandi\"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:53:32', '2015-09-22 06:23:32'),
+(40, 'saadhvi', 'Sadhvi shri Prasannyasha ji \"kalu\"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:55:29', '2015-09-22 06:25:29'),
+(41, 'saadhvi', 'Sadhvi Shri Madhuryaprabha ji \"Kalu\"', 'Shalimar Baugh', '', '', 1, 0, '2015-09-22 11:56:14', '2015-09-22 06:26:14'),
+(42, 'saadhvi', 'Sadhvi Shri Kumudprabha ji \"Delhi\"', 'Shalimar Baugh, New Delhi', '', '', 1, 0, '2015-09-22 11:56:56', '2015-09-22 06:26:57'),
 (43, 'saadhvi', 'Sadhvi Shri Raviprabha ji', 'Rohini, New Delhi', '', '', 1, 0, '2015-09-22 11:58:04', '2015-09-22 06:28:04'),
-(44, 'saadhvi', 'Sadhvi Shri Purnima Shri ji "Shardarshahar"', 'Rohini, New Delhi', '', '', 1, 0, '2015-09-22 11:59:07', '2015-09-22 06:29:07'),
+(44, 'saadhvi', 'Sadhvi Shri Purnima Shri ji \"Shardarshahar\"', 'Rohini, New Delhi', '', '', 1, 0, '2015-09-22 11:59:07', '2015-09-22 06:29:07'),
 (45, 'saadhvi', 'Sadhvi Shri Lokyashaji', 'Rohini, New Delhi', '', '', 1, 0, '2015-09-22 12:00:51', '2015-09-22 06:30:51'),
-(46, 'muni', 'Prathviraj ji "Shri Dungargar"', 'Borawad (Raj.)', '', '', 1, 0, '2015-09-22 12:03:09', '2015-09-22 06:33:09'),
-(47, 'muni', 'Parashkumar ji "Lachhura"', 'Borawad (Raj.)', '', '', 1, 0, '2015-09-22 12:03:48', '2015-09-22 06:33:48'),
-(48, 'muni', 'Atmanand ji "Shri Dungargar"', 'Borawad (Raj.)', '', '', 1, 0, '2015-09-22 12:04:36', '2015-09-22 06:34:36'),
-(49, 'muni', 'Sukhlal ji "Sujangar"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:05:20', '2015-09-22 06:35:20'),
-(50, 'muni', 'Mohajit Kumar ji "Rajgar"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:05:58', '2015-09-22 06:35:58'),
-(51, 'muni', 'Mohanlal ji "Shadulpur"', 'Jain Vishva Bharati', '', '', 1, 0, '2015-09-22 12:06:30', '2015-09-22 06:36:30'),
-(52, 'muni', 'Ridhkaran ji "Sujangar"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:07:54', '2015-09-22 06:37:54'),
-(53, 'muni', 'Devraj ji "Sayra"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:08:49', '2015-09-22 06:38:49'),
-(54, 'muni', 'Jindas ji "Sisay"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:09:50', '2015-09-22 06:39:50'),
-(55, 'muni', 'Madhu Kumar ji "Sardarshahar"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:11:02', '2015-09-22 06:41:02'),
-(56, 'muni', 'Bhavya Kumar ji "Bhinasar"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:11:48', '2015-09-22 06:41:48'),
-(57, 'muni', 'Kanti Kumar ji "Tapra"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:12:32', '2015-09-22 06:42:32'),
-(58, 'muni', 'Jayesh Kumar ji "Mumbai"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:13:12', '2015-09-22 06:43:12'),
-(59, 'muni', 'Vimal Kumar ji "Taranagar)', 'Chhotikhatu (Raj.)', '', '', 1, 0, '2015-09-22 12:13:48', '2015-09-22 06:43:48'),
-(60, 'muni', 'Madhur Kumar ji "Balotra"', 'Chhotikhatu (Raj.)', '', '', 1, 0, '2015-09-22 12:14:27', '2015-09-22 06:44:27'),
+(46, 'muni', 'Prathviraj ji \"Shri Dungargar\"', 'Borawad (Raj.)', '', '', 1, 0, '2015-09-22 12:03:09', '2015-09-22 06:33:09'),
+(47, 'muni', 'Parashkumar ji \"Lachhura\"', 'Borawad (Raj.)', '', '', 1, 0, '2015-09-22 12:03:48', '2015-09-22 06:33:48'),
+(48, 'muni', 'Atmanand ji \"Shri Dungargar\"', 'Borawad (Raj.)', '', '', 1, 0, '2015-09-22 12:04:36', '2015-09-22 06:34:36'),
+(49, 'muni', 'Sukhlal ji \"Sujangar\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:05:20', '2015-09-22 06:35:20'),
+(50, 'muni', 'Mohajit Kumar ji \"Rajgar\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:05:58', '2015-09-22 06:35:58'),
+(51, 'muni', 'Mohanlal ji \"Shadulpur\"', 'Jain Vishva Bharati', '', '', 1, 0, '2015-09-22 12:06:30', '2015-09-22 06:36:30'),
+(52, 'muni', 'Ridhkaran ji \"Sujangar\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:07:54', '2015-09-22 06:37:54'),
+(53, 'muni', 'Devraj ji \"Sayra\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:08:49', '2015-09-22 06:38:49'),
+(54, 'muni', 'Jindas ji \"Sisay\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:09:50', '2015-09-22 06:39:50'),
+(55, 'muni', 'Madhu Kumar ji \"Sardarshahar\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:11:02', '2015-09-22 06:41:02'),
+(56, 'muni', 'Bhavya Kumar ji \"Bhinasar\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:11:48', '2015-09-22 06:41:48'),
+(57, 'muni', 'Kanti Kumar ji \"Tapra\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:12:32', '2015-09-22 06:42:32'),
+(58, 'muni', 'Jayesh Kumar ji \"Mumbai\"', 'Jain Vishva Bharati, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:13:12', '2015-09-22 06:43:12'),
+(59, 'muni', 'Vimal Kumar ji \"Taranagar)', 'Chhotikhatu (Raj.)', '', '', 1, 0, '2015-09-22 12:13:48', '2015-09-22 06:43:48'),
+(60, 'muni', 'Madhur Kumar ji \"Balotra\"', 'Chhotikhatu (Raj.)', '', '', 1, 0, '2015-09-22 12:14:27', '2015-09-22 06:44:27'),
 (61, 'muni', 'Akshay Kumar ji', 'Chhotikhatu (Raj.)', '', '', 1, 0, '2015-09-22 12:14:53', '2015-09-22 06:44:53'),
-(62, 'muni', 'Dhanya Kumar ji "Bidasar"', 'Chhotikhatu (Raj.)', '', '', 1, 0, '2015-09-22 12:15:22', '2015-09-22 06:45:22'),
-(63, 'saadhvi', 'Vinay shri ji "Borawad"', 'Jodhpur', '', '', 1, 0, '2015-09-22 12:15:55', '2015-09-22 06:45:55'),
-(64, 'saadhvi', 'Pavanprabha ji "Shri Dungargar"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:16:36', '2015-09-22 06:46:36'),
-(65, 'saadhvi', 'Prabodhyasha ji "Udasar"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:17:09', '2015-09-22 06:47:09'),
-(66, 'saadhvi', 'Atamyasha ji "Shahada"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:18:18', '2015-09-22 06:48:18'),
-(67, 'saadhvi', 'Ramyaprabha ji "Gangashahar"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:18:58', '2015-09-22 06:48:58'),
-(68, 'saadhvi', 'Jasvati ji "Sardarshahar"', 'Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:20:24', '2015-09-22 06:50:24'),
-(69, 'saadhvi', 'Surajkumari ji "Shadulpur"', 'Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:21:02', '2015-09-22 06:51:02'),
-(70, 'saadhvi', 'Shilvati ji "Ladnun"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:22:10', '2015-09-22 06:52:11'),
-(71, 'saadhvi', 'Kalpna Shriji "Adsar"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:22:41', '2015-09-22 06:52:41'),
-(72, 'saadhvi', 'Jyotsna Kumar ji "Gangashahar"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:23:13', '2015-09-22 06:53:13'),
-(73, 'saadhvi', 'Rishabh prabha ji "Sardarshahar"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:24:27', '2015-09-22 06:54:27'),
-(74, 'saadhvi', 'Kumudyasha ji "Ladnun"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:25:16', '2015-09-22 06:55:16'),
-(75, 'saadhvi', 'Anekant Prabha ji "Ahmedabad"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:26:01', '2015-09-22 06:56:01'),
-(76, 'saadhvi', 'Akshayprabha ji "Bav"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:26:35', '2015-09-22 06:56:35'),
-(77, 'saadhvi', 'Subhvati ji  "Sisay"', 'Asada, Dist. Barmer (Raj.)', '', '', 1, 0, '2015-09-22 12:27:45', '2015-09-22 06:57:45');
+(62, 'muni', 'Dhanya Kumar ji \"Bidasar\"', 'Chhotikhatu (Raj.)', '', '', 1, 0, '2015-09-22 12:15:22', '2015-09-22 06:45:22'),
+(63, 'saadhvi', 'Vinay shri ji \"Borawad\"', 'Jodhpur', '', '', 1, 0, '2015-09-22 12:15:55', '2015-09-22 06:45:55'),
+(64, 'saadhvi', 'Pavanprabha ji \"Shri Dungargar\"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:16:36', '2015-09-22 06:46:36'),
+(65, 'saadhvi', 'Prabodhyasha ji \"Udasar\"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:17:09', '2015-09-22 06:47:09'),
+(66, 'saadhvi', 'Atamyasha ji \"Shahada\"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:18:18', '2015-09-22 06:48:18'),
+(67, 'saadhvi', 'Ramyaprabha ji \"Gangashahar\"', 'Jodhpur (Raj.)', '', '', 1, 0, '2015-09-22 12:18:58', '2015-09-22 06:48:58'),
+(68, 'saadhvi', 'Jasvati ji \"Sardarshahar\"', 'Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:20:24', '2015-09-22 06:50:24'),
+(69, 'saadhvi', 'Surajkumari ji \"Shadulpur\"', 'Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:21:02', '2015-09-22 06:51:02'),
+(70, 'saadhvi', 'Shilvati ji \"Ladnun\"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:22:10', '2015-09-22 06:52:11'),
+(71, 'saadhvi', 'Kalpna Shriji \"Adsar\"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:22:41', '2015-09-22 06:52:41'),
+(72, 'saadhvi', 'Jyotsna Kumar ji \"Gangashahar\"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:23:13', '2015-09-22 06:53:13'),
+(73, 'saadhvi', 'Rishabh prabha ji \"Sardarshahar\"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:24:27', '2015-09-22 06:54:27'),
+(74, 'saadhvi', 'Kumudyasha ji \"Ladnun\"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:25:16', '2015-09-22 06:55:16'),
+(75, 'saadhvi', 'Anekant Prabha ji \"Ahmedabad\"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:26:01', '2015-09-22 06:56:01'),
+(76, 'saadhvi', 'Akshayprabha ji \"Bav\"', 'Sewa Kendra, Ladnun (Raj.)', '', '', 1, 0, '2015-09-22 12:26:35', '2015-09-22 06:56:35'),
+(77, 'saadhvi', 'Subhvati ji  \"Sisay\"', 'Asada, Dist. Barmer (Raj.)', '', '', 1, 0, '2015-09-22 12:27:45', '2015-09-22 06:57:45');
 
 -- --------------------------------------------------------
 
@@ -1231,13 +1233,13 @@ INSERT INTO `tg_contact_info` (`contact_id`, `type`, `name`, `current_address`, 
 -- Table structure for table `tg_controllers`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_controllers` (
-`controller_id` int(11) NOT NULL,
+CREATE TABLE `tg_controllers` (
+  `controller_id` int(11) NOT NULL,
   `controller_name` varchar(255) NOT NULL,
   `controller_url` varchar(255) DEFAULT NULL,
   `controller_alias` varchar(100) NOT NULL,
   `ordering` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_controllers`
@@ -1261,15 +1263,15 @@ INSERT INTO `tg_controllers` (`controller_id`, `controller_name`, `controller_ur
 -- Table structure for table `tg_country`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_country` (
-`country_id` int(11) NOT NULL,
+CREATE TABLE `tg_country` (
+  `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `iso_code_2` varchar(2) NOT NULL,
   `iso_code_3` varchar(3) NOT NULL,
   `address_format` text NOT NULL,
   `postcode_required` tinyint(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=252 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_country`
@@ -1327,7 +1329,7 @@ INSERT INTO `tg_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (49, 'Congo', 'CG', 'COG', '', 0, 1),
 (50, 'Cook Islands', 'CK', 'COK', '', 0, 1),
 (51, 'Costa Rica', 'CR', 'CRI', '', 0, 1),
-(52, 'Cote D''Ivoire', 'CI', 'CIV', '', 0, 1),
+(52, 'Cote D\'Ivoire', 'CI', 'CIV', '', 0, 1),
 (53, 'Croatia', 'HR', 'HRV', '', 0, 1),
 (54, 'Cuba', 'CU', 'CUB', '', 0, 1),
 (55, 'Cyprus', 'CY', 'CYP', '', 0, 1),
@@ -1390,7 +1392,7 @@ INSERT INTO `tg_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (113, 'Korea, Republic of', 'KR', 'KOR', '', 0, 1),
 (114, 'Kuwait', 'KW', 'KWT', '', 0, 1),
 (115, 'Kyrgyzstan', 'KG', 'KGZ', '', 0, 1),
-(116, 'Lao People''s Democratic Republic', 'LA', 'LAO', '', 0, 1),
+(116, 'Lao People\'s Democratic Republic', 'LA', 'LAO', '', 0, 1),
 (117, 'Latvia', 'LV', 'LVA', '', 0, 1),
 (118, 'Lebanon', 'LB', 'LBN', '', 0, 1),
 (119, 'Lesotho', 'LS', 'LSO', '', 0, 1),
@@ -1532,8 +1534,8 @@ INSERT INTO `tg_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 -- Table structure for table `tg_event`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_event` (
-`event_id` int(11) unsigned NOT NULL,
+CREATE TABLE `tg_event` (
+  `event_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `event_title` varchar(255) NOT NULL,
@@ -1543,7 +1545,7 @@ CREATE TABLE IF NOT EXISTS `tg_event` (
   `event_is_deleted` tinyint(4) NOT NULL,
   `event_created_time` datetime NOT NULL,
   `event_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_event`
@@ -1560,13 +1562,13 @@ INSERT INTO `tg_event` (`event_id`, `user_id`, `user_role_id`, `event_title`, `e
 -- Table structure for table `tg_gcm_users`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_gcm_users` (
-`id` int(11) NOT NULL,
+CREATE TABLE `tg_gcm_users` (
+  `id` int(11) NOT NULL,
   `gcm_regid` text,
   `name` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=196 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_gcm_users`
@@ -1763,15 +1765,15 @@ INSERT INTO `tg_gcm_users` (`id`, `gcm_regid`, `name`, `email`, `created_at`) VA
 -- Table structure for table `tg_language`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_language` (
-`language_id` int(11) unsigned NOT NULL,
+CREATE TABLE `tg_language` (
+  `language_id` int(11) UNSIGNED NOT NULL,
   `language_title` varchar(255) NOT NULL,
   `language_description` text NOT NULL,
   `language_is_active` tinyint(4) NOT NULL,
   `language_is_deleted` tinyint(4) NOT NULL,
   `language_created_time` datetime NOT NULL,
   `language_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_language`
@@ -1786,13 +1788,13 @@ INSERT INTO `tg_language` (`language_id`, `language_title`, `language_descriptio
 -- Table structure for table `tg_login`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_login` (
-`id` int(11) unsigned NOT NULL,
+CREATE TABLE `tg_login` (
+  `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `hardware_id` varchar(255) NOT NULL,
   `login_status` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=284 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_login`
@@ -2062,8 +2064,8 @@ INSERT INTO `tg_login` (`id`, `user_id`, `user_name`, `hardware_id`, `login_stat
 -- Table structure for table `tg_logo`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_logo` (
-`logo_id` int(11) NOT NULL,
+CREATE TABLE `tg_logo` (
+  `logo_id` int(11) NOT NULL,
   `logo_title` varchar(255) NOT NULL,
   `logo_image` varchar(255) NOT NULL,
   `logo_url` varchar(255) NOT NULL,
@@ -2073,7 +2075,7 @@ CREATE TABLE IF NOT EXISTS `tg_logo` (
   `logo_is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `logo_created_time` datetime NOT NULL,
   `logo_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_logo`
@@ -2091,12 +2093,12 @@ INSERT INTO `tg_logo` (`logo_id`, `logo_title`, `logo_image`, `logo_url`, `logo_
 -- Table structure for table `tg_privileges`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_privileges` (
-`id` int(11) NOT NULL,
+CREATE TABLE `tg_privileges` (
+  `id` int(11) NOT NULL,
   `controller_id` int(11) NOT NULL DEFAULT '0',
   `role_id` int(11) NOT NULL DEFAULT '0',
   `action_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_privileges`
@@ -2152,15 +2154,15 @@ INSERT INTO `tg_privileges` (`id`, `controller_id`, `role_id`, `action_id`) VALU
 -- Table structure for table `tg_role`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_role` (
-`role_id` int(11) NOT NULL,
+CREATE TABLE `tg_role` (
+  `role_id` int(11) NOT NULL,
   `role_title` varchar(255) NOT NULL COMMENT 'Role type',
   `role_description` tinytext NOT NULL,
   `role_is_active` tinyint(4) NOT NULL DEFAULT '1',
   `role_is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `role_created_at` datetime NOT NULL,
   `role_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_role`
@@ -2168,7 +2170,7 @@ CREATE TABLE IF NOT EXISTS `tg_role` (
 
 INSERT INTO `tg_role` (`role_id`, `role_title`, `role_description`, `role_is_active`, `role_is_deleted`, `role_created_at`, `role_updated_time`) VALUES
 (1, 'Administrator', 'Super user who have all permissions.', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Staff/Moderator ', 'Center''s user who have limited permissions', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Staff/Moderator ', 'Center\'s user who have limited permissions', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'Test', '<p>\r\n Test</p>', 0, 0, '0000-00-00 00:00:00', '2017-12-31 09:06:19'),
 (4, 'Hotel / Company', '<p>\r\n Hotel / Company</p>', 1, 0, '0000-00-00 00:00:00', '2017-12-31 10:19:27'),
 (5, 'Artists', '<p>\r\n Artists</p>', 1, 0, '0000-00-00 00:00:00', '2017-12-31 10:19:43');
@@ -2179,12 +2181,12 @@ INSERT INTO `tg_role` (`role_id`, `role_title`, `role_description`, `role_is_act
 -- Table structure for table `tg_sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_sessions` (
+CREATE TABLE `tg_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `user_id` int(11) DEFAULT NULL,
   `ip_address` varchar(16) NOT NULL DEFAULT '0',
   `user_agent` varchar(120) NOT NULL,
-  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `last_activity` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `user_data` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -2193,7 +2195,7 @@ CREATE TABLE IF NOT EXISTS `tg_sessions` (
 --
 
 INSERT INTO `tg_sessions` (`session_id`, `user_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('f3e9b549bae717f7582ca2dc68b0e6e8', 0, '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 1522998358, 'a:4:{s:9:"user_data";s:0:"";s:18:"admin_session_data";a:30:{s:7:"user_id";s:1:"2";s:7:"role_id";s:1:"1";s:11:"hardware_id";s:0:"";s:10:"first_name";s:3:"H2H";s:9:"last_name";s:3:"H2H";s:8:"username";s:5:"admin";s:5:"email";s:13:"h2h@gmail.com";s:13:"user_password";s:65:"b8a83c3567f863928848234ac246ffa3753d4cea34f2df029c973fc298ad8a907";s:7:"address";s:4:"test";s:10:"country_id";s:1:"0";s:7:"zone_id";s:9:"rajasthan";s:9:"city_name";s:6:"jaipur";s:12:"phone_number";s:10:"1234567890";s:8:"location";s:0:"";s:17:"verification_code";s:0:"";s:10:"sms_status";s:0:"";s:12:"get_verified";s:0:"";s:14:"payment_method";s:0:"";s:5:"about";s:0:"";s:8:"user_dob";s:10:"1984-05-05";s:6:"gender";s:0:"";s:13:"profile_image";s:0:"";s:8:"key_code";s:6:"142572";s:8:"auth_key";s:65:"90efb161b2d982e474e9ebef8ebd77ccec7eb60111f02ca6bfc707cd343fe392f";s:10:"last_login";s:10:"1521863339";s:11:"login_count";s:3:"771";s:9:"is_active";s:1:"1";s:10:"is_deleted";s:1:"0";s:12:"created_time";s:19:"1970-01-01 00:00:00";s:12:"updated_time";s:19:"2015-09-23 03:19:54";}s:15:"last_login_time";i:1522988756;s:17:"flash:old:message";s:26:"Page Updated Successfully.";}');
+('f3e9b549bae717f7582ca2dc68b0e6e8', 0, '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 1522998358, 'a:4:{s:9:\"user_data\";s:0:\"\";s:18:\"admin_session_data\";a:30:{s:7:\"user_id\";s:1:\"2\";s:7:\"role_id\";s:1:\"1\";s:11:\"hardware_id\";s:0:\"\";s:10:\"first_name\";s:3:\"H2H\";s:9:\"last_name\";s:3:\"H2H\";s:8:\"username\";s:5:\"admin\";s:5:\"email\";s:13:\"h2h@gmail.com\";s:13:\"user_password\";s:65:\"b8a83c3567f863928848234ac246ffa3753d4cea34f2df029c973fc298ad8a907\";s:7:\"address\";s:4:\"test\";s:10:\"country_id\";s:1:\"0\";s:7:\"zone_id\";s:9:\"rajasthan\";s:9:\"city_name\";s:6:\"jaipur\";s:12:\"phone_number\";s:10:\"1234567890\";s:8:\"location\";s:0:\"\";s:17:\"verification_code\";s:0:\"\";s:10:\"sms_status\";s:0:\"\";s:12:\"get_verified\";s:0:\"\";s:14:\"payment_method\";s:0:\"\";s:5:\"about\";s:0:\"\";s:8:\"user_dob\";s:10:\"1984-05-05\";s:6:\"gender\";s:0:\"\";s:13:\"profile_image\";s:0:\"\";s:8:\"key_code\";s:6:\"142572\";s:8:\"auth_key\";s:65:\"90efb161b2d982e474e9ebef8ebd77ccec7eb60111f02ca6bfc707cd343fe392f\";s:10:\"last_login\";s:10:\"1521863339\";s:11:\"login_count\";s:3:\"771\";s:9:\"is_active\";s:1:\"1\";s:10:\"is_deleted\";s:1:\"0\";s:12:\"created_time\";s:19:\"1970-01-01 00:00:00\";s:12:\"updated_time\";s:19:\"2015-09-23 03:19:54\";}s:15:\"last_login_time\";i:1522988756;s:17:\"flash:old:message\";s:26:\"Page Updated Successfully.\";}');
 
 -- --------------------------------------------------------
 
@@ -2201,8 +2203,8 @@ INSERT INTO `tg_sessions` (`session_id`, `user_id`, `ip_address`, `user_agent`, 
 -- Table structure for table `tg_skill`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_skill` (
-`skill_id` int(11) unsigned NOT NULL,
+CREATE TABLE `tg_skill` (
+  `skill_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `skill_title` varchar(255) NOT NULL,
@@ -2211,7 +2213,7 @@ CREATE TABLE IF NOT EXISTS `tg_skill` (
   `skill_is_deleted` tinyint(4) NOT NULL,
   `skill_created_time` datetime NOT NULL,
   `skill_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_skill`
@@ -2230,8 +2232,8 @@ INSERT INTO `tg_skill` (`skill_id`, `user_id`, `user_role_id`, `skill_title`, `s
 -- Table structure for table `tg_slider_posts`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_slider_posts` (
-`post_id` int(11) NOT NULL,
+CREATE TABLE `tg_slider_posts` (
+  `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `post_slug` varchar(255) CHARACTER SET utf8 NOT NULL,
   `post_name` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -2243,7 +2245,7 @@ CREATE TABLE IF NOT EXISTS `tg_slider_posts` (
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `post_is_deleted` tinyint(4) NOT NULL,
   `post_is_active` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_slider_posts`
@@ -2260,8 +2262,8 @@ INSERT INTO `tg_slider_posts` (`post_id`, `user_id`, `post_slug`, `post_name`, `
 -- Table structure for table `tg_sponsers`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_sponsers` (
-`sponser_id` int(11) NOT NULL,
+CREATE TABLE `tg_sponsers` (
+  `sponser_id` int(11) NOT NULL,
   `sponser_title` varchar(255) NOT NULL,
   `sponser_image` varchar(255) NOT NULL,
   `sponser_url` varchar(255) NOT NULL,
@@ -2269,7 +2271,7 @@ CREATE TABLE IF NOT EXISTS `tg_sponsers` (
   `sponser_is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `sponser_created_time` datetime NOT NULL,
   `sponser_updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_sponsers`
@@ -2285,8 +2287,8 @@ INSERT INTO `tg_sponsers` (`sponser_id`, `sponser_title`, `sponser_image`, `spon
 -- Table structure for table `tg_static_pages`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_static_pages` (
-`page_id` int(11) NOT NULL,
+CREATE TABLE `tg_static_pages` (
+  `page_id` int(11) NOT NULL,
   `page_title` varchar(255) NOT NULL,
   `page_slug` varchar(255) NOT NULL,
   `page_description` text NOT NULL,
@@ -2296,7 +2298,7 @@ CREATE TABLE IF NOT EXISTS `tg_static_pages` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL,
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_static_pages`
@@ -2304,12 +2306,12 @@ CREATE TABLE IF NOT EXISTS `tg_static_pages` (
 
 INSERT INTO `tg_static_pages` (`page_id`, `page_title`, `page_slug`, `page_description`, `is_top`, `page_order`, `is_active`, `is_deleted`, `created_time`, `updated_time`) VALUES
 (1, 'test', 'test', '<p>\r\n tester</p>', 1, 1, 1, 0, '2017-12-31 09:42:52', '2017-12-31 09:42:37'),
-(2, 'About Us', 'about-us', '<div Open Sans", Arial, sans-serif; font-size: 14px;">\r\n  <p >\r\n  &nbsp;</p>\r\n  <div >\r\n   <h2 >\r\n   <br />\r\n   Why do we use it?</h2>\r\n   <p >\r\n   It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\r\n </div>\r\n</div>\r\n <div Open Sans", Arial, sans-serif; font-size: 14px;">\r\n  <h2 >\r\n  &nbsp;</h2>\r\n</div>\r\n<p>\r\n &nbsp;</p>', 1, 1, 1, 0, '2018-04-06 07:51:38', '2018-04-06 06:51:38'),
-(3, 'Contact Us', 'contact-us', '<h  >\r\n Where does it come from?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>', 1, 2, 1, 0, '2018-04-06 07:52:17', '2018-04-06 06:52:17'),
-(4, 'Popular Events', 'popular-events', '<h  >\r\n Where can I get some?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', 1, 3, 1, 0, '2018-04-06 07:53:12', '2018-04-06 06:53:12'),
-(5, 'Blog', 'blog', '<h  >\r\n Why do we use it?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>', 1, 4, 1, 0, '2018-04-06 07:53:36', '2018-04-06 06:53:36'),
-(6, 'FAQ', 'faq', '<h  >\r\n Where can I get some?</h2>\r\n <p Open Sans", Arial, sans-serif; font-size: 14px;">\r\n There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', 1, 2, 1, 0, '2018-04-06 08:06:24', '2018-04-06 07:06:24'),
-(7, 'Help', 'help', '<p>\r\n test</p>\r\n<p>\r\n &nbsp;</p>\r\n<h2>\r\n Where does it come from?</h2>\r\n<p font-size:="" open="">\r\n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\r\n<p font-size:="" open="">\r\n The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p>\r\n &nbsp;</p>', 1, 3, 1, 0, '2018-04-06 08:10:42', '2018-04-06 07:10:11');
+(2, 'About Us', 'about-us', '<div Open Sans\", Arial, sans-serif; font-size: 14px;\">\r\n  <p>&nbsp;</p>\r\n  <div >\r\n   <h2>About Us</h2>\r\n   <p>\r\n   Established over a decade ago, heart to heart event management has carved a niche for itself as the premium name for hotel entertainment as well as corporate, institutional and private events across india. A reputation that we have built by producing some of the largest, innovative and memorable events for leading brands and individuals. Our team of experienced, friendly and highly-professional planners work with you to provide the finest experience possible creating an event that is better than you imagined. We do our best to ensure that when you choose us, you get the best.</br>\r\n   Today, heart to heart event management has grown with offices in bangalore, mumbai, pune and hyderabad, producing some of the most exclusive, high profile events, and luxury brand experiences in india.</p>\r\n   <h2>Our Approach</h2>\r\n   <p>\r\n   Our team of highly knowledgeable, friendly, and professional planners are attentive to your requirements, working with you to produce an unparalleled result right down to the last detail. We aim to make the organization process enjoyable, providing you with the finest client experience.</p>\r\n </div>\r\n</div>', 1, 1, 1, 0, '2018-04-06 07:51:38', '2018-04-06 06:51:38'),
+(3, 'Contact Us', 'contact-us', '<h  >\r\n Where does it come from?</h2>\r\n <p Open Sans\", Arial, sans-serif; font-size: 14px;\">\r\n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>', 1, 2, 1, 0, '2018-04-06 07:52:17', '2018-04-06 06:52:17'),
+(4, 'Popular Events', 'popular-events', '<h  >\r\n Where can I get some?</h2>\r\n <p Open Sans\", Arial, sans-serif; font-size: 14px;\">\r\n There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', 1, 3, 1, 0, '2018-04-06 07:53:12', '2018-04-06 06:53:12'),
+(5, 'Blog', 'blog', '<h  >\r\n Why do we use it?</h2>\r\n <p Open Sans\", Arial, sans-serif; font-size: 14px;\">\r\n It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>', 1, 4, 1, 0, '2018-04-06 07:53:36', '2018-04-06 06:53:36'),
+(6, 'FAQ', 'faq', '<h  >\r\n Where can I get some?</h2>\r\n <p Open Sans\", Arial, sans-serif; font-size: 14px;\">\r\n There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', 1, 2, 1, 0, '2018-04-06 08:06:24', '2018-04-06 07:06:24'),
+(7, 'Help', 'help', '<p>\r\n test</p>\r\n<p>\r\n &nbsp;</p>\r\n<h2>\r\n Where does it come from?</h2>\r\n<p font-size:=\"\" open=\"\">\r\n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\r\n<p font-size:=\"\" open=\"\">\r\n The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p>\r\n &nbsp;</p>', 1, 3, 1, 0, '2018-04-06 08:10:42', '2018-04-06 07:10:11');
 
 -- --------------------------------------------------------
 
@@ -2317,8 +2319,8 @@ INSERT INTO `tg_static_pages` (`page_id`, `page_title`, `page_slug`, `page_descr
 -- Table structure for table `tg_users`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_users` (
-`user_id` int(11) NOT NULL,
+CREATE TABLE `tg_users` (
+  `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `hardware_id` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -2348,7 +2350,7 @@ CREATE TABLE IF NOT EXISTS `tg_users` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL,
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_users`
@@ -2378,8 +2380,8 @@ INSERT INTO `tg_users` (`user_id`, `role_id`, `hardware_id`, `first_name`, `last
 -- Table structure for table `tg_user_info`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_user_info` (
-`user_id` int(11) NOT NULL,
+CREATE TABLE `tg_user_info` (
+  `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `imei` varchar(255) NOT NULL,
@@ -2388,7 +2390,7 @@ CREATE TABLE IF NOT EXISTS `tg_user_info` (
   `user_is_deleted` tinyint(4) NOT NULL,
   `created_at` varchar(255) NOT NULL,
   `updated_at` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=231 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tg_user_info`
@@ -2632,7 +2634,7 @@ INSERT INTO `tg_user_info` (`user_id`, `name`, `address`, `imei`, `mobile`, `use
 -- Table structure for table `tg_user_logo_info`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_user_logo_info` (
+CREATE TABLE `tg_user_logo_info` (
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `user_logo_info` text NOT NULL,
@@ -2645,8 +2647,8 @@ CREATE TABLE IF NOT EXISTS `tg_user_logo_info` (
 --
 
 INSERT INTO `tg_user_logo_info` (`user_id`, `user_role_id`, `user_logo_info`, `created_time`, `updated_time`) VALUES
-(1, 1, '[{"status":true,"originalName":"500_8.jpg","generatedName":"14284d7429ba8d3a615437bfdfbf2150.jpg"}]', '0000-00-00 00:00:00', '2018-04-25 10:45:47'),
-(3, 2, '[{"status":true,"originalName":"logo3.jpg","generatedName":"561d3eb5ee3403039286f9463060bbda.jpg"}]', '0000-00-00 00:00:00', '2018-04-25 11:28:14');
+(1, 1, '[{\"status\":true,\"originalName\":\"500_8.jpg\",\"generatedName\":\"14284d7429ba8d3a615437bfdfbf2150.jpg\"}]', '0000-00-00 00:00:00', '2018-04-25 10:45:47'),
+(3, 2, '[{\"status\":true,\"originalName\":\"logo3.jpg\",\"generatedName\":\"561d3eb5ee3403039286f9463060bbda.jpg\"}]', '0000-00-00 00:00:00', '2018-04-25 11:28:14');
 
 -- --------------------------------------------------------
 
@@ -2654,7 +2656,7 @@ INSERT INTO `tg_user_logo_info` (`user_id`, `user_role_id`, `user_logo_info`, `c
 -- Table structure for table `tg_user_other_info`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_user_other_info` (
+CREATE TABLE `tg_user_other_info` (
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `user_artist_category` text NOT NULL,
@@ -2671,7 +2673,7 @@ CREATE TABLE IF NOT EXISTS `tg_user_other_info` (
 --
 
 INSERT INTO `tg_user_other_info` (`user_id`, `user_role_id`, `user_artist_category`, `user_artist_language`, `user_artist_physical_desc`, `user_artist_convince_travel`, `user_artist_convince_passport`, `created_time`, `updated_time`) VALUES
-(1, 1, '[{"artist_category_id":"1"}]', '[{"id":"1","itemName":"english"}]', '{"height":"34","weight":"54","complexion":"test","bodyType":"test"}', 'no', 'yes', '0000-00-00 00:00:00', '2018-04-24 12:01:43'),
+(1, 1, '[{\"artist_category_id\":\"1\"}]', '[{\"id\":\"1\",\"itemName\":\"english\"}]', '{\"height\":\"34\",\"weight\":\"54\",\"complexion\":\"test\",\"bodyType\":\"test\"}', 'no', 'yes', '0000-00-00 00:00:00', '2018-04-24 12:01:43'),
 (2, 2, '', '', '', '', '', '0000-00-00 00:00:00', '2018-04-24 09:54:40');
 
 -- --------------------------------------------------------
@@ -2680,7 +2682,7 @@ INSERT INTO `tg_user_other_info` (`user_id`, `user_role_id`, `user_artist_catego
 -- Table structure for table `tg_user_personal_info`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_user_personal_info` (
+CREATE TABLE `tg_user_personal_info` (
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `user_profile_title` varchar(255) NOT NULL,
@@ -2703,7 +2705,7 @@ INSERT INTO `tg_user_personal_info` (`user_id`, `user_role_id`, `user_profile_ti
 -- Table structure for table `tg_user_slider_images`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_user_slider_images` (
+CREATE TABLE `tg_user_slider_images` (
   `user_id` int(11) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `user_slider_images` text NOT NULL,
@@ -2716,7 +2718,7 @@ CREATE TABLE IF NOT EXISTS `tg_user_slider_images` (
 --
 
 INSERT INTO `tg_user_slider_images` (`user_id`, `user_role_id`, `user_slider_images`, `created_time`, `updated_time`) VALUES
-(1, 1, '[{"status":true,"originalName":"hotelsscroll1.jpg","generatedName":"4c767987d9fee82ff0eb36872ce86cfd.jpg"},{"status":true,"originalName":"hotelsscroll2.jpg","generatedName":"05f6c4cbeca75f1ed7dbb478ce177b3e.jpg"}]', '0000-00-00 00:00:00', '2018-04-25 11:35:30'),
+(1, 1, '[{\"status\":true,\"originalName\":\"hotelsscroll1.jpg\",\"generatedName\":\"4c767987d9fee82ff0eb36872ce86cfd.jpg\"},{\"status\":true,\"originalName\":\"hotelsscroll2.jpg\",\"generatedName\":\"05f6c4cbeca75f1ed7dbb478ce177b3e.jpg\"}]', '0000-00-00 00:00:00', '2018-04-25 11:35:30'),
 (3, 2, '', '0000-00-00 00:00:00', '2018-04-25 04:25:06');
 
 -- --------------------------------------------------------
@@ -2725,15 +2727,15 @@ INSERT INTO `tg_user_slider_images` (`user_id`, `user_role_id`, `user_slider_ima
 -- Table structure for table `tg_widget`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_widget` (
-`widget_id` int(11) unsigned NOT NULL,
+CREATE TABLE `tg_widget` (
+  `widget_id` int(11) UNSIGNED NOT NULL,
   `widget_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `widget_description` text COLLATE utf8_unicode_ci NOT NULL,
   `widget_is_active` tinyint(4) NOT NULL,
   `widget_is_deleted` tinyint(4) NOT NULL,
   `widget_created_at` datetime NOT NULL,
   `widget_updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tg_widget`
@@ -2753,13 +2755,13 @@ INSERT INTO `tg_widget` (`widget_id`, `widget_name`, `widget_description`, `widg
 -- Table structure for table `tg_zone`
 --
 
-CREATE TABLE IF NOT EXISTS `tg_zone` (
-`zone_id` int(11) NOT NULL,
+CREATE TABLE `tg_zone` (
+  `zone_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `code` varchar(32) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4033 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tg_zone`
@@ -2863,7 +2865,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (95, 3, 'Medea', 'MED', 1),
 (96, 3, 'Mila', 'MIL', 1),
 (97, 3, 'Mostaganem', 'MOS', 1),
-(98, 3, 'M''Sila', 'MSI', 1),
+(98, 3, 'M\'Sila', 'MSI', 1),
 (99, 3, 'Naama', 'NAA', 1),
 (100, 3, 'Oran', 'ORA', 1),
 (101, 3, 'Ouargla', 'OUA', 1),
@@ -2883,7 +2885,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (115, 3, 'Tizi Ouzou', 'TOU', 1),
 (116, 3, 'Tlemcen', 'TLE', 1),
 (117, 4, 'Eastern', 'E', 1),
-(118, 4, 'Manu''a', 'M', 1),
+(118, 4, 'Manu\'a', 'M', 1),
 (119, 4, 'Rose Island', 'R', 1),
 (120, 4, 'Swains Island', 'S', 1),
 (121, 4, 'Western', 'W', 1),
@@ -2948,13 +2950,13 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (180, 11, 'Aragatsotn', 'AGT', 1),
 (181, 11, 'Ararat', 'ARR', 1),
 (182, 11, 'Armavir', 'ARM', 1),
-(183, 11, 'Geghark''unik''', 'GEG', 1),
-(184, 11, 'Kotayk''', 'KOT', 1),
+(183, 11, 'Geghark\'unik\'', 'GEG', 1),
+(184, 11, 'Kotayk\'', 'KOT', 1),
 (185, 11, 'Lorri', 'LOR', 1),
 (186, 11, 'Shirak', 'SHI', 1),
-(187, 11, 'Syunik''', 'SYU', 1),
+(187, 11, 'Syunik\'', 'SYU', 1),
 (188, 11, 'Tavush', 'TAV', 1),
-(189, 11, 'Vayots'' Dzor', 'VAY', 1),
+(189, 11, 'Vayots\' Dzor', 'VAY', 1),
 (190, 11, 'Yerevan', 'YER', 1),
 (191, 13, 'Australian Capital Territory', 'ACT', 1),
 (192, 13, 'New South Wales', 'NSW', 1),
@@ -3068,7 +3070,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (300, 16, 'Long Island', 'LNG', 1),
 (301, 16, 'Mangrove Cay', 'MAN', 1),
 (302, 16, 'Mayaguana', 'MAY', 1),
-(303, 16, 'Moore''s Island', 'MOO', 1),
+(303, 16, 'Moore\'s Island', 'MOO', 1),
 (304, 16, 'North Abaco', 'NAB', 1),
 (305, 16, 'North Andros', 'NAN', 1),
 (306, 16, 'North Eleuthera', 'NEL', 1),
@@ -3103,7 +3105,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (335, 19, 'Saint Philip', 'PHI', 1),
 (336, 19, 'Saint Thomas', 'THO', 1),
 (337, 20, 'Brestskaya (Brest)', 'BR', 1),
-(338, 20, 'Homyel''skaya (Homyel'')', 'HO', 1),
+(338, 20, 'Homyel\'skaya (Homyel\')', 'HO', 1),
 (339, 20, 'Horad Minsk', 'HM', 1),
 (340, 20, 'Hrodzyenskaya (Hrodna)', 'HR', 1),
 (341, 20, 'Mahilyowskaya (Mahilyow)', 'MA', 1),
@@ -3143,9 +3145,9 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (375, 24, 'Paget', 'PG', 1),
 (376, 24, 'Pembroke', 'PB', 1),
 (377, 24, 'Saint George City', 'GC', 1),
-(378, 24, 'Saint George''s', 'SG', 1),
+(378, 24, 'Saint George\'s', 'SG', 1),
 (379, 24, 'Sandys', 'SA', 1),
-(380, 24, 'Smith''s', 'SM', 1),
+(380, 24, 'Smith\'s', 'SM', 1),
 (381, 24, 'Southampton', 'SH', 1),
 (382, 24, 'Warwick', 'WA', 1),
 (383, 25, 'Bumthang', 'BUM', 1),
@@ -3414,7 +3416,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (646, 41, 'Mambere-KadeÔ', 'MKD', 1),
 (647, 41, 'Mbomou', 'MBO', 1),
 (648, 41, 'Nana-Mambere', 'NMM', 1),
-(649, 41, 'Ombella-M''Poko', 'OMP', 1),
+(649, 41, 'Ombella-M\'Poko', 'OMP', 1),
 (650, 41, 'Ouaka', 'OUK', 1),
 (651, 41, 'Ouham', 'OUH', 1),
 (652, 41, 'Ouham-Pende', 'OPE', 1),
@@ -3442,7 +3444,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (674, 43, 'Atacama', 'AT', 1),
 (675, 43, 'Bio-Bio', 'BI', 1),
 (676, 43, 'Coquimbo', 'CO', 1),
-(677, 43, 'Libertador General Bernardo O''Hi', 'LI', 1),
+(677, 43, 'Libertador General Bernardo O\'Hi', 'LI', 1),
 (678, 43, 'Los Lagos', 'LL', 1),
 (679, 43, 'Magallanes y de la Antartica Chi', 'MA', 1),
 (680, 43, 'Maule', 'ML', 1),
@@ -3684,7 +3686,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (916, 57, 'Vejle', 'VK', 1),
 (917, 57, 'Vestj&aelig;lland', 'VJ', 1),
 (918, 57, 'Viborg', 'VB', 1),
-(919, 58, '''Ali Sabih', 'S', 1),
+(919, 58, '\'Ali Sabih', 'S', 1),
 (920, 58, 'Dikhil', 'K', 1),
 (921, 58, 'Djibouti', 'J', 1),
 (922, 58, 'Obock', 'O', 1),
@@ -3772,7 +3774,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1004, 63, 'Al Fayyum', 'FYM', 1),
 (1005, 63, 'Al Gharbiyah', 'GBY', 1),
 (1006, 63, 'Al Iskandariyah', 'IDR', 1),
-(1007, 63, 'Al Isma''iliyah', 'IML', 1),
+(1007, 63, 'Al Isma\'iliyah', 'IML', 1),
 (1008, 63, 'Al Jizah', 'JZH', 1),
 (1009, 63, 'Al Minufiyah', 'MFY', 1),
 (1010, 63, 'Al Minya', 'MNY', 1),
@@ -3784,13 +3786,13 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1016, 63, 'Aswan', 'ASW', 1),
 (1017, 63, 'Asyut', 'ASY', 1),
 (1018, 63, 'Bani Suwayf', 'BSW', 1),
-(1019, 63, 'Bur Sa''id', 'BSD', 1),
+(1019, 63, 'Bur Sa\'id', 'BSD', 1),
 (1020, 63, 'Dumyat', 'DMY', 1),
-(1021, 63, 'Janub Sina''', 'JNS', 1),
+(1021, 63, 'Janub Sina\'', 'JNS', 1),
 (1022, 63, 'Kafr ash Shaykh', 'KSH', 1),
 (1023, 63, 'Matruh', 'MAT', 1),
 (1024, 63, 'Qina', 'QIN', 1),
-(1025, 63, 'Shamal Sina''', 'SHS', 1),
+(1025, 63, 'Shamal Sina\'', 'SHS', 1),
 (1026, 63, 'Suhaj', 'SUH', 1),
 (1027, 64, 'Ahuachapan', 'AH', 1),
 (1028, 64, 'Cabanas', 'CA', 1),
@@ -3951,7 +3953,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1206, 74, 'Hauts de Seine', '92', 1),
 (1207, 74, 'Seine St-Denis', '93', 1),
 (1208, 74, 'Val de Marne', '94', 1),
-(1209, 74, 'Val d''Oise', '95', 1),
+(1209, 74, 'Val d\'Oise', '95', 1),
 (1210, 76, 'Archipel des Marquises', 'M', 1),
 (1211, 76, 'Archipel des Tuamotu', 'T', 1),
 (1212, 76, 'Archipel des Tubuai', 'I', 1),
@@ -4123,7 +4125,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1378, 92, 'Upper Takutu-Upper Essequibo', 'UT', 1),
 (1379, 93, 'Artibonite', 'AR', 1),
 (1380, 93, 'Centre', 'CE', 1),
-(1381, 93, 'Grand''Anse', 'GA', 1),
+(1381, 93, 'Grand\'Anse', 'GA', 1),
 (1382, 93, 'Nord', 'ND', 1),
 (1383, 93, 'Nord-Est', 'NE', 1),
 (1384, 93, 'Nord-Ouest', 'NO', 1),
@@ -4300,9 +4302,9 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1555, 101, 'Bushehr', 'BSH', 1),
 (1556, 101, 'Fars', 'FAR', 1),
 (1557, 101, 'Hormozgan', 'HRM', 1),
-(1558, 101, 'Sistan and Baluchistan', 'SBL', 1);
+(1558, 101, 'Sistan and Baluchistan', 'SBL', 1),
+(1559, 101, 'Kerman', 'KRB', 1);
 INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
-(1559, 101, 'Kerman', 'KRB', 1),
 (1560, 101, 'Yazd', 'YZD', 1),
 (1561, 101, 'Esfahan', 'EFH', 1),
 (1562, 101, 'Semnan', 'SMN', 1),
@@ -4327,7 +4329,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1581, 102, 'Ninawa', 'NN', 1),
 (1582, 102, 'Dahuk', 'DH', 1),
 (1583, 102, 'Arbil', 'AL', 1),
-(1584, 102, 'At Ta''mim', 'TM', 1),
+(1584, 102, 'At Ta\'mim', 'TM', 1),
 (1585, 102, 'As Sulaymaniyah', 'SL', 1),
 (1586, 103, 'Carlow', 'CA', 1),
 (1587, 103, 'Cavan', 'CV', 1),
@@ -4355,8 +4357,8 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1609, 103, 'Westmeath', 'WE', 1),
 (1610, 103, 'Wexford', 'WX', 1),
 (1611, 103, 'Wicklow', 'WI', 1),
-(1612, 104, 'Be''er Sheva', 'BS', 1),
-(1613, 104, 'Bika''at Hayarden', 'BH', 1),
+(1612, 104, 'Be\'er Sheva', 'BS', 1),
+(1613, 104, 'Bika\'at Hayarden', 'BH', 1),
 (1614, 104, 'Eilat and Arava', 'EA', 1),
 (1615, 104, 'Galil', 'GA', 1),
 (1616, 104, 'Haifa', 'HA', 1),
@@ -4427,17 +4429,17 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1701, 107, 'Yamagata', 'YA', 1),
 (1702, 107, 'Yamaguchi', 'YM', 1),
 (1703, 107, 'Yamanashi', 'YN', 1),
-(1704, 108, '''Amman', 'AM', 1),
+(1704, 108, '\'Amman', 'AM', 1),
 (1705, 108, 'Ajlun', 'AJ', 1),
-(1706, 108, 'Al ''Aqabah', 'AA', 1),
-(1707, 108, 'Al Balqa''', 'AB', 1),
+(1706, 108, 'Al \'Aqabah', 'AA', 1),
+(1707, 108, 'Al Balqa\'', 'AB', 1),
 (1708, 108, 'Al Karak', 'AK', 1),
 (1709, 108, 'Al Mafraq', 'AL', 1),
 (1710, 108, 'At Tafilah', 'AT', 1),
-(1711, 108, 'Az Zarqa''', 'AZ', 1),
+(1711, 108, 'Az Zarqa\'', 'AZ', 1),
 (1712, 108, 'Irbid', 'IR', 1),
 (1713, 108, 'Jarash', 'JA', 1),
-(1714, 108, 'Ma''an', 'MA', 1),
+(1714, 108, 'Ma\'an', 'MA', 1),
 (1715, 108, 'Madaba', 'MD', 1),
 (1716, 109, 'Almaty', 'AL', 1),
 (1717, 109, 'Almaty City', 'AC', 1),
@@ -4491,30 +4493,30 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1765, 112, 'Hwanghae-bukto', 'HWB', 1),
 (1766, 112, 'Hwanghae-namdo', 'HWN', 1),
 (1767, 112, 'Kangwon-do', 'KAN', 1),
-(1768, 112, 'P''yongan-bukto', 'PYB', 1),
-(1769, 112, 'P''yongan-namdo', 'PYN', 1),
+(1768, 112, 'P\'yongan-bukto', 'PYB', 1),
+(1769, 112, 'P\'yongan-namdo', 'PYN', 1),
 (1770, 112, 'Ryanggang-do (Yanggang-do)', 'YAN', 1),
 (1771, 112, 'Rason Directly Governed City', 'NAJ', 1),
-(1772, 112, 'P''yongyang Special City', 'PYO', 1),
-(1773, 113, 'Ch''ungch''ong-bukto', 'CO', 1),
-(1774, 113, 'Ch''ungch''ong-namdo', 'CH', 1),
+(1772, 112, 'P\'yongyang Special City', 'PYO', 1),
+(1773, 113, 'Ch\'ungch\'ong-bukto', 'CO', 1),
+(1774, 113, 'Ch\'ungch\'ong-namdo', 'CH', 1),
 (1775, 113, 'Cheju-do', 'CD', 1),
 (1776, 113, 'Cholla-bukto', 'CB', 1),
 (1777, 113, 'Cholla-namdo', 'CN', 1),
-(1778, 113, 'Inch''on-gwangyoksi', 'IG', 1),
+(1778, 113, 'Inch\'on-gwangyoksi', 'IG', 1),
 (1779, 113, 'Kangwon-do', 'KA', 1),
 (1780, 113, 'Kwangju-gwangyoksi', 'KG', 1),
 (1781, 113, 'Kyonggi-do', 'KD', 1),
 (1782, 113, 'Kyongsang-bukto', 'KB', 1),
 (1783, 113, 'Kyongsang-namdo', 'KN', 1),
 (1784, 113, 'Pusan-gwangyoksi', 'PG', 1),
-(1785, 113, 'Soul-t''ukpyolsi', 'SO', 1),
+(1785, 113, 'Soul-t\'ukpyolsi', 'SO', 1),
 (1786, 113, 'Taegu-gwangyoksi', 'TA', 1),
 (1787, 113, 'Taejon-gwangyoksi', 'TG', 1),
-(1788, 114, 'Al ''Asimah', 'AL', 1),
+(1788, 114, 'Al \'Asimah', 'AL', 1),
 (1789, 114, 'Al Ahmadi', 'AA', 1),
 (1790, 114, 'Al Farwaniyah', 'AF', 1),
-(1791, 114, 'Al Jahra''', 'AJ', 1),
+(1791, 114, 'Al Jahra\'', 'AJ', 1),
 (1792, 114, 'Hawalli', 'HA', 1),
 (1793, 115, 'Bishkek', 'GB', 1),
 (1794, 115, 'Batken', 'B', 1),
@@ -4580,9 +4582,9 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1854, 119, 'Leribe', 'LE', 1),
 (1855, 119, 'Mafeteng', 'MF', 1),
 (1856, 119, 'Maseru', 'MS', 1),
-(1857, 119, 'Mohale''s Hoek', 'MH', 1),
+(1857, 119, 'Mohale\'s Hoek', 'MH', 1),
 (1858, 119, 'Mokhotlong', 'MK', 1),
-(1859, 119, 'Qacha''s Nek', 'QN', 1),
+(1859, 119, 'Qacha\'s Nek', 'QN', 1),
 (1860, 119, 'Quthing', 'QT', 1),
 (1861, 119, 'Thaba-Tseka', 'TT', 1),
 (1862, 120, 'Bomi', 'BI', 1),
@@ -4599,14 +4601,14 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1873, 120, 'River Cess', 'RC', 1),
 (1874, 120, 'Sinoe', 'SN', 1),
 (1875, 121, 'Ajdabiya', 'AJ', 1),
-(1876, 121, 'Al ''Aziziyah', 'AZ', 1),
+(1876, 121, 'Al \'Aziziyah', 'AZ', 1),
 (1877, 121, 'Al Fatih', 'FA', 1),
 (1878, 121, 'Al Jabal al Akhdar', 'JA', 1),
 (1879, 121, 'Al Jufrah', 'JU', 1),
 (1880, 121, 'Al Khums', 'KH', 1),
 (1881, 121, 'Al Kufrah', 'KU', 1),
 (1882, 121, 'An Nuqat al Khams', 'NK', 1),
-(1883, 121, 'Ash Shati''', 'AS', 1),
+(1883, 121, 'Ash Shati\'', 'AS', 1),
 (1884, 121, 'Awbari', 'AW', 1),
 (1885, 121, 'Az Zawiyah', 'ZA', 1),
 (1886, 121, 'Banghazi', 'BA', 1),
@@ -5073,7 +5075,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2347, 153, 'Coromandel', 'COR', 1),
 (2348, 153, 'Gisborne', 'GIS', 1),
 (2349, 153, 'Fiordland', 'FIO', 1),
-(2350, 153, 'Hawke''s Bay', 'HKB', 1),
+(2350, 153, 'Hawke\'s Bay', 'HKB', 1),
 (2351, 153, 'Marlborough', 'MBH', 1),
 (2352, 153, 'Manawatu-Wanganui', 'MWT', 1),
 (2353, 153, 'Mt Cook-Mackenzie', 'MCM', 1),
@@ -5400,7 +5402,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2674, 173, 'Ar Rayyan', 'RN', 1),
 (2675, 173, 'Jarayan al Batinah', 'JB', 1),
 (2676, 173, 'Madinat ash Shamal', 'MS', 1),
-(2677, 173, 'Umm Sa''id', 'UD', 1),
+(2677, 173, 'Umm Sa\'id', 'UD', 1),
 (2678, 173, 'Umm Salal', 'UL', 1),
 (2679, 175, 'Alba', 'AB', 1),
 (2680, 175, 'Arad', 'AR', 1),
@@ -5518,9 +5520,9 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2792, 176, 'Tver', 'TV', 1),
 (2793, 176, 'Tyumen', 'TY', 1),
 (2794, 176, 'Ufa', 'UF', 1),
-(2795, 176, 'Ul''yanovsk', 'UL', 1),
+(2795, 176, 'Ul\'yanovsk', 'UL', 1),
 (2796, 176, 'Ulan-Ude', 'UU', 1),
-(2797, 176, 'Ust''-Ordynskiy', 'US', 1),
+(2797, 176, 'Ust\'-Ordynskiy', 'US', 1),
 (2798, 176, 'Vladikavkaz', 'VL', 1),
 (2799, 176, 'Vladimir', 'VA', 1),
 (2800, 176, 'Vladivostok', 'VV', 1),
@@ -5575,16 +5577,16 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2849, 180, 'Saint David', 'D', 1),
 (2850, 180, 'Saint George', 'G', 1),
 (2851, 180, 'Saint Patrick', 'P', 1),
-(2852, 181, 'A''ana', 'AN', 1),
+(2852, 181, 'A\'ana', 'AN', 1),
 (2853, 181, 'Aiga-i-le-Tai', 'AI', 1),
 (2854, 181, 'Atua', 'AT', 1),
-(2855, 181, 'Fa''asaleleaga', 'FA', 1),
-(2856, 181, 'Gaga''emauga', 'GE', 1),
+(2855, 181, 'Fa\'asaleleaga', 'FA', 1),
+(2856, 181, 'Gaga\'emauga', 'GE', 1),
 (2857, 181, 'Gagaifomauga', 'GF', 1),
 (2858, 181, 'Palauli', 'PA', 1),
-(2859, 181, 'Satupa''itea', 'SA', 1),
+(2859, 181, 'Satupa\'itea', 'SA', 1),
 (2860, 181, 'Tuamasaga', 'TU', 1),
-(2861, 181, 'Va''a-o-Fonoti', 'VF', 1),
+(2861, 181, 'Va\'a-o-Fonoti', 'VF', 1),
 (2862, 181, 'Vaisigano', 'VS', 1),
 (2863, 182, 'Acquaviva', 'AC', 1),
 (2864, 182, 'Borgo Maggiore', 'BM', 1),
@@ -5604,8 +5606,8 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2878, 184, 'Al Qasim', 'QS', 1),
 (2879, 184, 'Ar Riyad', 'RD', 1),
 (2880, 184, 'Ash Sharqiyah (Eastern)', 'AQ', 1),
-(2881, 184, '''Asir', 'AS', 1),
-(2882, 184, 'Ha''il', 'HL', 1),
+(2881, 184, '\'Asir', 'AS', 1),
+(2882, 184, 'Ha\'il', 'HL', 1),
 (2883, 184, 'Jizan', 'JZ', 1),
 (2884, 184, 'Makkah', 'ML', 1),
 (2885, 184, 'Najran', 'NR', 1),
@@ -5633,8 +5635,8 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (2907, 186, 'Bel Ombre', 'BO', 1),
 (2908, 186, 'Cascade', 'CA', 1),
 (2909, 186, 'Glacis', 'GL', 1),
-(2910, 186, 'Grand'' Anse (on Mahe)', 'GM', 1),
-(2911, 186, 'Grand'' Anse (on Praslin)', 'GP', 1),
+(2910, 186, 'Grand\' Anse (on Mahe)', 'GM', 1),
+(2911, 186, 'Grand\' Anse (on Praslin)', 'GP', 1),
 (2912, 186, 'La Digue', 'DG', 1),
 (2913, 186, 'La Riviere Anglaise', 'RA', 1),
 (2914, 186, 'Mont Buxton', 'MB', 1),
@@ -5757,7 +5759,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3031, 197, 'Ascension', 'A', 1),
 (3032, 197, 'Saint Helena', 'S', 1),
 (3033, 197, 'Tristan da Cunha', 'T', 1),
-(3034, 199, 'A''ali an Nil', 'ANL', 1),
+(3034, 199, 'A\'ali an Nil', 'ANL', 1),
 (3035, 199, 'Al Bahr al Ahmar', 'BAM', 1),
 (3036, 199, 'Al Buhayrat', 'BRT', 1),
 (3037, 199, 'Al Jazirah', 'JZR', 1),
@@ -5768,7 +5770,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3042, 199, 'An Nil al Azraq', 'ANZ', 1),
 (3043, 199, 'Ash Shamaliyah', 'ASH', 1),
 (3044, 199, 'Bahr al Jabal', 'BJA', 1),
-(3045, 199, 'Gharb al Istiwa''iyah', 'GIS', 1),
+(3045, 199, 'Gharb al Istiwa\'iyah', 'GIS', 1),
 (3046, 199, 'Gharb Bahr al Ghazal', 'GBG', 1),
 (3047, 199, 'Gharb Darfur', 'GDA', 1),
 (3048, 199, 'Gharb Kurdufan', 'GKU', 1),
@@ -5780,7 +5782,7 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3054, 199, 'Shamal Bahr al Ghazal', 'SBG', 1),
 (3055, 199, 'Shamal Darfur', 'SDA', 1),
 (3056, 199, 'Shamal Kurdufan', 'SKU', 1),
-(3057, 199, 'Sharq al Istiwa''iyah', 'SIS', 1),
+(3057, 199, 'Sharq al Istiwa\'iyah', 'SIS', 1),
 (3058, 199, 'Sinnar', 'SNR', 1),
 (3059, 199, 'Warab', 'WRB', 1),
 (3060, 200, 'Brokopondo', 'BR', 1),
@@ -5800,9 +5802,9 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3074, 203, 'Blekinge', 'K', 1),
 (3075, 203, 'Dalarna', 'W', 1),
 (3076, 203, 'G&auml;vleborg', 'X', 1),
-(3077, 203, 'Gotland', 'I', 1);
+(3077, 203, 'Gotland', 'I', 1),
+(3078, 203, 'Halland', 'N', 1);
 INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
-(3078, 203, 'Halland', 'N', 1),
 (3079, 203, 'J&auml;mtland', 'Z', 1),
 (3080, 203, 'J&ouml;nk&ouml;ping', 'F', 1),
 (3081, 203, 'Kalmar', 'H', 1),
@@ -5868,22 +5870,22 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3141, 206, 'Kin-men', 'KM', 1),
 (3142, 206, 'Lien-chiang', 'LC', 1),
 (3143, 206, 'Miao-li', 'ML', 1),
-(3144, 206, 'Nan-t''ou', 'NT', 1),
-(3145, 206, 'P''eng-hu', 'PH', 1),
-(3146, 206, 'P''ing-tung', 'PT', 1),
-(3147, 206, 'T''ai-chung', 'TG', 1),
-(3148, 206, 'T''ai-nan', 'TA', 1),
-(3149, 206, 'T''ai-pei county', 'TP', 1),
-(3150, 206, 'T''ai-tung', 'TT', 1),
-(3151, 206, 'T''ao-yuan', 'TY', 1),
+(3144, 206, 'Nan-t\'ou', 'NT', 1),
+(3145, 206, 'P\'eng-hu', 'PH', 1),
+(3146, 206, 'P\'ing-tung', 'PT', 1),
+(3147, 206, 'T\'ai-chung', 'TG', 1),
+(3148, 206, 'T\'ai-nan', 'TA', 1),
+(3149, 206, 'T\'ai-pei county', 'TP', 1),
+(3150, 206, 'T\'ai-tung', 'TT', 1),
+(3151, 206, 'T\'ao-yuan', 'TY', 1),
 (3152, 206, 'Yun-lin', 'YL', 1),
 (3153, 206, 'Chia-i city', 'CC', 1),
 (3154, 206, 'Chi-lung', 'CL', 1),
 (3155, 206, 'Hsin-chu', 'HC', 1),
-(3156, 206, 'T''ai-chung', 'TH', 1),
-(3157, 206, 'T''ai-nan', 'TN', 1),
+(3156, 206, 'T\'ai-chung', 'TH', 1),
+(3157, 206, 'T\'ai-nan', 'TN', 1),
 (3158, 206, 'Kao-hsiung city', 'KC', 1),
-(3159, 206, 'T''ai-pei city', 'TC', 1),
+(3159, 206, 'T\'ai-pei city', 'TC', 1),
 (3160, 207, 'Gorno-Badakhstan', 'GB', 1),
 (3161, 207, 'Khatlon', 'KT', 1),
 (3162, 207, 'Sughd', 'SU', 1),
@@ -5997,9 +5999,9 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3270, 211, 'Atafu', 'A', 1),
 (3271, 211, 'Fakaofo', 'F', 1),
 (3272, 211, 'Nukunonu', 'N', 1),
-(3273, 212, 'Ha''apai', 'H', 1),
+(3273, 212, 'Ha\'apai', 'H', 1),
 (3274, 212, 'Tongatapu', 'T', 1),
-(3275, 212, 'Vava''u', 'V', 1),
+(3275, 212, 'Vava\'u', 'V', 1),
 (3276, 213, 'Couva/Tabaquite/Talparo', 'CT', 1),
 (3277, 213, 'Diego Martin', 'DM', 1),
 (3278, 213, 'Mayaro/Rio Claro', 'MR', 1),
@@ -6208,34 +6210,34 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3481, 220, 'Chernihiv', 'CH', 1),
 (3482, 220, 'Chernivtsi', 'CV', 1),
 (3483, 220, 'Crimea', 'CR', 1),
-(3484, 220, 'Dnipropetrovs''k', 'DN', 1),
-(3485, 220, 'Donets''k', 'DO', 1),
-(3486, 220, 'Ivano-Frankivs''k', 'IV', 1),
+(3484, 220, 'Dnipropetrovs\'k', 'DN', 1),
+(3485, 220, 'Donets\'k', 'DO', 1),
+(3486, 220, 'Ivano-Frankivs\'k', 'IV', 1),
 (3487, 220, 'Kharkiv Kherson', 'KL', 1),
-(3488, 220, 'Khmel''nyts''kyy', 'KM', 1),
+(3488, 220, 'Khmel\'nyts\'kyy', 'KM', 1),
 (3489, 220, 'Kirovohrad', 'KR', 1),
 (3490, 220, 'Kiev', 'KV', 1),
 (3491, 220, 'Kyyiv', 'KY', 1),
-(3492, 220, 'Luhans''k', 'LU', 1),
-(3493, 220, 'L''viv', 'LV', 1),
+(3492, 220, 'Luhans\'k', 'LU', 1),
+(3493, 220, 'L\'viv', 'LV', 1),
 (3494, 220, 'Mykolayiv', 'MY', 1),
 (3495, 220, 'Odesa', 'OD', 1),
 (3496, 220, 'Poltava', 'PO', 1),
 (3497, 220, 'Rivne', 'RI', 1),
 (3498, 220, 'Sevastopol', 'SE', 1),
 (3499, 220, 'Sumy', 'SU', 1),
-(3500, 220, 'Ternopil''', 'TE', 1),
+(3500, 220, 'Ternopil\'', 'TE', 1),
 (3501, 220, 'Vinnytsya', 'VI', 1),
-(3502, 220, 'Volyn''', 'VO', 1),
+(3502, 220, 'Volyn\'', 'VO', 1),
 (3503, 220, 'Zakarpattya', 'ZK', 1),
 (3504, 220, 'Zaporizhzhya', 'ZA', 1),
 (3505, 220, 'Zhytomyr', 'ZH', 1),
 (3506, 221, 'Abu Zaby', 'AZ', 1),
-(3507, 221, '''Ajman', 'AJ', 1),
+(3507, 221, '\'Ajman', 'AJ', 1),
 (3508, 221, 'Al Fujayrah', 'FU', 1),
 (3509, 221, 'Ash Shariqah', 'SH', 1),
 (3510, 221, 'Dubayy', 'DU', 1),
-(3511, 221, 'R''as al Khaymah', 'RK', 1),
+(3511, 221, 'R\'as al Khaymah', 'RK', 1),
 (3512, 221, 'Umm al Qaywayn', 'UQ', 1),
 (3513, 222, 'Aberdeen', 'ABN', 1),
 (3514, 222, 'Aberdeenshire', 'ABNS', 1),
@@ -6432,12 +6434,12 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3705, 225, 'Treinta y Tres', 'TT', 1),
 (3706, 226, 'Andijon', 'AN', 1),
 (3707, 226, 'Buxoro', 'BU', 1),
-(3708, 226, 'Farg''ona', 'FA', 1),
+(3708, 226, 'Farg\'ona', 'FA', 1),
 (3709, 226, 'Jizzax', 'JI', 1),
 (3710, 226, 'Namangan', 'NG', 1),
 (3711, 226, 'Navoiy', 'NW', 1),
 (3712, 226, 'Qashqadaryo', 'QA', 1),
-(3713, 226, 'Qoraqalpog''iston Republikasi', 'QR', 1),
+(3713, 226, 'Qoraqalpog\'iston Republikasi', 'QR', 1),
 (3714, 226, 'Samarqand', 'SA', 1),
 (3715, 226, 'Sirdaryo', 'SI', 1),
 (3716, 226, 'Surxondaryo', 'SU', 1),
@@ -6525,13 +6527,13 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3798, 235, 'Ibb', 'IB', 1),
 (3799, 235, 'Al Jawf', 'JA', 1),
 (3800, 235, 'Lahij', 'LA', 1),
-(3801, 235, 'Ma''rib', 'MA', 1),
+(3801, 235, 'Ma\'rib', 'MA', 1),
 (3802, 235, 'Al Mahrah', 'MR', 1),
 (3803, 235, 'Al Mahwit', 'MW', 1),
-(3804, 235, 'Sa''dah', 'SD', 1),
-(3805, 235, 'San''a', 'SN', 1),
+(3804, 235, 'Sa\'dah', 'SD', 1),
+(3805, 235, 'San\'a', 'SN', 1),
 (3806, 235, 'Shabwah', 'SH', 1),
-(3807, 235, 'Ta''izz', 'TA', 1),
+(3807, 235, 'Ta\'izz', 'TA', 1),
 (3812, 237, 'Bas-Congo', 'BC', 1),
 (3813, 237, 'Bandundu', 'BN', 1),
 (3814, 237, 'Equateur', 'EQ', 1),
@@ -6762,169 +6764,171 @@ INSERT INTO `tg_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 -- Indexes for table `tg_actions`
 --
 ALTER TABLE `tg_actions`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tg_artist_category`
 --
 ALTER TABLE `tg_artist_category`
- ADD PRIMARY KEY (`artist_category_id`);
+  ADD PRIMARY KEY (`artist_category_id`);
 
 --
 -- Indexes for table `tg_captcha`
 --
 ALTER TABLE `tg_captcha`
- ADD PRIMARY KEY (`captcha_id`), ADD KEY `word` (`word`);
+  ADD PRIMARY KEY (`captcha_id`),
+  ADD KEY `word` (`word`);
 
 --
 -- Indexes for table `tg_catalogue`
 --
 ALTER TABLE `tg_catalogue`
- ADD PRIMARY KEY (`post_id`);
+  ADD PRIMARY KEY (`post_id`);
 
 --
 -- Indexes for table `tg_cities`
 --
 ALTER TABLE `tg_cities`
- ADD PRIMARY KEY (`city_id`);
+  ADD PRIMARY KEY (`city_id`);
 
 --
 -- Indexes for table `tg_contact_info`
 --
 ALTER TABLE `tg_contact_info`
- ADD PRIMARY KEY (`contact_id`);
+  ADD PRIMARY KEY (`contact_id`);
 
 --
 -- Indexes for table `tg_controllers`
 --
 ALTER TABLE `tg_controllers`
- ADD PRIMARY KEY (`controller_id`);
+  ADD PRIMARY KEY (`controller_id`);
 
 --
 -- Indexes for table `tg_country`
 --
 ALTER TABLE `tg_country`
- ADD PRIMARY KEY (`country_id`);
+  ADD PRIMARY KEY (`country_id`);
 
 --
 -- Indexes for table `tg_event`
 --
 ALTER TABLE `tg_event`
- ADD PRIMARY KEY (`event_id`);
+  ADD PRIMARY KEY (`event_id`);
 
 --
 -- Indexes for table `tg_gcm_users`
 --
 ALTER TABLE `tg_gcm_users`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tg_language`
 --
 ALTER TABLE `tg_language`
- ADD PRIMARY KEY (`language_id`);
+  ADD PRIMARY KEY (`language_id`);
 
 --
 -- Indexes for table `tg_login`
 --
 ALTER TABLE `tg_login`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tg_logo`
 --
 ALTER TABLE `tg_logo`
- ADD PRIMARY KEY (`logo_id`);
+  ADD PRIMARY KEY (`logo_id`);
 
 --
 -- Indexes for table `tg_privileges`
 --
 ALTER TABLE `tg_privileges`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tg_role`
 --
 ALTER TABLE `tg_role`
- ADD PRIMARY KEY (`role_id`);
+  ADD PRIMARY KEY (`role_id`);
 
 --
 -- Indexes for table `tg_sessions`
 --
 ALTER TABLE `tg_sessions`
- ADD PRIMARY KEY (`session_id`), ADD KEY `last_activity_idx` (`last_activity`);
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `last_activity_idx` (`last_activity`);
 
 --
 -- Indexes for table `tg_skill`
 --
 ALTER TABLE `tg_skill`
- ADD PRIMARY KEY (`skill_id`);
+  ADD PRIMARY KEY (`skill_id`);
 
 --
 -- Indexes for table `tg_slider_posts`
 --
 ALTER TABLE `tg_slider_posts`
- ADD PRIMARY KEY (`post_id`);
+  ADD PRIMARY KEY (`post_id`);
 
 --
 -- Indexes for table `tg_sponsers`
 --
 ALTER TABLE `tg_sponsers`
- ADD PRIMARY KEY (`sponser_id`);
+  ADD PRIMARY KEY (`sponser_id`);
 
 --
 -- Indexes for table `tg_static_pages`
 --
 ALTER TABLE `tg_static_pages`
- ADD PRIMARY KEY (`page_id`);
+  ADD PRIMARY KEY (`page_id`);
 
 --
 -- Indexes for table `tg_users`
 --
 ALTER TABLE `tg_users`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `tg_user_info`
 --
 ALTER TABLE `tg_user_info`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `tg_user_logo_info`
 --
 ALTER TABLE `tg_user_logo_info`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `tg_user_other_info`
 --
 ALTER TABLE `tg_user_other_info`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `tg_user_personal_info`
 --
 ALTER TABLE `tg_user_personal_info`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `tg_user_slider_images`
 --
 ALTER TABLE `tg_user_slider_images`
- ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `tg_widget`
 --
 ALTER TABLE `tg_widget`
- ADD PRIMARY KEY (`widget_id`);
+  ADD PRIMARY KEY (`widget_id`);
 
 --
 -- Indexes for table `tg_zone`
 --
 ALTER TABLE `tg_zone`
- ADD PRIMARY KEY (`zone_id`);
+  ADD PRIMARY KEY (`zone_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -6934,117 +6938,141 @@ ALTER TABLE `tg_zone`
 -- AUTO_INCREMENT for table `tg_actions`
 --
 ALTER TABLE `tg_actions`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
 --
 -- AUTO_INCREMENT for table `tg_artist_category`
 --
 ALTER TABLE `tg_artist_category`
-MODIFY `artist_category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `artist_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `tg_captcha`
 --
 ALTER TABLE `tg_captcha`
-MODIFY `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `captcha_id` bigint(13) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tg_catalogue`
 --
 ALTER TABLE `tg_catalogue`
-MODIFY `post_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `post_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `tg_cities`
 --
 ALTER TABLE `tg_cities`
-MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=892;
+  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=892;
+
 --
 -- AUTO_INCREMENT for table `tg_contact_info`
 --
 ALTER TABLE `tg_contact_info`
-MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=78;
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
 --
 -- AUTO_INCREMENT for table `tg_controllers`
 --
 ALTER TABLE `tg_controllers`
-MODIFY `controller_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+  MODIFY `controller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
 -- AUTO_INCREMENT for table `tg_country`
 --
 ALTER TABLE `tg_country`
-MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
+  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+
 --
 -- AUTO_INCREMENT for table `tg_event`
 --
 ALTER TABLE `tg_event`
-MODIFY `event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `tg_gcm_users`
 --
 ALTER TABLE `tg_gcm_users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=196;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+
 --
 -- AUTO_INCREMENT for table `tg_language`
 --
 ALTER TABLE `tg_language`
-MODIFY `language_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `language_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `tg_login`
 --
 ALTER TABLE `tg_login`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=284;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=284;
+
 --
 -- AUTO_INCREMENT for table `tg_logo`
 --
 ALTER TABLE `tg_logo`
-MODIFY `logo_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `logo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `tg_privileges`
 --
 ALTER TABLE `tg_privileges`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
 --
 -- AUTO_INCREMENT for table `tg_role`
 --
 ALTER TABLE `tg_role`
-MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `tg_skill`
 --
 ALTER TABLE `tg_skill`
-MODIFY `skill_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `skill_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `tg_slider_posts`
 --
 ALTER TABLE `tg_slider_posts`
-MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `tg_sponsers`
 --
 ALTER TABLE `tg_sponsers`
-MODIFY `sponser_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `sponser_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `tg_static_pages`
 --
 ALTER TABLE `tg_static_pages`
-MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `tg_users`
 --
 ALTER TABLE `tg_users`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT for table `tg_user_info`
 --
 ALTER TABLE `tg_user_info`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=231;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+
 --
 -- AUTO_INCREMENT for table `tg_widget`
 --
 ALTER TABLE `tg_widget`
-MODIFY `widget_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `widget_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `tg_zone`
 --
 ALTER TABLE `tg_zone`
-MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4033;
+  MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4033;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

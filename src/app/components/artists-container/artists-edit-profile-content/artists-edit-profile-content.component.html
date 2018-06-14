@@ -25,7 +25,8 @@
         <legend>
           <span>Personal</span>details</legend>
         <div class="form-group">
-          <input type='type' class="form-control" placeholder="Profile title" name="profileTitle" [(ngModel)]="profileTitle" />
+          <p>Please choose a promo name/title which will be used only by this website. The name you choose should be unique to this site and not used by any other internet platform. It can, however, be similar to your name, a short version of your name etc. and will be approved by our admin team. If you like you can give us a couple of options to choose from.</p>
+          <input type='type' class="form-control" placeholder="Promotional title" name="profileTitle" [(ngModel)]="profileTitle" />
         </div>
         <div class="form-group">
           <textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="About you/Bio" name="aboutUser" [(ngModel)]="aboutUser"></textarea>
@@ -43,8 +44,71 @@
       </fieldset>
       <br>
       <fieldset class="fieldset_inner">
+        <legend><span>Skills</span></legend>
+        <div class="control-group form-group" id="fields">
+          <div class="controls">
+            <form role="form" autocomplete="off">
+              <span class="input-group-btn">
+                <button class="btn btn-success btn-add" type="button" [disabled]="(skillType.length == skills.length) || addSkill" (click)="skills.push({desc : ''})">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+              </span>
+              <div class="row" *ngFor="let skill of skills; let i = index">
+                <div class="col-lg-4">
+                  <select class="form-control" [(ngModel)]="skill.type" (change)="changeSkill(i)" name="skill{{i}}.type">
+                    <option disabled=true value=undefined>Choose Skill</option>                      
+                    <option [hidden]="skillOptionDisable(sk.id)" *ngFor="let sk of skillType" [value]="sk.id">{{sk.name}}</option>
+                  </select>
+                </div>
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="skill.desc" type="text" placeholder="Description" name="skill{{i}}.desc">
+                </div>
+                <div class="col-lg-2">
+                  <span class="input-group-btn">
+                    <button class="btn btn-remove btn-primary btn-danger2" type="button" (click)="skills.splice(i,1);changeSkill()">
+                      <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </fieldset>
+      <br>
+      <fieldset class="fieldset_inner">
+        <legend><span>Musical/Entertainment Genres</span></legend>
+        <div class="control-group form-group" id="fields">
+          <div class="controls">
+            <form role="form" autocomplete="off">
+              <div class="row">
+                <div class="col-lg-12">
+                  <input class="form-control" [(ngModel)]="genres" type="textarea" placeholder="Describe the genres you specialize in" name="genres">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </fieldset>
+      <br>
+      <fieldset class="fieldset_inner">
+        <legend><span>Venues</span></legend>
+        <div class="control-group form-group" id="fields">
+          <div class="controls">
+            <form role="form" autocomplete="off">
+              <div class="row">
+                <div class="col-lg-12">
+                  <input class="form-control" [(ngModel)]="venues" type="textarea" placeholder="Venues you've previously performed at" name="venues">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </fieldset>
+      <br>
+      <fieldset class="fieldset_inner">
         <legend>
-          <span>Payment</span>details</legend>
+          <span>Payment </span>details</legend>
         <div class="control-group form-group" id="fields">
           <div class="controls">
             <form role="form" autocomplete="off">
@@ -76,7 +140,7 @@
         </div>
       </fieldset>
       <br>
-      <fieldset class="fieldset_inner">
+      <!-- <fieldset class="fieldset_inner">
         <legend>
           <span>Physical </span>description</legend>
         <div class="control-group form-group" id="fields">
@@ -105,7 +169,7 @@
             </div>
           </div>
         </div>
-      </fieldset>
+      </fieldset> -->
     </div>
 
     <div class="col-lg-6">
@@ -165,7 +229,7 @@
       <br>
       <fieldset class="fieldset_inner">
         <legend>
-          <span>Language</span>
+          <span>Languages</span>
         </legend>
         <div class="form-group">
           <!-- <select class="form-control" id="sel1">
@@ -182,6 +246,66 @@
       </fieldset>
       <br>
       <fieldset class="fieldset_inner">
+        <legend><span>Domestic Bookings</span></legend>
+        <div class="control-group form-group" id="fields">
+          <div class="controls">
+            <form role="form" autocomplete="off">
+              <div class="row">
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="domesticID" type="file" name="domesticID">
+                </div>
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="domesticIDDesc" type="text" placeholder="Domestic identity proof" name="domesticIDDesc">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </fieldset>
+      <br>
+      <fieldset class="fieldset_inner">
+        <legend><span>International Bookings</span></legend>
+        <div class="control-group form-group" id="fields">
+          <div class="controls">
+            <form role="form" autocomplete="off">
+              <div class="row">
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="intPassport" type="file" name="intPassport">
+                </div>
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="intPassportDesc" type="text" placeholder="Passport Scan Copy" name="intPassportDesc">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="controls">
+            <form role="form" autocomplete="off">
+              <div class="row">
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="intPassportPhoto" type="file" name="intPassportPhoto">
+                </div>
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="intPassportPhotoDesc" type="text" placeholder="Clear Passport Photo" name="intPassportPhotoDesc">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="controls">
+            <form role="form" autocomplete="off">
+              <div class="row">
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="intEduCer" type="file" name="intEduCer">
+                </div>
+                <div class="col-lg-6">
+                  <input class="form-control" [(ngModel)]="intEduCerDesc" type="text" placeholder="Education Certificate" name="intEduCerDesc">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </fieldset>
+      <br>
+      <!-- <fieldset class="fieldset_inner">
         <legend>
           <span>Conveyance</span>
         </legend>
@@ -221,7 +345,7 @@
             </div>
           </div>
         </div>
-      </fieldset>
+      </fieldset> -->
     </div>
   </div>
 </div>
