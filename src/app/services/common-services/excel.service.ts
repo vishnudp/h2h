@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
-import * as XLSXStyle from 'xlsx-style';
+//import * as XLSXStyle from 'xlsx-style';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -16,8 +16,8 @@ export class ExcelService {
     //this.wrapAndCenterCell(worksheet.B2);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     // Use XLSXStyle instead of XLSX write function which property writes cell styles.
-    const excelBuffer: any = XLSXStyle.write(workbook, { bookType: 'xlsx', type: 'buffer' });
-    this.saveAsExcelFile(excelBuffer, excelFileName);
+    // const excelBuffer: any = XLSXStyle.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    // this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
   private wrapAndCenterCell(cell: XLSX.CellObject) {

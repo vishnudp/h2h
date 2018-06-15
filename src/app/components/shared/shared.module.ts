@@ -33,7 +33,7 @@ import { PopularEventsComponent } from './shared-container/static-page-container
 import { ContactUsComponent } from './shared-container/static-page-container/static-pages/contact-us/contact-us.component';
 import { FaqComponent } from './shared-container/static-page-container/static-pages/faq/faq.component';
 import { HelpComponent } from './shared-container/static-page-container/static-pages/help/help.component';
-/*import { BlogComponent } from './shared-container/static-page-container/static-pages/blog/blog.component';*/
+import { BlogComponent } from './shared-container/static-page-container/static-pages/blog/blog.component';
 import { ArtistsViewProfilePublicComponent } from './shared-container/home-page-container/artists-view-profile-public/artists-view-profile-public.component';
 import { ArtistsPageSliderContentComponent } from './../artists-container/artists-page-slider-content/artists-page-slider-content.component';
 import { ArtistsViewProfileContentComponent } from './../artists-container/artists-view-profile-content/artists-view-profile-content.component';
@@ -82,7 +82,7 @@ import { NgUploaderModule  } from 'ngx-uploader';
         ContactUsComponent,
         FaqComponent,
         HelpComponent,
-        /*BlogComponent,*/
+        BlogComponent,
         ArtistsViewProfilePublicComponent,
         ArtistsPageSliderContentComponent,
         ArtistsViewProfileContentComponent,

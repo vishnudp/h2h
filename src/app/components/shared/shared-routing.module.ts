@@ -4,7 +4,7 @@ import { Routes, RouterModule, RouterLink } from '@angular/router';
 import { SignupComponent } from './../../components/auth-container/signup/signup.component';
 import { FaqComponent } from './shared-container/static-page-container/static-pages/faq/faq.component';
 import { HelpComponent } from './shared-container/static-page-container/static-pages/help/help.component';
-/*import { BlogComponent } from './shared-container/static-page-container/static-pages/blog/blog.component';*/
+import { BlogComponent } from './shared-container/static-page-container/static-pages/blog/blog.component';
 import { LoginComponent } from '../auth-container/login/login.component';
 import { AboutUsComponent } from './shared-container/static-page-container/static-pages/about-us/about-us.component';
 import { PopularEventsComponent } from './shared-container/static-page-container/static-pages/popular-events/popular-events.component';
@@ -74,11 +74,11 @@ const appRoutes: Routes =
 
     'path': 'help',
     'component': HelpComponent
-}, /*{
+}, {
 
     'path': 'blog',
     'component': BlogComponent
-},*/ {
+}, {
 
     'path': 'login',
     'component': LoginComponent

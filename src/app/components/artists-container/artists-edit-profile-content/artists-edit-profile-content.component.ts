@@ -321,7 +321,7 @@ export class ArtistsEditProfileContentComponent implements OnInit {
     return inputJson;
   }
 
-  /*onItemSelect(item: any) {
+  onItemSelect(item: any) {
     console.log(item);
     console.log(this.selectedLanguage);
   }
@@ -334,7 +334,7 @@ export class ArtistsEditProfileContentComponent implements OnInit {
   }
   onDeSelectAll(items: any) {
     console.log(this.selectedLanguage);
-  }*/
+  }
   onSelect(object) {
     //console.log('object--', object);
     if (object.checked) {
